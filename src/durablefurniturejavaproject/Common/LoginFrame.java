@@ -68,6 +68,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 102, 153));
         jPanel2.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 80));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\admin2.png")); // NOI18N
         jPanel2.add(jLabel6);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -81,6 +83,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Durable Furniture");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\furniture.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -108,6 +112,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(400, 50));
 
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\googleIcon.png")); // NOI18N
         jButton1.setText("Login with Google");
         jButton1.setPreferredSize(new java.awt.Dimension(250, 30));
         jPanel4.add(jButton1);
@@ -126,7 +131,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel2.setText("Email Address ");
         jPanel6.add(jLabel2, java.awt.BorderLayout.CENTER);
 
-        txtUsername.setText("staff1");
         txtUsername.setPreferredSize(new java.awt.Dimension(6, 30));
         txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -145,7 +149,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel3.setText("Password");
         jPanel7.add(jLabel3, java.awt.BorderLayout.CENTER);
 
-        txtPassword.setText("staff");
         txtPassword.setPreferredSize(new java.awt.Dimension(6, 30));
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -231,7 +234,7 @@ public class LoginFrame extends javax.swing.JFrame {
         LoginFunction login = new LoginFunction();
         int StaffId = login.Login(txtUsername.getText(), txtPassword.getText());
         if (StaffId > 0) {
-           JOptionPane.showMessageDialog(this, "Login successfully");
+           JOptionPane.showMessageDialog(this, "Login okk");
            MainJFrame mainFrame = new MainJFrame(StaffId);
            mainFrame.setVisible(true);
            this.dispose();

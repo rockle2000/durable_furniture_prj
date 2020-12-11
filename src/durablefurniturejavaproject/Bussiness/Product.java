@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+
 /**
  *
  * @author Redmibook 14
@@ -21,18 +22,23 @@ public class Product {
     String ProductName;
     int BrandId;
     int CategoryId;
-    int Status;
-    String Description;
-    String Size;
-    String Material;
-    String Color;
-    Double Price;
-    int Quantity;
+    int SizeId;
+    int ColorId;
+    int MaterialId;
 
-    
-     public List<Product> getListProduct() throws SQLException {
+    String CategoryName;
+    String BrandName;
+    String Description;
+    String SizeName;
+    String MaterialName;
+    String ColorName;
+    Double UnitPrice;
+    int UnitInStock;
+    List<Product> listProduct;
+
+    public List<Product> getListProduct() throws SQLException {
         List<Product> lstProduct = new ArrayList<Product>();
-        String sql = "select * from product";
+        String sql ="select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice   from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId ";
         ResultSet rs = db.ExecuteQuery(sql);
         while (rs.next()) {
             Product prd = new Product();
@@ -40,75 +46,118 @@ public class Product {
             prd.setProductName(rs.getString("ProductName"));
             prd.setBrandId(rs.getInt("BrandId"));
             prd.setCategoryId(rs.getInt("CategoryId"));
-            prd.setStatus(rs.getInt("Status"));
+            prd.setColorId(rs.getInt("ColorId"));
+            prd.setSizeId(rs.getInt("SizeId"));
+            prd.setMaterialId(rs.getInt("MaterialId"));
+            prd.setUnitPrice(rs.getDouble("UnitPrice"));
             prd.setDescription(rs.getString("Description"));
+            prd.setBrandName(rs.getString("BrandName"));
+            prd.setCategoryName(rs.getString("CategoryName"));
+            prd.setColorName(rs.getString("ColorName"));
+            prd.setSizeName(rs.getString("SizeName"));
+            prd.setMaterialName(rs.getString("MaterialName"));
+            prd.setUnitInStock(rs.getInt("UnitInStock"));
             lstProduct.add(prd);
         }
+        listProduct = lstProduct;
         return lstProduct;
     }
-     public List<Product> getListProduct(String searchText) throws SQLException {
-        List<Product> lstProduct = new ArrayList<Product>();
-        String sql = "select * from product where ProductName like '%"+searchText+"%' ";
-        //PreparedStatement stmt = db.connection.prepareCall(sql);
-        //stmt.setString(1, searchText);
-        //ResultSet rs = stmt.executeQuery();
-        ResultSet rs = db.ExecuteQuery(sql);
 
-        while (rs.next()) {
-            Product prd = new Product();
-            prd.setProductId(rs.getInt("ProductId"));
-            prd.setProductName(rs.getString("ProductName"));
-            prd.setBrandId(rs.getInt("BrandId"));
-            prd.setCategoryId(rs.getInt("CategoryId"));
-            prd.setStatus(rs.getInt("Status"));
-            prd.setDescription(rs.getString("Description"));
-            lstProduct.add(prd);
+    public List<Product> getListProduct(String searchText) throws SQLException {
+        List<Product> lstProduct = new ArrayList<Product>();
+        if (!searchText.equals("") && listProduct != null) {
+            for (Product p : listProduct) {
+                if (p.getCategoryName().contains(searchText) || p.getCategoryName().contains(searchText) || p.getProductName().contains(searchText)) {
+                    lstProduct.add(p);
+                }
+            }
         }
         db.CloseConnection();
         return lstProduct;
     }
 
-    public Double getPrice() {
-        return Price;
+    public int getSizeId() {
+        return SizeId;
     }
 
-    public void setPrice(Double Price) {
-        this.Price = Price;
+    public void setSizeId(int SizeId) {
+        this.SizeId = SizeId;
     }
 
-    public int getQuantity() {
-        return Quantity;
+    public int getColorId() {
+        return ColorId;
     }
 
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
-    }
-    public String getSize() {
-        return Size;
+    public void setColorId(int ColorId) {
+        this.ColorId = ColorId;
     }
 
-    public void setSize(String Size) {
-        this.Size = Size;
+    public int getMaterialId() {
+        return MaterialId;
     }
 
-    public String getMaterial() {
-        return Material;
+    public void setMaterialId(int MaterialId) {
+        this.MaterialId = MaterialId;
     }
 
-    public void setMaterial(String Material) {
-        this.Material = Material;
+    public String getSizeName() {
+        return SizeName;
     }
 
-    public String getColor() {
-        return Color;
+    public void setSizeName(String SizeName) {
+        this.SizeName = SizeName;
     }
 
-    public void setColor(String Color) {
-        this.Color = Color;
+    public String getMaterialName() {
+        return MaterialName;
     }
+
+    public void setMaterialName(String MaterialName) {
+        this.MaterialName = MaterialName;
+    }
+
+    public String getColorName() {
+        return ColorName;
+    }
+
+    public void setColorName(String ColorName) {
+        this.ColorName = ColorName;
+    }
+
+    public Double getUnitPrice() {
+        return UnitPrice;
+    }
+
+    public void setUnitPrice(Double UnitPrice) {
+        this.UnitPrice = UnitPrice;
+    }
+
+    public int getUnitInStock() {
+        return UnitInStock;
+    }
+
+    public void setUnitInStock(int UnitInStock) {
+        this.UnitInStock = UnitInStock;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String CategoryName) {
+        this.CategoryName = CategoryName;
+    }
+
+    public String getBrandName() {
+        return BrandName;
+    }
+
+    public void setBrandName(String BrandName) {
+        this.BrandName = BrandName;
+    }
+
     SqlDataAcess db = new SqlDataAcess();
 
-   
     public int getProductId() {
         return ProductId;
     }
@@ -141,13 +190,6 @@ public class Product {
         this.CategoryId = CategoryId;
     }
 
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int Status) {
-        this.Status = Status;
-    }
 
     public String getDescription() {
         return Description;

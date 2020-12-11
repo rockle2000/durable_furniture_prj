@@ -8,11 +8,13 @@ package durablefurniturejavaproject.Common;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import durablefurniturejavaproject.Bussiness.Product;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JColorChooser;
 
 /**
  *
@@ -30,6 +32,7 @@ public class ProductJPanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtShowingColor.setBackground(Color.red);
     }
 
     /**
@@ -80,6 +83,7 @@ public class ProductJPanel extends javax.swing.JPanel {
         txtFieldAddColor = new javax.swing.JTextField();
         txtFieldAddMaterial = new javax.swing.JTextField();
         txtFieldAddSize = new javax.swing.JTextField();
+        txtShowingColor = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(40, 81, 163));
@@ -103,7 +107,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Price", "Quantity"
+                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
@@ -121,8 +125,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblProduct.setMinimumSize(new java.awt.Dimension(1040, 340));
-        tblProduct.setPreferredSize(new java.awt.Dimension(1040, 150));
+        tblProduct.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(tblProduct);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -269,8 +272,12 @@ public class ProductJPanel extends javax.swing.JPanel {
         jPanel2.add(cbBoxMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 210, -1));
 
         cbBoxProdColor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbBoxProdColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cbBoxProdColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 210, -1));
+        cbBoxProdColor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbBoxProdColorPropertyChange(evt);
+            }
+        });
+        jPanel2.add(cbBoxProdColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 120, -1));
 
         cbBoxAddSize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbBoxAddSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -299,6 +306,9 @@ public class ProductJPanel extends javax.swing.JPanel {
         txtFieldAddSize.setText("jTextField2");
         jPanel2.add(txtFieldAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 210, 0));
 
+        txtShowingColor.setEnabled(false);
+        jPanel2.add(txtShowingColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 80, 23));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 240, 270));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -319,13 +329,14 @@ public class ProductJPanel extends javax.swing.JPanel {
 
         if (txtSearch.equals("")) {
             lstPrd = prod.getListProduct();
+            System.out.println(lstPrd.size());
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryId(), prd.getBrandId(), prd.getMaterial(), prd.getColor(), prd.getSize(), prd.getPrice(), prd.getQuantity()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getMaterialName(), prd.getColorName(), prd.getSizeName(), prd.getUnitPrice(), prd.getUnitInStock()});
             }
         } else {
             lstPrd = prod.getListProduct(txtSearch);
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryId(), prd.getBrandId(), prd.getMaterial(), prd.getColor(), prd.getSize(), prd.getPrice(), prd.getQuantity()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getMaterialName(), prd.getColorName(), prd.getSizeName(), prd.getUnitPrice(), prd.getUnitInStock()});
             }
         }
     }
@@ -347,19 +358,20 @@ public class ProductJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddMaterialMouseClicked
     static Boolean txtFieldAddSizeIsShowing = false;
     private void btnAddColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddColorActionPerformed
-        if (txtFieldAddColorIsShowing == false) {
-            txtFieldAddColorIsShowing = true;
-            txtFieldAddColor.setBounds(10, 63, 210, 23);
-        } else {
-
-            txtFieldAddColorIsShowing = false;
-            txtFieldAddColor.setBounds(10, 63, 210, 0);
-            if (!txtFieldAddColor.getText().equals("")) {
-                cbBoxProdColor.addItem(txtFieldAddColor.getText());
+        Color initialcolor = Color.RED;
+        Color color = JColorChooser.showDialog(this, 
+                "Select a color", initialcolor);
+        txtShowingColor.setBackground(color);
+        String value = Integer.toString(color.getRGB());
+        boolean colorIsExists = false;
+        for(int i = 0 ; i <cbBoxProdColor.getItemCount();i++ ){
+            if(cbBoxProdColor.getItemAt(i).toString().equals(Integer.toString(color.getRGB()))){
+                colorIsExists = true;
             }
-
         }
-
+        if(colorIsExists == false){
+            cbBoxProdColor.addItem(value);
+        }      
     }//GEN-LAST:event_btnAddColorActionPerformed
 
     private void cbBoxMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxMaterialActionPerformed
@@ -391,6 +403,14 @@ public class ProductJPanel extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_btnAddSizeActionPerformed
+
+    private void cbBoxProdColorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbBoxProdColorPropertyChange
+       if(cbBoxProdColor.getSelectedIndex() != -1){
+            txtShowingColor.setBackground(new Color(Integer.parseInt(cbBoxProdColor.getSelectedItem().toString())));
+            
+       }
+        
+    }//GEN-LAST:event_cbBoxProdColorPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -434,5 +454,6 @@ public class ProductJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtProductId;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtProductPrice;
+    private javax.swing.JTextField txtShowingColor;
     // End of variables declaration//GEN-END:variables
 }

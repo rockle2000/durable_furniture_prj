@@ -60,8 +60,6 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setMinimumSize(new java.awt.Dimension(1040, 340));
-        jTable1.setPreferredSize(new java.awt.Dimension(1040, 150));
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
