@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import durablefurniturejavaproject.Bussiness.Staff;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Redmibook 14
@@ -37,11 +38,11 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffId = staffId;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
-       
+
     }
     public int StaffId;
     public Staff Staff = new Staff();
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -393,7 +394,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
             };
             th.start();
-           
+
         } else {
             Thread th = new Thread() {
                 public void run() {
@@ -413,58 +414,59 @@ public class MainJFrame extends javax.swing.JFrame {
 
             };
             th.start();
-            
+
         }
 
 
     }//GEN-LAST:event_sidebarUserMouseClicked
 
     private void SidebarManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarManagerMouseClicked
+        int jPanel7Position = 200;
+        Thread th1 = new Thread() {
 
+            public void run() {
+                try {
+                    for (int i = 5; i <= 200;) {
+                        Thread.sleep(1);
+                        jPanel6.setBounds(3, 200, 165, i);
+
+                        jPanel7.setBounds(0, jPanel7Position + i, 170, 400);
+                        i += 5;
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        };
+        Thread th2 = new Thread() {
+            public void run() {
+                try {
+                    for (int i = 200; i >= 10;) {
+                        Thread.sleep(1);
+                        jPanel6.setBounds(3, 200, 165, i);
+                        i -= 5;
+                    }
+                    for (int i = 400; i >= 205;) {
+                        Thread.sleep(1);
+                        jPanel7.setBounds(0, i, 170, 400);
+                        i -= 5;
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+
+        };
         if (jPanel6.getBounds().height == 10) {
-            Thread th = new Thread() {
-                int jPanel7Position = 200;
 
-                public void run() {
-                    try {
-                        for (int i = 5; i <= 200;) {
-                            Thread.sleep(1);
-                            jPanel6.setBounds(3, 200, 165, i);
+            th1.start();
 
-                            jPanel7.setBounds(0, jPanel7Position + i, 170, 400);
-                            i += 5;
-                        }
-
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
-            };
-            th.start();
-         
         } else {
-            Thread th = new Thread() {
-                public void run() {
-                    try {
-                        for (int i = 200; i >= 10;) {
-                            Thread.sleep(1);
-                            jPanel6.setBounds(3, 200, 165, i);
-                            i -= 5;
-                        }
-                        for (int i = 400; i >= 205;) {
-                            Thread.sleep(1);
-                            jPanel7.setBounds(0, i, 170, 400);
-                            i -= 5;
-                        }
-                        
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
 
-            };
-            th.start();
-       
+            th2.start();
+
         }
 
     }//GEN-LAST:event_SidebarManagerMouseClicked
@@ -499,8 +501,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     }
                 }
             };
-            th.start();         
-           jPanel2.validate();
+            th.start();
+            jPanel2.validate();
 
         }
 
@@ -536,7 +538,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 }
             };
             th.start();
-             
+
             jPanel2.validate();
         }
     }//GEN-LAST:event_sidebarBrandMouseClicked
@@ -570,7 +572,7 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-            
+
         }
 
     }//GEN-LAST:event_sidebarProduct1MouseClicked
@@ -602,7 +604,7 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-           
+
         }
     }
     private void sidebarHomeIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarHomeIconMouseClicked
@@ -610,7 +612,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sidebarHomeIconMouseClicked
 
     private void sidebarAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarAccountMouseClicked
-            if (labelForMakerForm.getText() != "Account") {
+        if (labelForMakerForm.getText() != "Account") {
             jPanel2.removeAll();
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Account");
@@ -637,12 +639,12 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-          
+
         }
     }//GEN-LAST:event_sidebarAccountMouseClicked
 
     private void sidebarStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarStaffMouseClicked
-         if (labelForMakerForm.getText() != "Staffs") {
+        if (labelForMakerForm.getText() != "Staffs") {
             jPanel2.removeAll();
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Staffs");
@@ -669,7 +671,7 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-            
+
         }
     }//GEN-LAST:event_sidebarStaffMouseClicked
 
@@ -684,7 +686,6 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SidebarManager;
