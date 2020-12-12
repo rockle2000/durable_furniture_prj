@@ -103,7 +103,17 @@ public class MainJFrame extends javax.swing.JFrame {
 
         txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSearch.setBorder(null);
+        txtSearch.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtSearchInputMethodTextChanged(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSearchKeyTyped(evt);
             }
@@ -676,12 +686,20 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sidebarStaffMouseClicked
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
-        try {
+   
+    }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void txtSearchInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtSearchInputMethodTextChanged
+         
+    }//GEN-LAST:event_txtSearchInputMethodTextChanged
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+         try {
             prodPanel.showTableProduct(txtSearch.getText());
         } catch (SQLException ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_txtSearchKeyTyped
+    }//GEN-LAST:event_txtSearchKeyReleased
 
     /**
      * @param args the command line arguments

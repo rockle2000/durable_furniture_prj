@@ -34,48 +34,47 @@ public class Product {
     String ColorName;
     Double UnitPrice;
     int UnitInStock;
-    List<Product> listProduct;
-
-    public List<Product> getListProduct() throws SQLException {
-        List<Product> lstProduct = new ArrayList<Product>();
-        String sql ="select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice   from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId ";
-        ResultSet rs = db.ExecuteQuery(sql);
-        while (rs.next()) {
-            Product prd = new Product();
-            prd.setProductId(rs.getInt("ProductId"));
-            prd.setProductName(rs.getString("ProductName"));
-            prd.setBrandId(rs.getInt("BrandId"));
-            prd.setCategoryId(rs.getInt("CategoryId"));
-            prd.setColorId(rs.getInt("ColorId"));
-            prd.setSizeId(rs.getInt("SizeId"));
-            prd.setMaterialId(rs.getInt("MaterialId"));
-            prd.setUnitPrice(rs.getDouble("UnitPrice"));
-            prd.setDescription(rs.getString("Description"));
-            prd.setBrandName(rs.getString("BrandName"));
-            prd.setCategoryName(rs.getString("CategoryName"));
-            prd.setColorName(rs.getString("ColorName"));
-            prd.setSizeName(rs.getString("SizeName"));
-            prd.setMaterialName(rs.getString("MaterialName"));
-            prd.setUnitInStock(rs.getInt("UnitInStock"));
-            lstProduct.add(prd);
-        }
-        listProduct = lstProduct;
-        return lstProduct;
-    }
+    List<Product> listProduct = new ArrayList<Product>();
 
     public List<Product> getListProduct(String searchText) throws SQLException {
         List<Product> lstProduct = new ArrayList<Product>();
-        if (!searchText.equals("") && listProduct != null) {
+        if (searchText.equals("")) {
+            String sql = "select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice   from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId ";
+            ResultSet rs = db.ExecuteQuery(sql);
+            while (rs.next()) {
+                Product prd = new Product();
+                prd.setProductId(rs.getInt("ProductId"));
+                prd.setProductName(rs.getString("ProductName"));
+                prd.setBrandId(rs.getInt("BrandId"));
+                prd.setCategoryId(rs.getInt("CategoryId"));
+                prd.setColorId(rs.getInt("ColorId"));
+                prd.setSizeId(rs.getInt("SizeId"));
+                prd.setMaterialId(rs.getInt("MaterialId"));
+                prd.setUnitPrice(rs.getDouble("UnitPrice"));
+                prd.setDescription(rs.getString("Description"));
+                prd.setBrandName(rs.getString("BrandName"));
+                prd.setCategoryName(rs.getString("CategoryName"));
+                prd.setColorName(rs.getString("ColorName"));
+                prd.setSizeName(rs.getString("SizeName"));
+                prd.setMaterialName(rs.getString("MaterialName"));
+                prd.setUnitInStock(rs.getInt("UnitInStock"));
+                lstProduct.add(prd);
+            }
+            listProduct = lstProduct;
+            
+        } else {
+             
             for (Product p : listProduct) {
-                if (p.getCategoryName().contains(searchText) || p.getCategoryName().contains(searchText) || p.getProductName().contains(searchText)) {
+                if (p.getCategoryName().contains(searchText) || p.getBrandName().contains(searchText) || p.getProductName().contains(searchText)) {
                     lstProduct.add(p);
                 }
             }
         }
-        db.CloseConnection();
+
         return lstProduct;
     }
 
+   
     public int getSizeId() {
         return SizeId;
     }
@@ -189,7 +188,6 @@ public class Product {
     public void setCategoryId(int CategoryId) {
         this.CategoryId = CategoryId;
     }
-
 
     public String getDescription() {
         return Description;

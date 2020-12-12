@@ -320,21 +320,22 @@ public class ProductJPanel extends javax.swing.JPanel {
      List<Product> lstPrd = new ArrayList();
 
     DefaultTableModel tableModel;
+    Product prod = new Product();
 
    public void showTableProduct(String txtSearch) throws SQLException {
         tableModel = (DefaultTableModel) tblProduct.getModel();
-        Product prod = new Product();
-
+    
         tableModel.setRowCount(0);
 
         if (txtSearch.equals("")) {
-            lstPrd = prod.getListProduct();
-            System.out.println(lstPrd.size());
+            lstPrd = prod.getListProduct("");
+            
             for (Product prd : lstPrd) {
                 tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getMaterialName(), prd.getColorName(), prd.getSizeName(), prd.getUnitPrice(), prd.getUnitInStock()});
             }
         } else {
             lstPrd = prod.getListProduct(txtSearch);
+            
             for (Product prd : lstPrd) {
                 tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getMaterialName(), prd.getColorName(), prd.getSizeName(), prd.getUnitPrice(), prd.getUnitInStock()});
             }
