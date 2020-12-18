@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,7 +27,7 @@ public class Product {
     int SizeId;
     int ColorId;
     int MaterialId;
-
+    int Status;
     String CategoryName;
     String BrandName;
     String Description;
@@ -61,9 +63,8 @@ public class Product {
                 lstProduct.add(prd);
             }
             listProduct = lstProduct;
-            
         } else {
-             
+
             for (Product p : listProduct) {
                 if (p.getCategoryName().contains(searchText) || p.getBrandName().contains(searchText) || p.getProductName().contains(searchText)) {
                     lstProduct.add(p);
@@ -74,9 +75,72 @@ public class Product {
         return lstProduct;
     }
 
-   
+    public Boolean InsertProduct() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "insert into product(ProductName,CategoryId,BrandId,ColorId,SizeId,MaterialId,UnitInStock,UnitPrice,Status,Description) value (?,?,?,?,?,?,?,?,?,?)";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, ProductName);
+        stmt.setInt(2, CategoryId);
+        stmt.setInt(3, BrandId);
+        stmt.setInt(4, SizeId);
+        stmt.setInt(5, MaterialId);
+        stmt.setInt(6, UnitInStock);
+        stmt.setDouble(7, UnitPrice);
+        stmt.setInt(8, Status);
+        stmt.setString(9, Description);
+        return stmt.execute();
+    }
+
+    public Boolean UpdateProduct() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "update product set ProductName = ?,CategoryId=?,BrandId=?,ColorId=?,SizeId=?,MaterialId=?,UnitInStock=?,UnitPrice=?,Status=?,Description=? where ProductId = ?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, ProductName);
+        stmt.setInt(2, CategoryId);
+        stmt.setInt(3, BrandId);
+        stmt.setInt(4, SizeId);
+        stmt.setInt(5, MaterialId);
+        stmt.setInt(6, UnitInStock);
+        stmt.setDouble(7, UnitPrice);
+        stmt.setInt(8, Status);
+        stmt.setString(9, Description);
+        return stmt.execute();
+    }
+     public boolean DeleteProduct() {
+        String sql = "Delete from product where ProductId = ?";
+        PreparedStatement stmt = null;
+        try {
+            db.OpenConnection();
+            stmt = db.connection.prepareCall(sql);
+            stmt.setInt(1, BrandId);
+            
+            stmt.execute();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
     public int getSizeId() {
         return SizeId;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
+    }
+
+    public SqlDataAcess getDb() {
+        return db;
+    }
+
+    public void setDb(SqlDataAcess db) {
+        this.db = db;
     }
 
     public void setSizeId(int SizeId) {

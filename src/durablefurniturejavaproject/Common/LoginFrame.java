@@ -28,6 +28,8 @@ public class LoginFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         txtUsername.requestFocus();
+        txtUsername.setText("admin");
+        txtPassword.setText("admin");
     }
 
     /**
@@ -232,9 +234,9 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public void Login() throws SQLException {
         LoginFunction login = new LoginFunction();
+        
         int StaffId = login.Login(txtUsername.getText(), txtPassword.getText());
         if (StaffId > 0) {
-           JOptionPane.showMessageDialog(this, "Login okk");
            MainJFrame mainFrame = new MainJFrame(StaffId);
            mainFrame.setVisible(true);
            this.dispose();
