@@ -5,6 +5,7 @@
  */
 package durablefurniturejavaproject.Common;
 
+import durablefurniturejavaproject.Bussiness.Brand;
 import durablefurniturejavaproject.Bussiness.ProductColor;
 import durablefurniturejavaproject.Bussiness.ProductMaterial;
 import javax.swing.JTextField;
@@ -56,6 +57,7 @@ public class ProductJPanel extends javax.swing.JPanel {
             showComboboxProductColor();
             showComboboxProductMaterial();
             showComboboxProductSize();
+            showComboBoxBrand();
         } catch (SQLException ex) {
             Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,7 +91,7 @@ public class ProductJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         cbBoxCategory = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        cbBoxBrand = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -245,8 +247,8 @@ public class ProductJPanel extends javax.swing.JPanel {
         cbBoxCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(cbBoxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 210, -1));
 
-        jComboBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 210, -1));
+        cbBoxBrand.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(cbBoxBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 210, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -395,9 +397,17 @@ public class ProductJPanel extends javax.swing.JPanel {
         for (ProductSize prdsz : ls) {
             cbBoxAddSize.addItem(prdsz);
         }
-
     }
-    
+
+    public void showComboBoxBrand() {
+        Brand brand = new Brand();
+        List<Brand> ls = new ArrayList<Brand>();
+        ls = brand.GetAllBrand();
+        for (Brand br : ls) {
+            cbBoxBrand.addItem(br);
+        }
+    }
+
     public void showComboboxProductColor() throws SQLException {
         ProductColor prodColor = new ProductColor();
         List<ProductColor> ls = new ArrayList<ProductColor>();
@@ -623,6 +633,9 @@ public class ProductJPanel extends javax.swing.JPanel {
         }
         product.setProductName(txtProductName.getText());
         product.setUnitInStock(Integer.parseInt(txtProductQuantity.getText()));
+        product.setUnitPrice(Double.parseDouble(txtProductPrice.getText()));
+        Brand brand = (Brand)cbBoxBrand.getSelectedItem();
+        product.setBrandId(brand.getBrandId());
     }//GEN-LAST:event_btnAdd_EditActionPerformed
 
     void validateForm_EnableBtnAdd_Edit() {
@@ -674,11 +687,11 @@ public class ProductJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDeleteSize;
     private javax.swing.JButton btnOpenGallery;
     private javax.swing.JComboBox<ProductSize> cbBoxAddSize;
+    private javax.swing.JComboBox<Brand> cbBoxBrand;
     private javax.swing.JComboBox<String> cbBoxCategory;
     private javax.swing.JComboBox<ProductColor> cbBoxColor;
     private javax.swing.JComboBox<ProductMaterial> cbBoxMaterial;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
