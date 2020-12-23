@@ -83,12 +83,13 @@ public class Product {
         stmt.setString(1, ProductName);
         stmt.setInt(2, CategoryId);
         stmt.setInt(3, BrandId);
-        stmt.setInt(4, SizeId);
-        stmt.setInt(5, MaterialId);
-        stmt.setInt(6, UnitInStock);
-        stmt.setDouble(7, UnitPrice);
-        stmt.setInt(8, Status);
-        stmt.setString(9, Description);
+        stmt.setInt(4, ColorId);
+        stmt.setInt(5, SizeId);
+        stmt.setInt(6, MaterialId);
+        stmt.setInt(7, UnitInStock);
+        stmt.setDouble(8, UnitPrice);
+        stmt.setInt(9, Status);
+        stmt.setString(10, Description);
         return stmt.execute();
     }
 

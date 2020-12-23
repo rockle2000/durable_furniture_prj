@@ -86,6 +86,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         jPanel5.setPreferredSize(new java.awt.Dimension(1200, 800));
 
