@@ -38,8 +38,7 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffId = staffId;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
-        
-        
+
     }
     public int StaffId;
     public Staff Staff = new Staff();
@@ -677,11 +676,14 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sidebarStaffMouseClicked
 
     private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
-         try {
-            prodPanel.showTableProduct(txtSearch.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        if (labelForMakerForm.getText() == "Products") {
+            try {
+                prodPanel.showTableProduct(txtSearch.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_txtSearchKeyReleased
 
     /**

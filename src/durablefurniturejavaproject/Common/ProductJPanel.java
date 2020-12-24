@@ -514,7 +514,8 @@ public class ProductJPanel extends javax.swing.JPanel {
             try {
                 if (colorSub.InsertColor() == false) {
                     JOptionPane.showMessageDialog(this, "Color added!");
-                    cbBoxColor.addItem(colorSub);
+                    cbBoxMaterial.removeAllItems();
+                    showComboboxProductMaterial();
                 } else {
                     JOptionPane.showMessageDialog(this, "Insert failed!");
                 }
@@ -722,7 +723,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 for (int i = 0; i < anh.size(); i++) {
                     prdImg.InsertProductImage(anh.get(i));
                 }
-               
+
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
@@ -910,7 +911,7 @@ public class ProductJPanel extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+
         }
         try {
             refeshForm();
@@ -931,7 +932,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Please choose product!");
         }
 
