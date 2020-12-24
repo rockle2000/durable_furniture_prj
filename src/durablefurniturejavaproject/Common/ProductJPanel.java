@@ -12,10 +12,12 @@ import durablefurniturejavaproject.Bussiness.ProductMaterial;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import durablefurniturejavaproject.Bussiness.Product;
+import durablefurniturejavaproject.Bussiness.ProductImage;
 import durablefurniturejavaproject.Bussiness.ProductSize;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +76,9 @@ public class ProductJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuRefeshForm = new javax.swing.JPopupMenu();
+        Refesh = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
@@ -119,6 +124,17 @@ public class ProductJPanel extends javax.swing.JPanel {
         btnDeleteColor = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        Refesh.setText("Refesh");
+        Refesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefeshActionPerformed(evt);
+            }
+        });
+        jPopupMenuRefeshForm.add(Refesh);
+
+        Delete.setText("Delete");
+        jPopupMenuRefeshForm.add(Delete);
+
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(1040, 645));
@@ -127,6 +143,11 @@ public class ProductJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(40, 81, 163));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(1050, 640));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1010, 150));
@@ -134,20 +155,20 @@ public class ProductJPanel extends javax.swing.JPanel {
         tblProduct.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity"
+                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -159,6 +180,14 @@ public class ProductJPanel extends javax.swing.JPanel {
             }
         });
         tblProduct.setRequestFocusEnabled(false);
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblProductMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduct);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -211,6 +240,11 @@ public class ProductJPanel extends javax.swing.JPanel {
 
         btnOpenGallery.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnOpenGallery.setText("Gallery");
+        btnOpenGallery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenGalleryActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnOpenGallery, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 130, 20));
 
         lblProductImage.setForeground(new java.awt.Color(255, 255, 255));
@@ -384,6 +418,11 @@ public class ProductJPanel extends javax.swing.JPanel {
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 140, 40));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -447,13 +486,13 @@ public class ProductJPanel extends javax.swing.JPanel {
             lstPrd = prod.getListProduct("");
 
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock(), prd.getStatus()});
             }
         } else {
             lstPrd = prod.getListProduct(txtSearch);
 
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock(), prd.getStatus()});
             }
         }
     }
@@ -611,7 +650,7 @@ public class ProductJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeleteMaterialActionPerformed
 
-
+    List<String> anh = new ArrayList();
     private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -631,7 +670,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 img = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
                 Image dimg = img.getScaledInstance(lblProductImage.getWidth(), lblProductImage.getHeight(), Image.SCALE_SMOOTH);
                 lblProductImage.setIcon(new ImageIcon(dimg));
-                List<String> anh = new ArrayList();
+
                 File[] files = chooser.getSelectedFiles();
                 for (int i = 0; i < files.length; i++) {
                     images.add(files[i]);
@@ -650,7 +689,6 @@ public class ProductJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "You must fill all field!");
             return;
         }
-
         product.setProductName(txtProductName.getText());
         product.setUnitInStock(Integer.parseInt(txtProductQuantity.getText()));
         product.setUnitPrice(Double.parseDouble(txtProductPrice.getText()));
@@ -664,19 +702,32 @@ public class ProductJPanel extends javax.swing.JPanel {
         product.setColorId(prdcolor.getColorId());
         product.setMaterialId(prdMaterial.getMaterialId());
         product.setSizeId(prdSize.getSizeId());
+        product.setStatus((String) cbBoxStatus.getSelectedItem());
+        ProductImage prdImg = new ProductImage();
         if (txtProductId.getText().equals("")) {
             try {
                 product.InsertProduct();
+                for (int i = 0; i < anh.size(); i++) {
+
+                    prdImg.InsertProductImage(anh.get(i));
+                }
+                refeshForm();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
         } else {
             try {
+                product.setProductId(Integer.parseInt(txtProductId.getText()));
                 product.UpdateProduct();
+                for (int i = 0; i < anh.size(); i++) {
+                    prdImg.InsertProductImage(anh.get(i));
+                }
+               
             } catch (SQLException ex) {
-               JOptionPane.showMessageDialog(null, ex);
+                JOptionPane.showMessageDialog(null, ex);
             }
         }
+
     }//GEN-LAST:event_btnAdd_EditActionPerformed
 
     void validateForm_EnableBtnAdd_Edit() {
@@ -715,8 +766,181 @@ public class ProductJPanel extends javax.swing.JPanel {
         validateForm_EnableBtnAdd_Edit();
     }//GEN-LAST:event_txtProductNameKeyReleased
 
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jPanel1MouseReleased
+
+    private void tblProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblProductMouseReleased
+    void refeshForm() throws SQLException {
+        txtProductName.setText("");
+        txtProductQuantity.setText("");
+        txtProductPrice.setText("");
+        txtProductId.setText("");
+        cbBoxCategory.setSelectedIndex(0);
+        cbBoxBrand.setSelectedIndex(0);
+        cbBoxStatus.setSelectedIndex(0);
+        cbBoxColor.setSelectedIndex(0);
+        cbBoxAddSize.setSelectedIndex(0);
+        cbBoxMaterial.setSelectedIndex(0);
+        showTableProduct("");
+        anh = new ArrayList<String>();
+        lblProductImage.setIcon(null);
+    }
+    private void RefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefeshActionPerformed
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RefeshActionPerformed
+
+    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
+
+        int row = tblProduct.rowAtPoint(evt.getPoint());
+        int col = tblProduct.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            txtProductId.setText(tblProduct.getModel().getValueAt(row, 0).toString());
+            txtProductName.setText(tblProduct.getModel().getValueAt(row, 1).toString());
+
+            for (int i = 0; i < cbBoxCategory.getItemCount() - 1; i++) {
+                Category cate = cbBoxCategory.getItemAt(i);
+                if (cate.CategoryName.equals(tblProduct.getModel().getValueAt(row, 2).toString())) {
+                    cbBoxCategory.setSelectedIndex(i);
+                    cbBoxCategory.validate();
+                }
+            }
+
+            for (int i = 0; i < cbBoxBrand.getItemCount(); i++) {
+                Brand brand = cbBoxBrand.getItemAt(i);
+                if (brand.BrandName.equals(tblProduct.getModel().getValueAt(row, 3).toString())) {
+                    cbBoxBrand.setSelectedIndex(i);
+                    cbBoxBrand.validate();
+                    cbBoxBrand.repaint();
+                }
+            }
+            String sizeName = tblProduct.getModel().getValueAt(row, 4).toString();
+            String materialName = tblProduct.getModel().getValueAt(row, 5).toString();
+            String colorName = tblProduct.getModel().getValueAt(row, 6).toString();
+            String[] splitString = tblProduct.getModel().getValueAt(row, 7).toString().split(".", 2);
+            String doublePrice = splitString[0];
+            txtProductPrice.setText(doublePrice);
+            txtProductQuantity.setText(tblProduct.getModel().getValueAt(row, 8).toString());
+            String status = tblProduct.getModel().getValueAt(row, 9).toString();
+            for (int i = 0; i < cbBoxAddSize.getItemCount() - 1; i++) {
+                ProductSize sz = cbBoxAddSize.getItemAt(i);
+                if (sz.getSizeName().equals(sizeName)) {
+                    cbBoxAddSize.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxColor.getItemCount(); i++) {
+                ProductColor prdColor = cbBoxColor.getItemAt(i);
+                if (prdColor.getColorName().equals(colorName)) {
+                    cbBoxColor.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxMaterial.getItemCount(); i++) {
+                ProductMaterial prdMaterial = cbBoxMaterial.getItemAt(i);
+                if (prdMaterial.getMaterialName().equals(materialName)) {
+                    cbBoxMaterial.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxStatus.getItemCount(); i++) {
+
+                if (cbBoxStatus.getItemAt(i).equals(status)) {
+                    cbBoxStatus.setSelectedIndex(i);
+                }
+            }
+            txtShowingColor.setBackground(new Color(Integer.parseInt(cbBoxColor.getSelectedItem().toString())));
+            ProductImage prdImg = new ProductImage();
+            prdImg.setProductId(Integer.parseInt(txtProductId.getText()));
+            try {
+                prdImg.get1TopImageByProductId();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (prdImg.getImg() == null) {
+                lblProductImage.setIcon(null);
+                System.out.println("null");
+            } else {
+                BufferedImage img;
+                try {
+                    img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg()));
+
+                    Image dimg = img.getScaledInstance(lblProductImage.getWidth(), lblProductImage.getHeight(), Image.SCALE_SMOOTH);
+                    lblProductImage.setIcon(new ImageIcon(dimg));
+                } catch (IOException e) {
+                    System.out.println(e);
+
+                }
+            }
+        }
+        validateForm_EnableBtnAdd_Edit();
+    }//GEN-LAST:event_tblProductMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (!txtProductId.getText().equals("")) {
+            int productid = Integer.parseInt(txtProductId.getText());
+            Product prd = new Product();
+            prd.setProductId(productid);
+
+            ProductImage img = new ProductImage();
+            img.setProductId(productid);
+            List<ProductImage> prdImgs = new ArrayList<ProductImage>();
+            try {
+                prdImgs = img.getImagesByProductId(productid);
+                for (ProductImage prdImg : prdImgs) {
+                    File file = new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg());
+                    file.delete();
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (img.Delete() == false) {
+                    prd.DeleteProduct();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnOpenGalleryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenGalleryActionPerformed
+        if (!txtProductId.getText().equals("")) {
+            ProductGalleryJFrame frameGallery;
+            try {
+                frameGallery = new ProductGalleryJFrame(Integer.parseInt(txtProductId.getText()));
+                frameGallery.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Please choose product!");
+        }
+
+    }//GEN-LAST:event_btnOpenGalleryActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Refesh;
     private javax.swing.JButton btnAddColor;
     private javax.swing.JButton btnAddMaterial;
     private javax.swing.JButton btnAddSize;
@@ -747,6 +971,7 @@ public class ProductJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenuRefeshForm;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblProductImage;

@@ -27,7 +27,7 @@ public class Product {
     int SizeId;
     int ColorId;
     int MaterialId;
-    int Status;
+    String Status;
     String CategoryName;
     String BrandName;
     String Description;
@@ -41,7 +41,7 @@ public class Product {
     public List<Product> getListProduct(String searchText) throws SQLException {
         List<Product> lstProduct = new ArrayList<Product>();
         if (searchText.equals("")) {
-            String sql = "select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice   from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId ";
+            String sql = "select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice,product.Status  from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId ";
             ResultSet rs = db.ExecuteQuery(sql);
             while (rs.next()) {
                 Product prd = new Product();
@@ -60,6 +60,7 @@ public class Product {
                 prd.setSizeName(rs.getString("SizeName"));
                 prd.setMaterialName(rs.getString("MaterialName"));
                 prd.setUnitInStock(rs.getInt("UnitInStock"));
+                prd.setStatus(rs.getString("Status"));
                 lstProduct.add(prd);
             }
             listProduct = lstProduct;
@@ -88,7 +89,7 @@ public class Product {
         stmt.setInt(6, MaterialId);
         stmt.setInt(7, UnitInStock);
         stmt.setDouble(8, UnitPrice);
-        stmt.setInt(9, Status);
+        stmt.setString(9, Status);
         stmt.setString(10, Description);
         return stmt.execute();
     }
@@ -101,12 +102,14 @@ public class Product {
         stmt.setString(1, ProductName);
         stmt.setInt(2, CategoryId);
         stmt.setInt(3, BrandId);
-        stmt.setInt(4, SizeId);
-        stmt.setInt(5, MaterialId);
-        stmt.setInt(6, UnitInStock);
-        stmt.setDouble(7, UnitPrice);
-        stmt.setInt(8, Status);
-        stmt.setString(9, Description);
+        stmt.setInt(4, ColorId);
+        stmt.setInt(5, SizeId);
+        stmt.setInt(6, MaterialId);
+        stmt.setInt(7, UnitInStock);
+        stmt.setDouble(8, UnitPrice);
+        stmt.setString(9, Status);
+        stmt.setString(10, Description);
+        stmt.setInt(11, ProductId);
         return stmt.execute();
     }
      public boolean DeleteProduct() {
@@ -115,7 +118,7 @@ public class Product {
         try {
             db.OpenConnection();
             stmt = db.connection.prepareCall(sql);
-            stmt.setInt(1, BrandId);
+            stmt.setInt(1, ProductId);
             
             stmt.execute();
             return true;
@@ -128,13 +131,15 @@ public class Product {
         return SizeId;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return Status;
     }
 
-    public void setStatus(int Status) {
+    public void setStatus(String Status) {
         this.Status = Status;
     }
+
+    
 
     public SqlDataAcess getDb() {
         return db;

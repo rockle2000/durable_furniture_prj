@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,7 +21,7 @@ import java.sql.ResultSet;
 public class ProductImage {
 
     int ProductId;
-    String ProductImage;
+    String Img;
     SqlDataAcess db = new SqlDataAcess();
 
     int getProductMaxId() throws SQLException {
@@ -31,21 +33,60 @@ public class ProductImage {
         return productid;
     }
 
-    public boolean InsertProductImage(String Image) {
+    public boolean InsertProductImage(String Image) throws SQLException {
         String sql = "INSERT productimage (ProductId,Img) VALUES(?,?)";
         PreparedStatement stmt = null;
-        try {
-            db.OpenConnection();
-            stmt = db.connection.prepareCall(sql);
-            stmt.setInt(1, getProductMaxId());
-            stmt.setString(2, Image);
-            stmt.execute();
-            db.CloseConnection();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setInt(1, getProductMaxId());
+        stmt.setString(2, Image);
+        return stmt.execute();
+    }
+
+    public List<ProductImage> getImagesByProductId(int productId) throws SQLException {
+        String sql = "select * from productimage where ProductId = " + productId;
+        db.OpenConnection();
+        ResultSet rs = db.ExecuteQuery(sql);
+        List<ProductImage> ls = new ArrayList<ProductImage>();
+        while (rs.next()) {
+            ProductImage prdImg = new ProductImage();
+            prdImg.setImg(rs.getString("Img"));
+            ls.add(prdImg);
         }
+        db.CloseConnection();
+        return ls;
+    }
+
+    public void get1TopImageByProductId() throws SQLException {
+
+        String sql = "SELECT * FROM productimage WHERE  ProductId = " + ProductId + " LIMIT 1";
+        db.OpenConnection();
+        ResultSet rs = db.ExecuteQuery(sql);
+
+        if (rs.next()) {
+            Img = (rs.getString("Img"));
+        }
+    }
+
+    public boolean DeleteImageByName() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "delete from productimage where Img=?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, Img);
+        return stmt.execute();
+    }
+
+    public boolean Delete() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "delete from productimage where ProductId=?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setInt(1, ProductId);
+
+        return stmt.execute();
+
     }
 
     public int getProductId() {
@@ -56,12 +97,12 @@ public class ProductImage {
         this.ProductId = ProductId;
     }
 
-    public String getProductImage() {
-        return ProductImage;
+    public String getImg() {
+        return Img;
     }
 
-    public void setProductImage(String ProductImage) {
-        this.ProductImage = ProductImage;
+    public void setImg(String Img) {
+        this.Img = Img;
     }
 
 }

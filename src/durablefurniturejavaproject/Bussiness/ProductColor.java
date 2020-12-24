@@ -44,7 +44,6 @@ public class ProductColor {
         db.OpenConnection();
         PreparedStatement stmt = db.connection.prepareCall(sql);
         stmt.setString(1, ColorName);
-
         return stmt.execute();
     }
 

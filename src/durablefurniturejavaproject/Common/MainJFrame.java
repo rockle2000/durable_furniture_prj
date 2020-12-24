@@ -38,7 +38,8 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffId = staffId;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
-
+        
+        
     }
     public int StaffId;
     public Staff Staff = new Staff();
@@ -149,7 +150,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 81, 163), 2, true));
-        jPanel6.setPreferredSize(new java.awt.Dimension(165, 200));
+        jPanel6.setPreferredSize(new java.awt.Dimension(165, 10));
 
         sidebarBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sidebarBill.setForeground(new java.awt.Color(255, 255, 255));
@@ -295,7 +296,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 90, -1, 70));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, 430));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 430));
 
         jPanel2.setBackground(new java.awt.Color(40, 81, 163));
         jPanel2.setPreferredSize(new java.awt.Dimension(1050, 648));
@@ -480,7 +481,6 @@ public class MainJFrame extends javax.swing.JFrame {
             jPanel2.removeAll();
             CategoryJPanel catePanel = new CategoryJPanel();
             //catePanel.setBounds(5, 5, 1040, 591);
-
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Categories");
             labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
