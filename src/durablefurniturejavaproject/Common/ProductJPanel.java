@@ -155,20 +155,20 @@ public class ProductJPanel extends javax.swing.JPanel {
         tblProduct.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status"
+                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status", "Image"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -723,6 +723,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 for (int i = 0; i < anh.size(); i++) {
                     prdImg.InsertProductImage(anh.get(i));
                 }
+                anh = new ArrayList();
 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);

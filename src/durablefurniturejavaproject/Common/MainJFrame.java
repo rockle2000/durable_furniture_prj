@@ -244,6 +244,11 @@ public class MainJFrame extends javax.swing.JFrame {
         sidebarSellProduct.setForeground(new java.awt.Color(255, 255, 255));
         sidebarSellProduct.setText("Sell Product");
         sidebarSellProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sidebarSellProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sidebarSellProductMousePressed(evt);
+            }
+        });
         jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 40));
         jPanel8.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 150, 20));
         jPanel8.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 10));
@@ -685,6 +690,39 @@ public class MainJFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void sidebarSellProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarSellProductMousePressed
+        
+        if (labelForMakerForm.getText() != "SellProduct") {
+            jPanel2.removeAll();
+            SellProductJPanel sellPrdPanel = new SellProductJPanel();
+            //catePanel.setBounds(5, 5, 1040, 591);
+            labelForMakerForm.setForeground(Color.WHITE);
+            labelForMakerForm.setText("SellProduct");
+            labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
+            labelForMakerForm.setBounds(10, 0, 200, 40);
+            jPanel2.add(labelForMakerForm);
+            jPanel2.add(sellPrdPanel);
+            Thread th = new Thread() {
+                public void run() {
+                    try {
+                        for (int i = 0; i <= 645;) {
+                            Thread.sleep(1);
+                            sellPrdPanel.setBounds(5, -640 + i, 1020, 640);
+                            i += 15;
+
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            };
+            th.start();
+            jPanel2.validate();
+
+        }
+    }//GEN-LAST:event_sidebarSellProductMousePressed
 
     /**
      * @param args the command line arguments
