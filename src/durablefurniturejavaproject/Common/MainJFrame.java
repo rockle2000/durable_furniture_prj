@@ -22,6 +22,7 @@ import javax.swing.UIManager;
 import durablefurniturejavaproject.Bussiness.Staff;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Redmibook 14
@@ -37,11 +38,11 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffId = staffId;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
-       
+
     }
     public int StaffId;
     public Staff Staff = new Staff();
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,6 +86,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
+        setResizable(false);
 
         jPanel5.setPreferredSize(new java.awt.Dimension(1200, 800));
 
@@ -93,7 +95,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\loupe.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/loupe.png"))); // NOI18N
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 41, 39));
 
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -103,14 +105,14 @@ public class MainJFrame extends javax.swing.JFrame {
         txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSearch.setBorder(null);
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSearchKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
         jPanel4.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 243, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\user-avatar-with-check-mark.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-avatar-with-check-mark.png"))); // NOI18N
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 40, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -124,7 +126,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidebarHomeIcon.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        sidebarHomeIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\iconfinder_Menu_2001884.png")); // NOI18N
+        sidebarHomeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_Menu_2001884.png"))); // NOI18N
         sidebarHomeIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sidebarHomeIcon.setPreferredSize(new java.awt.Dimension(64, 200));
         sidebarHomeIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,7 +149,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
         jPanel6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 81, 163), 2, true));
-        jPanel6.setPreferredSize(new java.awt.Dimension(165, 200));
+        jPanel6.setPreferredSize(new java.awt.Dimension(165, 10));
 
         sidebarBill.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sidebarBill.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,6 +244,11 @@ public class MainJFrame extends javax.swing.JFrame {
         sidebarSellProduct.setForeground(new java.awt.Color(255, 255, 255));
         sidebarSellProduct.setText("Sell Product");
         sidebarSellProduct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sidebarSellProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sidebarSellProductMousePressed(evt);
+            }
+        });
         jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 40));
         jPanel8.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 150, 20));
         jPanel8.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 10));
@@ -293,7 +300,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 90, -1, 70));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, 430));
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 430));
 
         jPanel2.setBackground(new java.awt.Color(40, 81, 163));
         jPanel2.setPreferredSize(new java.awt.Dimension(1050, 648));
@@ -322,7 +329,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\iconfinder_furniture_living_room_house-36_3799038.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_furniture_living_room_house-36_3799038.png"))); // NOI18N
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 70, 80));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -393,7 +400,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
             };
             th.start();
-           
+
         } else {
             Thread th = new Thread() {
                 public void run() {
@@ -413,56 +420,57 @@ public class MainJFrame extends javax.swing.JFrame {
 
             };
             th.start();
-            
+
         }
     }//GEN-LAST:event_sidebarUserMouseClicked
 
     private void SidebarManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarManagerMouseClicked
+        int jPanel7Position = 200;
+        Thread th1 = new Thread() {
 
+            public void run() {
+                try {
+                    for (int i = 5; i <= 200;) {
+                        Thread.sleep(1);
+                        jPanel6.setBounds(3, 200, 165, i);
+
+                        jPanel7.setBounds(0, jPanel7Position + i, 170, 400);
+                        i += 5;
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+        };
+        Thread th2 = new Thread() {
+            public void run() {
+                try {
+                    for (int i = 200; i >= 10;) {
+                        Thread.sleep(1);
+                        jPanel6.setBounds(3, 200, 165, i);
+                        i -= 5;
+                    }
+                    for (int i = 400; i >= 205;) {
+                        Thread.sleep(1);
+                        jPanel7.setBounds(0, i, 170, 400);
+                        i -= 5;
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+
+        };
         if (jPanel6.getBounds().height == 10) {
-            Thread th = new Thread() {
-                int jPanel7Position = 200;
 
-                public void run() {
-                    try {
-                        for (int i = 5; i <= 200;) {
-                            Thread.sleep(1);
-                            jPanel6.setBounds(3, 200, 165, i);
+            th1.start();
 
-                            jPanel7.setBounds(0, jPanel7Position + i, 170, 400);
-                            i += 5;
-                        }
-
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
-            };
-            th.start();
-         
         } else {
-            Thread th = new Thread() {
-                public void run() {
-                    try {
-                        for (int i = 200; i >= 10;) {
-                            Thread.sleep(1);
-                            jPanel6.setBounds(3, 200, 165, i);
-                            i -= 5;
-                        }
-                        for (int i = 400; i >= 205;) {
-                            Thread.sleep(1);
-                            jPanel7.setBounds(0, i, 170, 400);
-                            i -= 5;
-                        }
-                        
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
 
-            };
-            th.start();
-       
+            th2.start();
+
         }
 
     }//GEN-LAST:event_SidebarManagerMouseClicked
@@ -475,7 +483,6 @@ public class MainJFrame extends javax.swing.JFrame {
             jPanel2.removeAll();
             CategoryJPanel catePanel = new CategoryJPanel();
             //catePanel.setBounds(5, 5, 1040, 591);
-
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Categories");
             labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
@@ -497,8 +504,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     }
                 }
             };
-            th.start();         
-           jPanel2.validate();
+            th.start();
+            jPanel2.validate();
 
         }
 
@@ -534,7 +541,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 }
             };
             th.start();
-             
+
             jPanel2.validate();
         }
     }//GEN-LAST:event_sidebarBrandMouseClicked
@@ -568,7 +575,7 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-            
+
         }
 
     }//GEN-LAST:event_sidebarProduct1MouseClicked
@@ -600,7 +607,7 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-           
+
         }
     }
     private void sidebarHomeIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarHomeIconMouseClicked
@@ -608,7 +615,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sidebarHomeIconMouseClicked
 
     private void sidebarAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarAccountMouseClicked
-            if (labelForMakerForm.getText() != "Account") {
+        if (labelForMakerForm.getText() != "Account") {
             jPanel2.removeAll();
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Account");
@@ -635,12 +642,12 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-          
+
         }
     }//GEN-LAST:event_sidebarAccountMouseClicked
 
     private void sidebarStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarStaffMouseClicked
-         if (labelForMakerForm.getText() != "Staffs") {
+        if (labelForMakerForm.getText() != "Staffs") {
             jPanel2.removeAll();
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("Staffs");
@@ -667,22 +674,57 @@ public class MainJFrame extends javax.swing.JFrame {
             };
             th.start();
             jPanel2.validate();
-            
+
         }
     }//GEN-LAST:event_sidebarStaffMouseClicked
 
-    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
-        try {
-            prodPanel.showTableProduct(txtSearch.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        if (labelForMakerForm.getText() == "Products") {
+            try {
+                prodPanel.showTableProduct(txtSearch.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }//GEN-LAST:event_txtSearchKeyTyped
+
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void sidebarSellProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarSellProductMousePressed
+        
+        if (labelForMakerForm.getText() != "SellProduct") {
+            jPanel2.removeAll();
+            SellProductJPanel sellPrdPanel = new SellProductJPanel();
+            //catePanel.setBounds(5, 5, 1040, 591);
+            labelForMakerForm.setForeground(Color.WHITE);
+            labelForMakerForm.setText("SellProduct");
+            labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
+            labelForMakerForm.setBounds(10, 0, 200, 40);
+            jPanel2.add(labelForMakerForm);
+            jPanel2.add(sellPrdPanel);
+            Thread th = new Thread() {
+                public void run() {
+                    try {
+                        for (int i = 0; i <= 645;) {
+                            Thread.sleep(1);
+                            sellPrdPanel.setBounds(5, -640 + i, 1020, 640);
+                            i += 15;
+
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            };
+            th.start();
+            jPanel2.validate();
+
+        }
+    }//GEN-LAST:event_sidebarSellProductMousePressed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel SidebarManager;

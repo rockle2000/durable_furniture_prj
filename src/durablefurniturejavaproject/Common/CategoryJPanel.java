@@ -260,7 +260,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
             }
         }
         if ("Edit".equals(btnSave.getText())) {
-            //Sửa category nhưng không sửa ảnh
+            //S?a category nhung kh�ng s?a ?nh
             if ("".equals(image)) {
                 try {
                     if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, imageLink) ) {
@@ -274,7 +274,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //Sửa category nhưng sửa ảnh
+                //S?a category nhung s?a ?nh
             } else {
                 try {
                     File file = new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink);
@@ -302,12 +302,12 @@ public class CategoryJPanel extends javax.swing.JPanel {
         RefreshData();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    //Xóa Category
+    //X�a Category
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
 
         if (!"".equals(txtCategoryId.getText())) {
-            // Chọn Yes 
+            // Ch?n Yes 
             int reply = JOptionPane.showConfirmDialog(null, "Do you sure you want to delete this brand ?", "Message", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 File file = new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink);
@@ -324,7 +324,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Delete category failed", "Message", JOptionPane.PLAIN_MESSAGE);
                 }
             } else {
-                // chọn NO nên không xóa
+                // ch?n NO n�n kh�ng x�a
             }
         } else {
             JOptionPane.showMessageDialog(this, "You must choose a brand to delete", "Message", JOptionPane.PLAIN_MESSAGE);

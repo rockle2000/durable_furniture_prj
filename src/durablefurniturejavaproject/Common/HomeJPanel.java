@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import durablefurniturejavaproject.Bussiness.Staff;
+
 /**
  *
  * @author Redmibook 14
@@ -22,33 +23,35 @@ public class HomeJPanel extends javax.swing.JPanel {
     /**
      * Creates new form HomeJPanel
      */
-    DateTimeFormatter dtf;
     LocalDateTime now = LocalDateTime.now();
-    
+
     public HomeJPanel(Staff staff) {
+        DateTimeFormatter dtf;
         initComponents();
         lblFullName.setText(staff.getFullName());
         dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        
+        setTime();
         lblDate.setText(dtf.format(now));
         dtf = DateTimeFormatter.ofPattern("yyyy");
         String getAge = String.valueOf(Integer.parseInt(dtf.format(now)) - staff.getBirthYear());
         lblAge.setText(getAge);
         lblPhoneNumber.setText(staff.getPhoneNumber());
-        Timer timer = new Timer(1000, taskPerformer);
+        Timer timer = new Timer(60000, taskPerformer);
         timer.start();
-        
+
     }
-    
+
+    private void setTime() {
+        DateTimeFormatter dtf;
+        now = LocalDateTime.now();
+        dtf = DateTimeFormatter.ofPattern("HH:mm");
+        lblTime.setText(dtf.format(now));
+        jPanel11.validate();
+    }
     ActionListener taskPerformer = new ActionListener() {
-      
+
         public void actionPerformed(ActionEvent evt) {
-      
-            now = LocalDateTime.now();
-             dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-            lblTime.setText(dtf.format(now));
-            jPanel11.validate();
-            
+            setTime();
         }
     };
 
@@ -186,7 +189,7 @@ public class HomeJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutMouseClicked
-       JOptionPane.showMessageDialog(this, "This application was designed by Le Hoang.");
+        JOptionPane.showMessageDialog(this, "This application was designed by Le Hoang.");
     }//GEN-LAST:event_AboutMouseClicked
 
 

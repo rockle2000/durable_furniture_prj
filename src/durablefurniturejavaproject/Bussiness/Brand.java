@@ -115,4 +115,9 @@ public class Brand {
         this.Image = Image;
     }
 
+    @Override
+    public String toString() {
+        return BrandName; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }

@@ -5,14 +5,39 @@
  */
 package durablefurniturejavaproject.Common;
 
+import durablefurniturejavaproject.Bussiness.Brand;
+import durablefurniturejavaproject.Bussiness.Category;
+import durablefurniturejavaproject.Bussiness.ProductColor;
+import durablefurniturejavaproject.Bussiness.ProductMaterial;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import durablefurniturejavaproject.Bussiness.Product;
+import durablefurniturejavaproject.Bussiness.ProductImage;
+import durablefurniturejavaproject.Bussiness.ProductSize;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -30,6 +55,16 @@ public class ProductJPanel extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        txtShowingColor.setBackground(Color.red);
+        try {
+            showComboboxProductColor();
+            showComboboxProductMaterial();
+            showComboboxProductSize();
+            showComboBoxBrand();
+            showComboBoxCategory();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -41,31 +76,34 @@ public class ProductJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuRefeshForm = new javax.swing.JPopupMenu();
+        Refesh = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduct = new javax.swing.JTable();
         txtProductId = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAdd_Edit = new javax.swing.JButton();
         txtProductPrice = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        txtDescription = new javax.swing.JTextArea();
+        btnOpenGallery = new javax.swing.JButton();
+        lblProductImage = new javax.swing.JLabel();
         txtProductName = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtProductQuantity = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbBoxStatus = new javax.swing.JComboBox<>();
         cbBoxCategory = new javax.swing.JComboBox<>();
-        jComboBox7 = new javax.swing.JComboBox<>();
+        cbBoxBrand = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnChooseImage = new javax.swing.JButton();
         txtFieldAddColor1 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -73,14 +111,31 @@ public class ProductJPanel extends javax.swing.JPanel {
         btnAddColor = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbBoxMaterial = new javax.swing.JComboBox<>();
-        cbBoxProdColor = new javax.swing.JComboBox<>();
+        cbBoxColor = new javax.swing.JComboBox<>();
         cbBoxAddSize = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         btnAddSize = new javax.swing.JButton();
         txtFieldAddColor = new javax.swing.JTextField();
         txtFieldAddMaterial = new javax.swing.JTextField();
         txtFieldAddSize = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtShowingColor = new javax.swing.JTextField();
+        btnDeleteSize = new javax.swing.JButton();
+        btnDeleteMaterial = new javax.swing.JButton();
+        btnDeleteColor = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+
+        jPopupMenuRefeshForm.setPreferredSize(new java.awt.Dimension(150, 100));
+
+        Refesh.setText("Refesh");
+        Refesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefeshActionPerformed(evt);
+            }
+        });
+        jPopupMenuRefeshForm.add(Refesh);
+
+        Delete.setText("Delete");
+        jPopupMenuRefeshForm.add(Delete);
 
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -90,6 +145,11 @@ public class ProductJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(40, 81, 163));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(1050, 640));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1010, 150));
@@ -97,20 +157,20 @@ public class ProductJPanel extends javax.swing.JPanel {
         tblProduct.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Price", "Quantity"
+                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status", "Image"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,12 +181,20 @@ public class ProductJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblProduct.setMinimumSize(new java.awt.Dimension(1040, 340));
-        tblProduct.setPreferredSize(new java.awt.Dimension(1040, 150));
+        tblProduct.setRequestFocusEnabled(false);
+        tblProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblProductMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProduct);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
+        txtProductId.setEditable(false);
         txtProductId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtProductId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 230, -1));
 
@@ -141,11 +209,22 @@ public class ProductJPanel extends javax.swing.JPanel {
         jLabel2.setText("Product Price");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Add/Edit");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 550, 140, 40));
+        btnAdd_Edit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAdd_Edit.setText("Add/Edit");
+        btnAdd_Edit.setEnabled(false);
+        btnAdd_Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdd_EditActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAdd_Edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 550, 140, 40));
 
         txtProductPrice.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtProductPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtProductPriceKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 230, -1));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -154,26 +233,41 @@ public class ProductJPanel extends javax.swing.JPanel {
         jLabel3.setText("Product Image");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 210, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescription.setColumns(20);
+        txtDescription.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        txtDescription.setRows(5);
+        jScrollPane2.setViewportView(txtDescription);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 820, -1));
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Gallery");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 130, 20));
+        btnOpenGallery.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnOpenGallery.setText("Gallery");
+        btnOpenGallery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenGalleryActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnOpenGallery, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 400, 130, 20));
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 280, 180));
+        lblProductImage.setForeground(new java.awt.Color(255, 255, 255));
+        lblProductImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel1.add(lblProductImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 270, 180));
 
         txtProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtProductName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtProductNameKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 230, -1));
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 210, -1));
+        txtProductQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtProductQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtProductQuantityKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtProductQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 210, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,17 +279,15 @@ public class ProductJPanel extends javax.swing.JPanel {
         jLabel7.setText("Product Quantity");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
-        jComboBox3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 210, -1));
+        cbBoxStatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Up Comming", "In Stock", "Out of Stock" }));
+        jPanel1.add(cbBoxStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 210, -1));
 
         cbBoxCategory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jPanel1.add(cbBoxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 210, -1));
 
-        jComboBox7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 210, -1));
+        cbBoxBrand.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jPanel1.add(cbBoxBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 210, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -221,9 +313,14 @@ public class ProductJPanel extends javax.swing.JPanel {
         jLabel11.setText("Product Status");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 340, -1, -1));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Choose Image");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 130, 20));
+        btnChooseImage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnChooseImage.setText("Choose Image");
+        btnChooseImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChooseImageActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnChooseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 210, 130, 20));
 
         txtFieldAddColor1.setText("jTextField2");
         jPanel1.add(txtFieldAddColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 210, 0));
@@ -238,12 +335,12 @@ public class ProductJPanel extends javax.swing.JPanel {
         jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         btnAddMaterial.setText("Add");
-        btnAddMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddMaterialMouseClicked(evt);
+        btnAddMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddMaterialActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAddMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 70, 20));
+        jPanel2.add(btnAddMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 50, 20));
 
         btnAddColor.setText("Add");
         btnAddColor.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +348,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                 btnAddColorActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAddColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 70, 20));
+        jPanel2.add(btnAddColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 50, 20));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -260,21 +357,18 @@ public class ProductJPanel extends javax.swing.JPanel {
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         cbBoxMaterial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbBoxMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbBoxMaterial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbBoxMaterialActionPerformed(evt);
+        jPanel2.add(cbBoxMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 230, -1));
+
+        cbBoxColor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbBoxColor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbBoxColorPropertyChange(evt);
             }
         });
-        jPanel2.add(cbBoxMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 210, -1));
-
-        cbBoxProdColor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbBoxProdColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cbBoxProdColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 210, -1));
+        jPanel2.add(cbBoxColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
 
         cbBoxAddSize.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbBoxAddSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(cbBoxAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 210, -1));
+        jPanel2.add(cbBoxAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 230, -1));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -288,125 +382,585 @@ public class ProductJPanel extends javax.swing.JPanel {
                 btnAddSizeActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 70, 20));
+        jPanel2.add(btnAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 50, 20));
+        jPanel2.add(txtFieldAddColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 63, 230, 0));
 
-        txtFieldAddColor.setText("jTextField2");
-        jPanel2.add(txtFieldAddColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 210, 0));
+        txtFieldAddMaterial.setToolTipText("");
+        jPanel2.add(txtFieldAddMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 153, 230, 0));
+        jPanel2.add(txtFieldAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 243, 230, 0));
 
-        txtFieldAddMaterial.setText("jTextField2");
-        jPanel2.add(txtFieldAddMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 0));
+        txtShowingColor.setEnabled(false);
+        jPanel2.add(txtShowingColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 85, 25));
 
-        txtFieldAddSize.setText("jTextField2");
-        jPanel2.add(txtFieldAddSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 210, 0));
+        btnDeleteSize.setText("Delete");
+        btnDeleteSize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteSizeMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnDeleteSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 70, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 240, 270));
+        btnDeleteMaterial.setText("Delete");
+        btnDeleteMaterial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteMaterialActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnDeleteMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 70, 20));
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setText("Delete");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 140, 40));
+        btnDeleteColor.setText("Delete");
+        btnDeleteColor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteColorMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnDeleteColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 70, 20));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, 250, 270));
+
+        btnDelete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 480, 140, 40));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
      List<Product> lstPrd = new ArrayList();
 
     DefaultTableModel tableModel;
+    Product prod = new Product();
 
-   public void showTableProduct(String txtSearch) throws SQLException {
+    public void showComboboxProductSize() throws SQLException {
+        ProductSize prodSize = new ProductSize();
+        List<ProductSize> ls = new ArrayList<ProductSize>();
+        ls = prodSize.GetSize();
+        for (ProductSize prdsz : ls) {
+            cbBoxAddSize.addItem(prdsz);
+        }
+    }
+
+    public void showComboBoxBrand() {
+        Brand brand = new Brand();
+        List<Brand> ls = new ArrayList<Brand>();
+        ls = brand.GetAllBrand();
+        for (Brand br : ls) {
+            cbBoxBrand.addItem(br);
+        }
+    }
+
+    public void showComboBoxCategory() throws SQLException {
+        Category cate = new Category();
+        List<Category> ls = new ArrayList<Category>();
+        ls = cate.GetAllCategory();
+        for (Category catel : ls) {
+            cbBoxCategory.addItem(catel);
+        }
+    }
+
+    public void showComboboxProductColor() throws SQLException {
+        ProductColor prodColor = new ProductColor();
+        List<ProductColor> ls = new ArrayList<ProductColor>();
+        ls = prodColor.GetColor();
+        for (ProductColor prdcl : ls) {
+            cbBoxColor.addItem(prdcl);
+        }
+    }
+
+    public void showComboboxProductMaterial() throws SQLException {
+        ProductMaterial prdMaterial = new ProductMaterial();
+        List<ProductMaterial> ls = new ArrayList<ProductMaterial>();
+        ls = prdMaterial.GetMaterial();
+        for (ProductMaterial prdmt : ls) {
+            cbBoxMaterial.addItem(prdmt);
+        }
+    }
+
+    public void showTableProduct(String txtSearch) throws SQLException {
         tableModel = (DefaultTableModel) tblProduct.getModel();
-        Product prod = new Product();
 
         tableModel.setRowCount(0);
 
         if (txtSearch.equals("")) {
-            lstPrd = prod.getListProduct();
+            lstPrd = prod.getListProduct("");
+
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryId(), prd.getBrandId(), prd.getMaterial(), prd.getColor(), prd.getSize(), prd.getPrice(), prd.getQuantity()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock(), prd.getStatus()});
             }
         } else {
             lstPrd = prod.getListProduct(txtSearch);
+
             for (Product prd : lstPrd) {
-                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryId(), prd.getBrandId(), prd.getMaterial(), prd.getColor(), prd.getSize(), prd.getPrice(), prd.getQuantity()});
+                tableModel.addRow(new Object[]{prd.getProductId(), prd.getProductName(), prd.getCategoryName(), prd.getBrandName(), prd.getSizeName(), prd.getMaterialName(), prd.getColorName(), prd.getUnitPrice(), prd.getUnitInStock(), prd.getStatus()});
             }
         }
     }
     static Boolean txtFieldAddColorIsShowing = false;
-    static Boolean txtFieldAddMaterialIsShowing = false;
-    private void btnAddMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMaterialMouseClicked
-        if (txtFieldAddMaterialIsShowing == false) {
-            txtFieldAddMaterialIsShowing = true;
-            txtFieldAddMaterial.setBounds(10, 150, 210, 23);
-        } else {
-
-            txtFieldAddMaterialIsShowing = false;
-            txtFieldAddMaterial.setBounds(10, 150, 210, 0);
-            if (!txtFieldAddMaterial.getText().equals("")) {
-                cbBoxMaterial.addItem(txtFieldAddMaterial.getText());
-            }
-
-        }
-    }//GEN-LAST:event_btnAddMaterialMouseClicked
-    static Boolean txtFieldAddSizeIsShowing = false;
     private void btnAddColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddColorActionPerformed
-        if (txtFieldAddColorIsShowing == false) {
-            txtFieldAddColorIsShowing = true;
-            txtFieldAddColor.setBounds(10, 63, 210, 23);
-        } else {
-
-            txtFieldAddColorIsShowing = false;
-            txtFieldAddColor.setBounds(10, 63, 210, 0);
-            if (!txtFieldAddColor.getText().equals("")) {
-                cbBoxProdColor.addItem(txtFieldAddColor.getText());
+        Color initialcolor = Color.RED;
+        Color color = JColorChooser.showDialog(this,
+                "Select a color", initialcolor);
+        txtShowingColor.setBackground(color);
+        ProductColor colorSub = new ProductColor();
+        colorSub.setColorName(Integer.toString(color.getRGB()));
+        boolean colorIsExists = false;
+        for (int i = 0; i < cbBoxColor.getItemCount(); i++) {
+            if (cbBoxColor.getItemAt(i).toString().equals(Integer.toString(color.getRGB()))) {
+                colorIsExists = true;
+            }
+        }
+        if (colorIsExists == false) {
+            try {
+                if (colorSub.InsertColor() == false) {
+                    JOptionPane.showMessageDialog(this, "Color added!");
+                    cbBoxMaterial.removeAllItems();
+                    showComboboxProductMaterial();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Insert failed!");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        } else {
+            JOptionPane.showMessageDialog(this, "Color is existed");
         }
-
     }//GEN-LAST:event_btnAddColorActionPerformed
-
-    private void cbBoxMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBoxMaterialActionPerformed
-        if (txtFieldAddMaterialIsShowing == false) {
-            txtFieldAddMaterialIsShowing = true;
-            txtFieldAddMaterial.setBounds(10, 150, 210, 23);
-        } else {
-
-            txtFieldAddMaterialIsShowing = false;
-            txtFieldAddMaterial.setBounds(10, 150, 210, 0);
-            if (!txtFieldAddMaterial.getText().equals("")) {
-                cbBoxMaterial.addItem(txtFieldAddMaterial.getText());
-            }
-
-        }
-    }//GEN-LAST:event_cbBoxMaterialActionPerformed
-
+    static Boolean txtFieldAddSizeIsShowing = false;
     private void btnAddSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSizeActionPerformed
         if (txtFieldAddSizeIsShowing == false) {
             txtFieldAddSizeIsShowing = true;
-            txtFieldAddSize.setBounds(10, 240, 210, 23);
+            txtFieldAddSize.setBounds(10, 240, 230, 23);
         } else {
-
             txtFieldAddSizeIsShowing = false;
-            txtFieldAddSize.setBounds(10, 240, 210, 0);
+            txtFieldAddSize.setBounds(10, 240, 230, 0);
             if (!txtFieldAddSize.getText().equals("")) {
-                cbBoxAddSize.addItem(txtFieldAddSize.getText());
+                ProductSize prdSz = new ProductSize();
+                prdSz.setSizeName(txtFieldAddSize.getText());
+
+                try {
+                    if (prdSz.InsertSize() == false) {
+                        cbBoxAddSize.removeAllItems();
+                        showComboboxProductSize();
+                        JOptionPane.showMessageDialog(this, "Size added!");
+                        txtFieldAddSize.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Size add faled!");
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, ex);
+                }
+
             }
 
         }
     }//GEN-LAST:event_btnAddSizeActionPerformed
 
+    private void cbBoxColorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbBoxColorPropertyChange
+        if (cbBoxColor.getSelectedIndex() != -1) {
+            txtShowingColor.setBackground(new Color(Integer.parseInt(cbBoxColor.getSelectedItem().toString())));
+
+        }
+
+    }//GEN-LAST:event_cbBoxColorPropertyChange
+
+    private void btnDeleteSizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteSizeMouseClicked
+        ProductSize prdsz = new ProductSize();
+        prdsz = (ProductSize) cbBoxAddSize.getSelectedItem();
+        int delete = JOptionPane.showConfirmDialog(null, "Confirm delete size " + prdsz.getSizeName());
+        if (delete == 0) {
+            try {
+                if (prdsz.DeleteSize() == false) {
+                    JOptionPane.showMessageDialog(this, "Size deleted!");
+                    cbBoxAddSize.removeItem(cbBoxAddSize.getSelectedItem());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete failed!");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteSizeMouseClicked
+
+    private void btnDeleteColorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteColorMouseClicked
+
+        ProductColor prdc = new ProductColor();
+        prdc.setColorName(cbBoxColor.getSelectedItem().toString());
+        int delete = JOptionPane.showConfirmDialog(null, "Confirm delete color " + prdc.getColorName());
+        if (delete == 0) {
+            try {
+                if (prdc.DeleteColor() == false) {
+                    JOptionPane.showMessageDialog(this, "Color deleted!");
+                    cbBoxColor.removeItem(cbBoxColor.getSelectedItem());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete failed!");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteColorMouseClicked
+
+    static Boolean txtFieldAddMaterialIsShowing = false;
+    private void btnAddMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMaterialActionPerformed
+        if (txtFieldAddMaterialIsShowing == false) {
+            txtFieldAddMaterialIsShowing = true;
+            txtFieldAddMaterial.setBounds(10, 153, 230, 23);
+        } else {
+            txtFieldAddMaterialIsShowing = false;
+            txtFieldAddMaterial.setBounds(10, 153, 230, 0);
+            if (!txtFieldAddMaterial.getText().equals("")) {
+                ProductMaterial material = new ProductMaterial();
+                material.setMaterialName(txtFieldAddMaterial.getText());
+                ProductMaterial prdMaterial = new ProductMaterial();
+                prdMaterial.setMaterialName(txtFieldAddMaterial.getText());
+                try {
+                    if (prdMaterial.InsertMaterial() == false) {
+                        cbBoxMaterial.removeAllItems();
+                        showComboboxProductMaterial();
+                        JOptionPane.showMessageDialog(this, "Material added!");
+                        txtFieldAddMaterial.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Material add faled!");
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(this, ex);
+                }
+
+            }
+
+        }
+    }//GEN-LAST:event_btnAddMaterialActionPerformed
+
+    private void btnDeleteMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteMaterialActionPerformed
+        ProductMaterial prdMaterial = new ProductMaterial();
+        prdMaterial = (ProductMaterial) cbBoxMaterial.getSelectedItem();
+        int delete = JOptionPane.showConfirmDialog(null, "Confirm delete material " + prdMaterial.getMaterialName());
+        if (delete == 0) {
+            try {
+                if (prdMaterial.DeleteMaterial() == false) {
+                    JOptionPane.showMessageDialog(this, "Material deleted!");
+                    cbBoxMaterial.removeItem(cbBoxMaterial.getSelectedItem());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Delete failed!");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }//GEN-LAST:event_btnDeleteMaterialActionPerformed
+
+    List<String> anh = new ArrayList();
+    private void btnChooseImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseImageActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setCurrentDirectory(new File("D:"));
+        String currentDir = System.getProperty("user.dir") + "/Images";
+        File theDir = new File(currentDir + "/Products");
+        if (!theDir.exists()) {
+            theDir.mkdirs();
+        }
+        int returnVal = chooser.showOpenDialog(null);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            BufferedImage img;
+            BufferedImage image;
+            ArrayList<File> images = new ArrayList<>();
+            try {
+                img = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
+                Image dimg = img.getScaledInstance(lblProductImage.getWidth(), lblProductImage.getHeight(), Image.SCALE_SMOOTH);
+                lblProductImage.setIcon(new ImageIcon(dimg));
+
+                File[] files = chooser.getSelectedFiles();
+                for (int i = 0; i < files.length; i++) {
+                    images.add(files[i]);
+                    anh.add(UUID.randomUUID().toString().replace("-", "") + files[i].getName());
+                    image = ImageIO.read(files[i]);
+                    ImageIO.write(image, "jpg", new File(currentDir + "/Products/" + anh.get(i)));
+                }
+            } catch (IOException e) {
+            }
+        }
+    }//GEN-LAST:event_btnChooseImageActionPerformed
+
+    private void btnAdd_EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd_EditActionPerformed
+        Product product = new Product();
+        if (txtProductName.getText().equals("") && txtProductPrice.getText().equals("") && txtProductQuantity.getText().equals("") && cbBoxCategory.getSelectedIndex() < 0 && cbBoxAddSize.getSelectedIndex() < 0 && cbBoxColor.getSelectedIndex() < 0) {
+            JOptionPane.showMessageDialog(this, "You must fill all field!");
+            return;
+        }
+        product.setProductName(txtProductName.getText());
+        product.setUnitInStock(Integer.parseInt(txtProductQuantity.getText()));
+        product.setUnitPrice(Double.parseDouble(txtProductPrice.getText()));
+        Brand brand = (Brand) cbBoxBrand.getSelectedItem();
+        Category cate = (Category) cbBoxCategory.getSelectedItem();
+        ProductColor prdcolor = (ProductColor) cbBoxColor.getSelectedItem();
+        ProductMaterial prdMaterial = (ProductMaterial) cbBoxMaterial.getSelectedItem();
+        ProductSize prdSize = (ProductSize) cbBoxAddSize.getSelectedItem();
+        product.setBrandId(brand.getBrandId());
+        product.setCategoryId(cate.CategoryId);
+        product.setColorId(prdcolor.getColorId());
+        product.setMaterialId(prdMaterial.getMaterialId());
+        product.setSizeId(prdSize.getSizeId());
+        product.setStatus((String) cbBoxStatus.getSelectedItem());
+        ProductImage prdImg = new ProductImage();
+        if (txtProductId.getText().equals("")) {
+            try {
+                product.InsertProduct();
+                for (int i = 0; i < anh.size(); i++) {
+
+                    prdImg.InsertProductImage(anh.get(i));
+                }
+                refeshForm();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        } else {
+            try {
+                product.setProductId(Integer.parseInt(txtProductId.getText()));
+                product.UpdateProduct();
+                for (int i = 0; i < anh.size(); i++) {
+                    prdImg.InsertProductImage(anh.get(i));
+                }
+                anh = new ArrayList();
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_btnAdd_EditActionPerformed
+
+    void validateForm_EnableBtnAdd_Edit() {
+        String strNumber = "1234567890";
+        Boolean isValid = true;
+        for (char c : txtProductQuantity.getText().toCharArray()) {
+            if (strNumber.indexOf(c) < 0) {
+                isValid = false;
+            }
+        }
+        for (char c : txtProductPrice.getText().toCharArray()) {
+            if (strNumber.indexOf(c) < 0) {
+                isValid = false;
+            }
+        }
+        if (txtProductName.getText().equals("") || txtProductQuantity.getText().equals("") || txtProductPrice.getText().equals("")) {
+            isValid = false;
+        }
+        if (isValid == false) {
+            btnAdd_Edit.setEnabled(false);
+            return;
+        }
+        btnAdd_Edit.setEnabled(true);
+    }
+
+    private void txtProductQuantityKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductQuantityKeyReleased
+        validateForm_EnableBtnAdd_Edit();
+    }//GEN-LAST:event_txtProductQuantityKeyReleased
+
+    private void txtProductPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductPriceKeyReleased
+        validateForm_EnableBtnAdd_Edit();
+
+    }//GEN-LAST:event_txtProductPriceKeyReleased
+
+    private void txtProductNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductNameKeyReleased
+        validateForm_EnableBtnAdd_Edit();
+    }//GEN-LAST:event_txtProductNameKeyReleased
+
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jPanel1MouseReleased
+
+    private void tblProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblProductMouseReleased
+    void refeshForm() throws SQLException {
+        txtProductName.setText("");
+        txtProductQuantity.setText("");
+        txtProductPrice.setText("");
+        txtProductId.setText("");
+        cbBoxCategory.setSelectedIndex(0);
+        cbBoxBrand.setSelectedIndex(0);
+        cbBoxStatus.setSelectedIndex(0);
+        cbBoxColor.setSelectedIndex(0);
+        cbBoxAddSize.setSelectedIndex(0);
+        cbBoxMaterial.setSelectedIndex(0);
+        showTableProduct("");
+        anh = new ArrayList<String>();
+        lblProductImage.setIcon(null);
+    }
+    private void RefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefeshActionPerformed
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RefeshActionPerformed
+
+    private void tblProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductMouseClicked
+
+        int row = tblProduct.rowAtPoint(evt.getPoint());
+        int col = tblProduct.columnAtPoint(evt.getPoint());
+        if (row >= 0 && col >= 0) {
+            txtProductId.setText(tblProduct.getModel().getValueAt(row, 0).toString());
+            txtProductName.setText(tblProduct.getModel().getValueAt(row, 1).toString());
+
+            for (int i = 0; i < cbBoxCategory.getItemCount() - 1; i++) {
+                Category cate = cbBoxCategory.getItemAt(i);
+                if (cate.CategoryName.equals(tblProduct.getModel().getValueAt(row, 2).toString())) {
+                    cbBoxCategory.setSelectedIndex(i);
+                    cbBoxCategory.validate();
+                }
+            }
+
+            for (int i = 0; i < cbBoxBrand.getItemCount(); i++) {
+                Brand brand = cbBoxBrand.getItemAt(i);
+                if (brand.BrandName.equals(tblProduct.getModel().getValueAt(row, 3).toString())) {
+                    cbBoxBrand.setSelectedIndex(i);
+                    cbBoxBrand.validate();
+                    cbBoxBrand.repaint();
+                }
+            }
+            String sizeName = tblProduct.getModel().getValueAt(row, 4).toString();
+            String materialName = tblProduct.getModel().getValueAt(row, 5).toString();
+            String colorName = tblProduct.getModel().getValueAt(row, 6).toString();
+            String[] splitString = tblProduct.getModel().getValueAt(row, 7).toString().split(".", 2);
+            String doublePrice = splitString[0];
+            txtProductPrice.setText(doublePrice);
+            txtProductQuantity.setText(tblProduct.getModel().getValueAt(row, 8).toString());
+            String status = tblProduct.getModel().getValueAt(row, 9).toString();
+            for (int i = 0; i < cbBoxAddSize.getItemCount() - 1; i++) {
+                ProductSize sz = cbBoxAddSize.getItemAt(i);
+                if (sz.getSizeName().equals(sizeName)) {
+                    cbBoxAddSize.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxColor.getItemCount(); i++) {
+                ProductColor prdColor = cbBoxColor.getItemAt(i);
+                if (prdColor.getColorName().equals(colorName)) {
+                    cbBoxColor.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxMaterial.getItemCount(); i++) {
+                ProductMaterial prdMaterial = cbBoxMaterial.getItemAt(i);
+                if (prdMaterial.getMaterialName().equals(materialName)) {
+                    cbBoxMaterial.setSelectedIndex(i);
+                }
+            }
+            for (int i = 0; i < cbBoxStatus.getItemCount(); i++) {
+
+                if (cbBoxStatus.getItemAt(i).equals(status)) {
+                    cbBoxStatus.setSelectedIndex(i);
+                }
+            }
+            txtShowingColor.setBackground(new Color(Integer.parseInt(cbBoxColor.getSelectedItem().toString())));
+            ProductImage prdImg = new ProductImage();
+            prdImg.setProductId(Integer.parseInt(txtProductId.getText()));
+            try {
+                prdImg.get1TopImageByProductId();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (prdImg.getImg() == null) {
+                lblProductImage.setIcon(null);
+                System.out.println("null");
+            } else {
+                BufferedImage img;
+                try {
+                    img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg()));
+
+                    Image dimg = img.getScaledInstance(lblProductImage.getWidth(), lblProductImage.getHeight(), Image.SCALE_SMOOTH);
+                    lblProductImage.setIcon(new ImageIcon(dimg));
+                } catch (IOException e) {
+                    System.out.println(e);
+
+                }
+            }
+        }
+        validateForm_EnableBtnAdd_Edit();
+    }//GEN-LAST:event_tblProductMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        if (!txtProductId.getText().equals("")) {
+            int productid = Integer.parseInt(txtProductId.getText());
+            Product prd = new Product();
+            prd.setProductId(productid);
+
+            ProductImage img = new ProductImage();
+            img.setProductId(productid);
+            List<ProductImage> prdImgs = new ArrayList<ProductImage>();
+            try {
+                prdImgs = img.getImagesByProductId(productid);
+                for (ProductImage prdImg : prdImgs) {
+                    File file = new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg());
+                    file.delete();
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                if (img.Delete() == false) {
+                    prd.DeleteProduct();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnOpenGalleryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenGalleryActionPerformed
+        if (!txtProductId.getText().equals("")) {
+            ProductGalleryJFrame frameGallery;
+            try {
+                frameGallery = new ProductGalleryJFrame(Integer.parseInt(txtProductId.getText()));
+                frameGallery.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Please choose product!");
+        }
+
+    }//GEN-LAST:event_btnOpenGalleryActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Refesh;
     private javax.swing.JButton btnAddColor;
     private javax.swing.JButton btnAddMaterial;
     private javax.swing.JButton btnAddSize;
-    private javax.swing.JComboBox<String> cbBoxAddSize;
-    private javax.swing.JComboBox<String> cbBoxCategory;
-    private javax.swing.JComboBox<String> cbBoxMaterial;
-    private javax.swing.JComboBox<String> cbBoxProdColor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JButton btnAdd_Edit;
+    private javax.swing.JButton btnChooseImage;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDeleteColor;
+    private javax.swing.JButton btnDeleteMaterial;
+    private javax.swing.JButton btnDeleteSize;
+    private javax.swing.JButton btnOpenGallery;
+    private javax.swing.JComboBox<ProductSize> cbBoxAddSize;
+    private javax.swing.JComboBox<Brand> cbBoxBrand;
+    private javax.swing.JComboBox<Category> cbBoxCategory;
+    private javax.swing.JComboBox<ProductColor> cbBoxColor;
+    private javax.swing.JComboBox<ProductMaterial> cbBoxMaterial;
+    private javax.swing.JComboBox<String> cbBoxStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -415,18 +969,18 @@ public class ProductJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenuRefeshForm;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JLabel lblProductImage;
     private javax.swing.JTable tblProduct;
+    private javax.swing.JTextArea txtDescription;
     private javax.swing.JTextField txtFieldAddColor;
     private javax.swing.JTextField txtFieldAddColor1;
     private javax.swing.JTextField txtFieldAddMaterial;
@@ -434,5 +988,7 @@ public class ProductJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtProductId;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtProductPrice;
+    private javax.swing.JTextField txtProductQuantity;
+    private javax.swing.JTextField txtShowingColor;
     // End of variables declaration//GEN-END:variables
 }

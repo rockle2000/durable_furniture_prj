@@ -11,7 +11,7 @@
  Target Server Version : 100408
  File Encoding         : 65001
 
- Date: 09/12/2020 11:20:20
+ Date: 24/12/2020 19:57:10
 */
 
 SET NAMES utf8mb4;
@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `bill`;
 CREATE TABLE `bill`  (
   `BillId` int(11) NOT NULL AUTO_INCREMENT,
   `ClientName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Date` datetime(0) NOT NULL,
-  `PhoneNumber` char(0) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `Address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `Date` datetime(0) NULL DEFAULT NULL,
+  `PhoneNumber` char(0) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `StaffId` int(11) NOT NULL,
   `TotalPrice` double(10, 2) NOT NULL,
@@ -49,21 +49,7 @@ CREATE TABLE `brand`  (
 -- ----------------------------
 -- Records of brand
 -- ----------------------------
-INSERT INTO `brand` VALUES (1, 'Test', NULL);
-
--- ----------------------------
--- Table structure for cart
--- ----------------------------
-DROP TABLE IF EXISTS `cart`;
-CREATE TABLE `cart`  (
-  `BillId` int(11) NOT NULL,
-  `ProductPropertiesId` int(11) NOT NULL,
-  `Quantity` int(255) NULL DEFAULT NULL,
-  `TotalPrice` double(10, 2) NULL DEFAULT NULL,
-  PRIMARY KEY (`BillId`, `ProductPropertiesId`) USING BTREE,
-  INDEX `ProductPropertiesId`(`ProductPropertiesId`) USING BTREE,
-  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`BillId`) REFERENCES `bill` (`BillId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+INSERT INTO `brand` VALUES (1, 'Favi', 0x63386665616334336639323234313438383261616166653132643265326461613838383633362E6A7067);
 
 -- ----------------------------
 -- Table structure for category
@@ -89,12 +75,13 @@ CREATE TABLE `color`  (
   `ColorId` int(11) NOT NULL AUTO_INCREMENT,
   `ColorName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`ColorId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of color
 -- ----------------------------
-INSERT INTO `color` VALUES (1, 'Test');
+INSERT INTO `color` VALUES (2, '-39322');
+INSERT INTO `color` VALUES (4, '-3368704');
 
 -- ----------------------------
 -- Table structure for material
@@ -104,12 +91,12 @@ CREATE TABLE `material`  (
   `MaterialId` int(11) NOT NULL AUTO_INCREMENT,
   `MaterialName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`MaterialId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of material
 -- ----------------------------
-INSERT INTO `material` VALUES (1, 'Test');
+INSERT INTO `material` VALUES (2, 'Wood');
 
 -- ----------------------------
 -- Table structure for member
@@ -132,57 +119,59 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product`  (
   `ProductId` int(11) NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `BrandId` int(11) NULL DEFAULT NULL,
-  `CategoryId` int(11) NULL DEFAULT NULL,
-  `Status` tinyint(4) NULL DEFAULT NULL,
+  `BrandId` int(11) NOT NULL,
+  `CategoryId` int(11) NOT NULL,
+  `Status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `SizeId` int(11) NOT NULL,
+  `MaterialId` int(11) NOT NULL,
+  `ColorId` int(11) NOT NULL,
+  `UnitPrice` double(10, 0) NULL DEFAULT NULL,
+  `UnitInStock` int(11) NULL DEFAULT NULL,
   `Description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`ProductId`) USING BTREE,
   INDEX `CategoryId`(`CategoryId`) USING BTREE,
   INDEX `BrandId`(`BrandId`) USING BTREE,
-  CONSTRAINT `product_ibfk_2` FOREIGN KEY (`BrandId`) REFERENCES `brand` (`BrandId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `product_ibfk_3` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`CategoryId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  INDEX `ColorId`(`ColorId`) USING BTREE,
+  INDEX `SizeId`(`SizeId`) USING BTREE,
+  INDEX `MaterialId`(`MaterialId`) USING BTREE,
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`ColorId`) REFERENCES `color` (`ColorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_ibfk_2` FOREIGN KEY (`SizeId`) REFERENCES `size` (`SizeId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_ibfk_5` FOREIGN KEY (`MaterialId`) REFERENCES `material` (`MaterialId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_ibfk_6` FOREIGN KEY (`BrandId`) REFERENCES `brand` (`BrandId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_ibfk_7` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`CategoryId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES (1, 'SanPhamTest', 1, 1, 1, 'OK');
+INSERT INTO `product` VALUES (5, 'Sản phẩm 1', 1, 1, 'Up Comming', 1, 2, 2, 1200, 10, NULL);
+INSERT INTO `product` VALUES (7, 'Sản phẩm 2', 1, 1, 'Up Comming', 1, 2, 2, 1200, 10, NULL);
+
+-- ----------------------------
+-- Table structure for productbill
+-- ----------------------------
+DROP TABLE IF EXISTS `productbill`;
+CREATE TABLE `productbill`  (
+  `BillId` int(11) NOT NULL,
+  `ProductId` int(11) NOT NULL,
+  `Quantity` int(255) NOT NULL,
+  `TotalPrice` double(10, 2) NOT NULL,
+  PRIMARY KEY (`BillId`, `ProductId`) USING BTREE,
+  INDEX `ProductPropertiesId`(`ProductId`) USING BTREE,
+  CONSTRAINT `productbill_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `productbill_ibfk_2` FOREIGN KEY (`BillId`) REFERENCES `bill` (`BillId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for productimage
 -- ----------------------------
 DROP TABLE IF EXISTS `productimage`;
 CREATE TABLE `productimage`  (
-  `ProductId` int(11) NOT NULL AUTO_INCREMENT,
-  `Img` varbinary(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`ProductId`) USING BTREE,
-  CONSTRAINT `productimage_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for productproperties
--- ----------------------------
-DROP TABLE IF EXISTS `productproperties`;
-CREATE TABLE `productproperties`  (
-  `ProductPropertiesId` int(11) NOT NULL AUTO_INCREMENT,
   `ProductId` int(11) NOT NULL,
-  `ColorId` int(11) NOT NULL,
-  `SizeId` int(11) NOT NULL,
-  `MaterialId` int(11) NOT NULL,
-  `UnitPrice` double(10, 2) NOT NULL,
-  `UnitInStock` int(11) NOT NULL,
-  PRIMARY KEY (`ProductPropertiesId`) USING BTREE,
+  `Img` varbinary(255) NULL DEFAULT NULL,
   INDEX `ProductId`(`ProductId`) USING BTREE,
-  INDEX `ColorId`(`ColorId`) USING BTREE,
-  INDEX `SizeId`(`SizeId`) USING BTREE,
-  INDEX `MaterialId`(`MaterialId`) USING BTREE,
-  INDEX `ProductPropertiesId`(`ProductPropertiesId`) USING BTREE,
-  CONSTRAINT `productproperties_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `productproperties_ibfk_2` FOREIGN KEY (`ColorId`) REFERENCES `color` (`ColorId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `productproperties_ibfk_3` FOREIGN KEY (`SizeId`) REFERENCES `size` (`SizeId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `productproperties_ibfk_4` FOREIGN KEY (`MaterialId`) REFERENCES `material` (`MaterialId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `productproperties_ibfk_5` FOREIGN KEY (`ProductPropertiesId`) REFERENCES `cart` (`ProductPropertiesId`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `productimage_ibfk_1` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ProductId`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for size
@@ -206,14 +195,19 @@ DROP TABLE IF EXISTS `staff`;
 CREATE TABLE `staff`  (
   `StaffId` int(11) NOT NULL AUTO_INCREMENT,
   `FullName` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `BirthYear` int(11) NULL DEFAULT NULL,
+  `BirthYear` int(11) NOT NULL,
   `Address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `PhoneNumber` int(11) NOT NULL,
   `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `Level` tinyint(255) NOT NULL,
   `Username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `Password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `Password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`StaffId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of staff
+-- ----------------------------
+INSERT INTO `staff` VALUES (1, 'Adminstrator', 1998, 'HN', 389957438, 'adminstrator@gmail.com', 100, 'admin', 'admin');
 
 SET FOREIGN_KEY_CHECKS = 1;
