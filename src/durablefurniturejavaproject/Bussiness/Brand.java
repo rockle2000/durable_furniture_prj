@@ -52,54 +52,43 @@ public class Brand {
         return brandList;
     }
 
-    public boolean InsertBrand(String BrandName, String Image) {
+    public boolean InsertBrand(String BrandName, String Image) throws SQLException {
         String sql = "INSERT brand (BrandName,Image) VALUES(?,?)";
         PreparedStatement stmt = null;
-        try {
-            db.OpenConnection();
-            stmt = db.connection.prepareCall(sql);
-            stmt.setString(1, BrandName);
-            stmt.setString(2, Image);
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, BrandName);
+        stmt.setString(2, Image);
+        int res = stmt.executeUpdate();
+        db.CloseConnection();
+        return res == 1;
     }
 
-    public boolean UpdateBrand(int BrandId, String BrandName, String Image) {
+    public boolean UpdateBrand(int BrandId, String BrandName, String Image) throws SQLException {
         String sql = "Update brand SET BrandName = ?, Image = ? WHERE BrandId = ?";
         PreparedStatement stmt = null;
-        try {
-            db.OpenConnection();
-            stmt = db.connection.prepareCall(sql);
-            stmt.setString(1, BrandName);
-            stmt.setString(2, Image);
-            stmt.setInt(3, BrandId);
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, BrandName);
+        stmt.setString(2, Image);
+        stmt.setInt(3, BrandId);
+        int res = stmt.executeUpdate();
+        db.CloseConnection();
+        return res == 1;
+
     }
 
-    public boolean DeleteBrand(int BrandId) {
+    public boolean DeleteBrand(int BrandId) throws SQLException {
 
         String sql = "Delete from brand where BrandId = ?";
         PreparedStatement stmt = null;
-        try {
-            db.OpenConnection();
-            stmt = db.connection.prepareCall(sql);
-            stmt.setInt(1, BrandId);
-            
-            stmt.execute();
-            return true;
-        } catch (SQLException ex) {
-            Logger.getLogger(Brand.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setInt(1, BrandId);
+        int res = stmt.executeUpdate();
+        db.CloseConnection();
+        return res == 1;
     }
 
     public int getBrandId() {

@@ -415,8 +415,6 @@ public class MainJFrame extends javax.swing.JFrame {
             th.start();
             
         }
-
-
     }//GEN-LAST:event_sidebarUserMouseClicked
 
     private void SidebarManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarManagerMouseClicked

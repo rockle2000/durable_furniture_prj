@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -68,6 +70,7 @@ public class BrandJPanel extends javax.swing.JPanel {
         btnAddImage = new javax.swing.JButton();
         lblPicture = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -91,9 +94,16 @@ public class BrandJPanel extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblBrand.setMinimumSize(new java.awt.Dimension(1040, 340));
@@ -104,9 +114,15 @@ public class BrandJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblBrand);
+        if (tblBrand.getColumnModel().getColumnCount() > 0) {
+            tblBrand.getColumnModel().getColumn(0).setResizable(false);
+            tblBrand.getColumnModel().getColumn(1).setResizable(false);
+            tblBrand.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
+        txtBrandId.setEditable(false);
         txtBrandId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         add(txtBrandId, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 350, -1));
 
@@ -128,7 +144,7 @@ public class BrandJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, 140, 40));
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, 140, 40));
 
         txtBrandName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         add(txtBrandName, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 350, -1));
@@ -172,31 +188,85 @@ public class BrandJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 580, 140, 40));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, 140, 40));
+
+        btnRefresh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+        add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 580, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
-    String anh;
+    String anh = "";
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         String name = txtBrandName.getText();
         String image = "".equals(anh) ? "" : anh;
-        if ("".equals(txtBrandName.getText())) {
-            JOptionPane.showMessageDialog(this, "Brand Name can not be null", "Error", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+        String currentDir = System.getProperty("user.dir") + "/Images";
         if ("Add".equals(btnSave.getText())) {
-            if (brand.InsertBrand(name, image)) {
-                JOptionPane.showMessageDialog(this, "Add new brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
-                GetBrandList();
-                RefreshData();
+            if ("".equals(txtBrandName.getText())) {
+                JOptionPane.showMessageDialog(this, "Brand's name can not be null", "Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if ("".equals(anh) || anh == null) {
+                JOptionPane.showMessageDialog(this, "Brand's image can not be null", "Error", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            try {
+                if (brand.InsertBrand(name, image)) {
+                    try {
+                        ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
+                    } catch (IOException ex) {
+                        Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    JOptionPane.showMessageDialog(this, "Add new brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+                    GetBrandList();
+                    RefreshData();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Add brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if ("Edit".equals(btnSave.getText())) {
-            if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, image)) {
-                JOptionPane.showMessageDialog(this, "Edit brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
-                GetBrandList();
-                RefreshData();
-                btnSave.setText("Add");
+            //Sửa brand nhưng không sửa ảnh
+            if ("".equals(image)) {
+                try {
+                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, imageLink)) {
+                        JOptionPane.showMessageDialog(this, "Edit brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+                        GetBrandList();
+                        RefreshData();
+                        btnSave.setText("Add");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Edit brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    //Sửa brand nhưng sửa ảnh
+                } catch (SQLException ex) {
+                    Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                File file = new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink);
+                try {
+                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, image) && file.delete()) {
+                        try {
+                            ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
+                        } catch (IOException ex) {
+                            Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        JOptionPane.showMessageDialog(this, "Edit brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+                        GetBrandList();
+                        RefreshData();
+                        btnSave.setText("Add");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Edit brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -204,9 +274,10 @@ public class BrandJPanel extends javax.swing.JPanel {
     private void RefreshData() {
         txtBrandId.setText("");
         txtBrandName.setText("");
+        btnSave.setText("Add");
         lblPicture.setIcon(null);
     }
-
+    BufferedImage image_add;
     private void btnAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImageActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
@@ -223,33 +294,34 @@ public class BrandJPanel extends javax.swing.JPanel {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
 //            System.out.println("You chose to open this directory: " + chooser.getSelectedFile().getAbsolutePath());
             BufferedImage img;
-            BufferedImage image;
+//            BufferedImage image_add;
             try {
                 img = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
                 Image dimg = img.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
                 lblPicture.setIcon(new ImageIcon(dimg));
-                image = ImageIO.read(chooser.getSelectedFile());
+                image_add = ImageIO.read(chooser.getSelectedFile());
                 anh = UUID.randomUUID().toString().replace("-", "") + chooser.getSelectedFile().getName();
-                ImageIO.write(image, "jpg", new File(currentDir + "/Brands/" + anh));
+//                ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
             } catch (IOException e) {
 
             }
         }
     }//GEN-LAST:event_btnAddImageActionPerformed
-
+    //current image 
+    String imageLink;
     private void tblBrandMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBrandMouseClicked
         // TODO add your handling code here:
         btnSave.setText("Edit");
         int row = tblBrand.rowAtPoint(evt.getPoint());
         int col = tblBrand.columnAtPoint(evt.getPoint());
+
         if (row >= 0 && col >= 0) {
             txtBrandId.setText(tblBrand.getModel().getValueAt(row, 0).toString());
             txtBrandName.setText(tblBrand.getModel().getValueAt(row, 1).toString());
-            String imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
-            if ("".equals(imageLink)) {
-                lblPicture.setIcon(null);
-                System.out.println("null");
-            } else {
+            imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
+            if (!"".equals(imageLink)) {
+                imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
+//                System.out.println(imageLink);
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink));
@@ -262,29 +334,44 @@ public class BrandJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblBrandMouseClicked
 
+    // Xóa brand
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
         if (!"".equals(txtBrandId.getText())) {
+            // Chọn Yes 
             int reply = JOptionPane.showConfirmDialog(null, "Do you sure you want to delete this brand ?", "Message", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                if (brand.DeleteBrand(Integer.parseInt(txtBrandId.getText()))) {
-                    JOptionPane.showMessageDialog(this, "Delete brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
-                    GetBrandList();
-                    RefreshData();
+                File file = new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink);
+                try {
+                    if (brand.DeleteBrand(Integer.parseInt(txtBrandId.getText())) && file.delete()) {
+                        JOptionPane.showMessageDialog(this, "Delete brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+                        GetBrandList();
+                        RefreshData();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Delete brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Delete brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
                 }
             } else {
-
+                // chọn NO nên k xóa
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "You must choose a brand to delete", "Message", JOptionPane.PLAIN_MESSAGE);
-            return;
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    // Refresh dữ liệu
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+        RefreshData();
+    }//GEN-LAST:event_btnRefreshActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddImage;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
