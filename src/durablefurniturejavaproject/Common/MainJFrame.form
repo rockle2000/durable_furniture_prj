@@ -104,7 +104,7 @@
                   <Font name="Segoe UI Light" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Redmibook 14\Documents\NetBeansProjects\DurableFurnitureJavaProject\src\icons\loupe.png"/>
+                  <Image iconType="3" name="/icons/loupe.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -152,7 +152,7 @@
                   <Font name="Segoe UI Light" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Redmibook 14\Documents\NetBeansProjects\DurableFurnitureJavaProject\src\icons\user-avatar-with-check-mark.png"/>
+                  <Image iconType="3" name="/icons/user-avatar-with-check-mark.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -204,7 +204,7 @@
                   <Font name="Segoe UI Light" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Redmibook 14\Documents\NetBeansProjects\DurableFurnitureJavaProject\src\icons\iconfinder_Menu_2001884.png"/>
+                  <Image iconType="3" name="/icons/iconfinder_Menu_2001884.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -637,7 +637,7 @@
                   <Font name="Segoe UI Light" size="14" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Redmibook 14\Documents\NetBeansProjects\DurableFurnitureJavaProject\src\icons\iconfinder_furniture_living_room_house-36_3799038.png"/>
+                  <Image iconType="3" name="/icons/iconfinder_furniture_living_room_house-36_3799038.png"/>
                 </Property>
               </Properties>
               <Constraints>

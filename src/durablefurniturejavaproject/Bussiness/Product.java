@@ -36,6 +36,7 @@ public class Product {
     String ColorName;
     Double UnitPrice;
     int UnitInStock;
+    int Quantity;
     List<Product> listProduct = new ArrayList<Product>();
 
     public List<Product> getListProduct(String searchText) throws SQLException {
@@ -73,6 +74,34 @@ public class Product {
             }
         }
 
+        return lstProduct;
+    }
+    
+    public List<Product> getListProductInStock() throws SQLException {
+        List<Product> lstProduct = new ArrayList<Product>();
+       
+            String sql = "select brand.BrandId,brand.BrandName,category.CategoryName,category.CategoryId,product.ProductName,product.ProductId,size.SizeName,size.SizeId,color.ColorName,color.ColorId,material.MaterialName,material.MaterialId,product.UnitInStock,product.Description,product.UnitPrice,product.Status  from category,brand,product,color,size,material  where product.BrandId = brand.BrandId and product.CategoryId = category.CategoryId  and product.SizeId = size.SizeId and product.ColorId = color.ColorId and product.MaterialId = material.MaterialId and Status = 'In Stock'";
+            ResultSet rs = db.ExecuteQuery(sql);
+            while (rs.next()) {
+                Product prd = new Product();
+                prd.setProductId(rs.getInt("ProductId"));
+                prd.setProductName(rs.getString("ProductName"));
+                prd.setBrandId(rs.getInt("BrandId"));
+                prd.setCategoryId(rs.getInt("CategoryId"));
+                prd.setColorId(rs.getInt("ColorId"));
+                prd.setSizeId(rs.getInt("SizeId"));
+                prd.setMaterialId(rs.getInt("MaterialId"));
+                prd.setUnitPrice(rs.getDouble("UnitPrice"));
+                prd.setDescription(rs.getString("Description"));
+                prd.setBrandName(rs.getString("BrandName"));
+                prd.setCategoryName(rs.getString("CategoryName"));
+                prd.setColorName(rs.getString("ColorName"));
+                prd.setSizeName(rs.getString("SizeName"));
+                prd.setMaterialName(rs.getString("MaterialName"));
+                prd.setUnitInStock(rs.getInt("UnitInStock"));
+                prd.setStatus(rs.getString("Status"));
+                lstProduct.add(prd);
+            }
         return lstProduct;
     }
 
@@ -139,7 +168,14 @@ public class Product {
         this.Status = Status;
     }
 
-    
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
+    }
+  
 
     public SqlDataAcess getDb() {
         return db;

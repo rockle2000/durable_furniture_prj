@@ -124,6 +124,8 @@ public class ProductJPanel extends javax.swing.JPanel {
         btnDeleteColor = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
 
+        jPopupMenuRefeshForm.setPreferredSize(new java.awt.Dimension(150, 100));
+
         Refesh.setText("Refesh");
         Refesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

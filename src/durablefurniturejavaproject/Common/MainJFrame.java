@@ -95,7 +95,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\loupe.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/loupe.png"))); // NOI18N
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 41, 39));
 
         jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -112,7 +112,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel4.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 243, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\user-avatar-with-check-mark.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-avatar-with-check-mark.png"))); // NOI18N
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 40, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -126,7 +126,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sidebarHomeIcon.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        sidebarHomeIcon.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\iconfinder_Menu_2001884.png")); // NOI18N
+        sidebarHomeIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_Menu_2001884.png"))); // NOI18N
         sidebarHomeIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sidebarHomeIcon.setPreferredSize(new java.awt.Dimension(64, 200));
         sidebarHomeIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,7 +329,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 20));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\iconfinder_furniture_living_room_house-36_3799038.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_furniture_living_room_house-36_3799038.png"))); // NOI18N
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 70, 80));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);

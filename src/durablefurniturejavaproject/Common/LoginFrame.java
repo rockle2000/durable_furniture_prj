@@ -71,7 +71,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(500, 450));
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 80));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\admin2.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/admin2.png"))); // NOI18N
         jPanel2.add(jLabel6);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -86,7 +86,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Durable Furniture");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\furniture.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/furniture.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -114,7 +114,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\googleIcon.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/googleIcon.png"))); // NOI18N
         jButton1.setText("Login with Google");
         jButton1.setPreferredSize(new java.awt.Dimension(250, 30));
         jPanel4.add(jButton1);

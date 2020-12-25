@@ -42,6 +42,7 @@ public class ProductGalleryJFrame extends javax.swing.JFrame {
 
         this.ProductId = ProductId;
         showProductImages();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(15);
     }
     private int ProductId;
 

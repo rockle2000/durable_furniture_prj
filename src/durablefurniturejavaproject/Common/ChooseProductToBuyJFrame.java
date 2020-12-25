@@ -41,26 +41,22 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
     /**
      * Creates new form ChooseProductToBuyJFrame
      */
-    public ChooseProductToBuyJFrame(SellProductJPanel sellProductJPanel, List<Integer> lsProductInSelProductForm) throws SQLException {
+    public ChooseProductToBuyJFrame(SellProductJPanel sellProductJPanel, List<Integer> lsProductInSelProductForm, List<Product> listProductSendFromSellProductForm) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.sellProductJPanel = sellProductJPanel;
         this.listProductIdInThisForm = lsProductInSelProductForm;
-        try {
-            Product prd = new Product();
-            lsProduct = prd.getListProduct("");
-            showProduct();
-        } catch (SQLException ex) {
-            Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(15);
+        Product prd = new Product();
+        lsProduct = listProductSendFromSellProductForm;
         showComboboxProductSize();
         showCheckedCheckBox();
         showComboBoxBrand();
         showComboBoxCategory();
         showComboboxProductColor();
+        showProduct(lsProduct);
     }
     SellProductJPanel sellProductJPanel;
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,17 +79,17 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         lbl4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         txtShowColor = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1140, 645));
@@ -116,9 +112,19 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jPanel1.add(jButtonSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 550, 160, 40));
 
         cbBoxCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbBoxCategory.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbBoxCategoryItemStateChanged(evt);
+            }
+        });
         jPanel1.add(cbBoxCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 140, -1));
 
         cbBoxSize.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbBoxSize.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbBoxSizeItemStateChanged(evt);
+            }
+        });
         jPanel1.add(cbBoxSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 140, -1));
 
         cbBoxColor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -127,9 +133,19 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                 cbBoxColorItemStateChanged(evt);
             }
         });
+        cbBoxColor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cbBoxColorPropertyChange(evt);
+            }
+        });
         jPanel1.add(cbBoxColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 90, -1));
 
         cbBoxBrand.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        cbBoxBrand.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbBoxBrandItemStateChanged(evt);
+            }
+        });
         jPanel1.add(cbBoxBrand, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 140, -1));
 
         lbl.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -160,27 +176,37 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBar(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1110, 450));
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.setPreferredSize(new java.awt.Dimension(1110, 600));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel1.setText("Size");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1106, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 596, Short.MAX_VALUE)
+        );
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("Image");
+        jScrollPane1.setViewportView(jPanel2);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setText("Name");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, 370));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Brand");
+        txtSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 140, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Category");
+        txtShowColor.setEnabled(false);
+        txtShowColor.setPreferredSize(new java.awt.Dimension(7, 23));
+        jPanel1.add(txtShowColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 59, -1));
 
-        jSeparator1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel6.setText("Color");
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Price");
@@ -188,12 +214,30 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel8.setText("Id");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Size");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel6.setText("Color");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel5.setText("Category");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setText("Brand");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Name");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Image");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addComponent(jLabel2)
                 .addGap(115, 115, 115)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,48 +245,34 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(110, 110, 110)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel6)
-                .addGap(110, 110, 110)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(110, 110, 110)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1050, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
-        jScrollPane1.setViewportView(jPanel2);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-
-        txtSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 140, -1));
-
-        txtShowColor.setEnabled(false);
-        txtShowColor.setPreferredSize(new java.awt.Dimension(7, 23));
-        jPanel1.add(txtShowColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 59, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 99, 1109, 70));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1140, 645);
@@ -262,7 +292,32 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         } else {
             txtShowColor.setBackground(Color.WHITE);
         }
+        searchProduct();
     }//GEN-LAST:event_cbBoxColorItemStateChanged
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+
+        searchProduct();
+
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void cbBoxColorPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbBoxColorPropertyChange
+        if (cbBoxColor.getSelectedIndex() > 0) {
+
+        }
+    }//GEN-LAST:event_cbBoxColorPropertyChange
+
+    private void cbBoxBrandItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbBoxBrandItemStateChanged
+        searchProduct();
+    }//GEN-LAST:event_cbBoxBrandItemStateChanged
+
+    private void cbBoxCategoryItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbBoxCategoryItemStateChanged
+        searchProduct();
+    }//GEN-LAST:event_cbBoxCategoryItemStateChanged
+
+    private void cbBoxSizeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbBoxSizeItemStateChanged
+        searchProduct();
+    }//GEN-LAST:event_cbBoxSizeItemStateChanged
     List<Product> lsProduct;
     List<Integer> listProductIdInThisForm;
     List<JCheckBox> listCheckBox = new ArrayList<JCheckBox>();
@@ -320,20 +375,56 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             }
         }
     }
-    private void searchProduct(){
-        List<Product> lsProductFiltered = new ArrayList<Product>();
-        for(Product prd : lsProduct){
-            if(prd.getProductName().contains(txtSearch.getText()) ){
-                
-            }
+
+    private void searchProduct() {
+        if (cbBoxBrand.getSelectedItem() != null && cbBoxCategory.getSelectedItem() != null && cbBoxColor.getSelectedItem() != null && cbBoxSize.getSelectedItem() != null) {
+            List<Product> lsProductFiltered = new ArrayList<Product>();
+            Thread th1 = new Thread() {
+                public synchronized void run() {
+
+                    for (Product prd : lsProduct) {
+                        if ((prd.getProductName().contains(txtSearch.getText())) && ((prd.getBrandName().equals(cbBoxBrand.getSelectedItem().toString())) || cbBoxBrand.getSelectedItem().toString().equals("Choose"))
+                                && ((prd.getCategoryName().equals(cbBoxCategory.getSelectedItem().toString())) || cbBoxCategory.getSelectedItem().toString().equals("Choose"))
+                                && ((prd.getColorName().equals(cbBoxColor.getSelectedItem().toString())) || cbBoxColor.getSelectedItem().toString().equals("Choose"))
+                                && ((prd.getSizeName().equals(cbBoxSize.getSelectedItem().toString())) || cbBoxSize.getSelectedItem().toString().equals("Choose"))) {
+                            lsProductFiltered.add(prd);
+                        }
+                    }
+                    jPanel2.removeAll();
+                    notifyAll();
+                }
+            };
+            Thread th2 = new Thread() {
+                public synchronized void run() {
+                    if (lsProductFiltered.size() < 0) {
+                        try {
+                            wait();
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    try {
+                        showProduct(lsProductFiltered);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    showCheckedCheckBox();
+
+                }
+            };
+
+            th1.start();
+            th2.start();
+
         }
     }
-    private void showProduct() throws SQLException {
+
+    private void showProduct(List<Product> lsProduct) throws SQLException {
         int X = 20;
-        int Y = 90;
+        int Y = 20;
         int increaseVariableX = 160;
         int increaseVariableY = 90;
-       
+
         for (Product prd : lsProduct) {
             ProductImage prdImg = new ProductImage();
             prdImg.setProductId(prd.getProductId());
@@ -406,9 +497,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             } else {
                 BufferedImage img;
                 try {
-                    System.out.println(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg());
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg()));
-
                     Image dimg = img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
                     lblImage.setIcon(new ImageIcon(dimg));
                 } catch (IOException ex) {
@@ -426,9 +515,8 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             X = 20;
             Y += increaseVariableY;
 
-            jPanel2.repaint();
         }
-
+        jPanel2.repaint();
     }
     /**
      * @param args the command line arguments
@@ -451,8 +539,8 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbl;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lbl2;
