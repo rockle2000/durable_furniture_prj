@@ -477,7 +477,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
 
                     if (e.getStateChange() == ItemEvent.SELECTED && !listProductIdInThisForm.contains(Integer.parseInt(cbId.getText()))) {
                         listProductIdInThisForm.add(Integer.parseInt(cbId.getText()));
-
+                        
                     }
                     if (e.getStateChange() == ItemEvent.DESELECTED) {
                         for (int i = 0; i < listProductIdInThisForm.size(); i++) {
@@ -486,6 +486,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                             }
                         }
                     }
+                    sellProductJPanel.showProductInCart();
                     sellProductJPanel.takeListProductIdToSellProductForm(listProductIdInThisForm);
                     System.out.println(listProductIdInThisForm.size());
 

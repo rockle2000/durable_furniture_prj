@@ -6,11 +6,23 @@
 package durablefurniturejavaproject.Common;
 
 import durablefurniturejavaproject.Bussiness.Product;
+import durablefurniturejavaproject.Bussiness.ProductImage;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -139,6 +151,18 @@ public class SellProductJPanel extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(40, 83, 160));
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel2.setPreferredSize(new java.awt.Dimension(1010, 500));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1006, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 496, Short.MAX_VALUE)
+        );
+
         jScrollPane2.setViewportView(jPanel2);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 260, -1, 370));
@@ -223,30 +247,123 @@ public class SellProductJPanel extends javax.swing.JPanel {
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-   
+
     public void takeListProductIdToSellProductForm(List<Integer> listIdToCartOnOtherForm) {
         this.lsProductIdInCartOnThisForm = listIdToCartOnOtherForm;
     }
-    List<Integer> lsProductIdInCartOnThisForm = new ArrayList();
+    List<Integer> lsProductIdInCartOnThisForm = new ArrayList<Integer>();
     List<Product> listProduct;
     private void btnChooseProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChooseProductActionPerformed
-         ChooseProductToBuyJFrame cptbjf;
-         Product prd = new Product();
+        ChooseProductToBuyJFrame cptbjf;
+        Product prd = new Product();
         try {
             listProduct = prd.getListProductInStock();
         } catch (SQLException ex) {
             Logger.getLogger(SellProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            cptbjf = new ChooseProductToBuyJFrame(this, lsProductIdInCartOnThisForm,listProduct);
+            cptbjf = new ChooseProductToBuyJFrame(this, lsProductIdInCartOnThisForm, listProduct);
             cptbjf.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(SellProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnChooseProductActionPerformed
-    static Boolean txtFieldAddColorIsShowing = false;
-    static Boolean txtFieldAddMaterialIsShowing = false;
-    static Boolean txtFieldAddSizeIsShowing = false;
+    public void showProductInCart() {
+        jPanel2.removeAll();
+        List<Product> productsInCart = new ArrayList<Product>();
+        for (int i = 0; i < listProduct.size(); i++) {
+            for (int j = 0; j < lsProductIdInCartOnThisForm.size(); j++) {
+                if (listProduct.get(i).getProductId() == lsProductIdInCartOnThisForm.get(j)) {
+                    productsInCart.add(listProduct.get(i));
+                }
+            }
+        }
+
+        int X = 20;
+        int Y = 20;
+        int increaseVariableX = 130;
+        int increaseVariableY = 90;
+
+        for (Product prd : productsInCart) {
+            ProductImage prdImg = new ProductImage();
+            prdImg.setProductId(prd.getProductId());
+            try {
+                prdImg.get1TopImageByProductId();
+            } catch (SQLException ex) {
+                Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JLabel lblImage = new JLabel();
+            lblImage.setForeground(Color.white);
+            lblImage.setBounds(X, Y, 110, 80);
+            X += increaseVariableX;
+            //
+            JLabel lblProductName = new JLabel();
+            lblProductName.setBounds(X + 5, Y + 30, 150, 50);
+            lblProductName.setText(prd.getProductName());
+            lblProductName.setForeground(Color.white);
+            X += increaseVariableX;
+            //
+            JLabel lblBrand = new JLabel();
+            lblBrand.setBounds(X + 10, Y + 30, 170, 50);
+            lblBrand.setText(prd.getBrandName());
+            lblBrand.setForeground(Color.white);
+            X += increaseVariableX;
+            //
+            JLabel lblCategory = new JLabel();
+            lblCategory.setBounds(X + 10, Y + 30, 160, 50);
+            lblCategory.setText(prd.getCategoryName());
+            lblCategory.setForeground(Color.white);
+            X += increaseVariableX;
+            //
+
+            JTextField txtColor = new JTextField();
+            txtColor.setEnabled(false);
+            txtColor.setBounds(X + 15, Y + 30, 60, 50);
+            txtColor.setText(prd.getColorName());
+            txtColor.setBackground(new Color(Integer.parseInt(prd.getColorName())));
+            txtColor.setForeground(Color.white);
+            X += increaseVariableX;
+            //
+            JLabel lblSize = new JLabel();
+            lblSize.setBounds(X + 15, Y + 30, 160, 50);
+            lblSize.setText(prd.getSizeName());
+            lblSize.setForeground(Color.white);
+            X += increaseVariableX;
+            //
+            JLabel lblPrice = new JLabel();
+            lblPrice.setBounds(X, Y + 30, 160, 50);
+            lblPrice.setText(prd.getUnitPrice().toString());
+            lblPrice.setForeground(Color.white);
+            X += increaseVariableX;
+
+            //
+            if (prdImg.getImg() == null) {
+                lblImage.setIcon(null);
+                lblImage.setText("No Image");
+            } else {
+                BufferedImage img;
+                try {
+                    img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Products/" + prdImg.getImg()));
+                    Image dimg = img.getScaledInstance(lblImage.getWidth(), lblImage.getHeight(), Image.SCALE_SMOOTH);
+                    lblImage.setIcon(new ImageIcon(dimg));
+                } catch (IOException ex) {
+                    Logger.getLogger(ProductGalleryJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            jPanel2.add(lblImage);
+            jPanel2.add(lblProductName);
+            jPanel2.add(lblBrand);
+            jPanel2.add(lblCategory);
+            jPanel2.add(txtColor);
+            jPanel2.add(lblSize);
+            jPanel2.add(lblPrice);
+
+            X = 20;
+            Y += increaseVariableY;
+
+        }
+        jPanel2.repaint();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChooseProduct;
