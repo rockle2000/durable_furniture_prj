@@ -55,6 +55,8 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         showComboBoxCategory();
         showComboboxProductColor();
         showProduct(lsProduct);
+        System.out.println(lsProductInSelProductForm.size());
+        
     }
     SellProductJPanel sellProductJPanel;
     /**

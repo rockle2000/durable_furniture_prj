@@ -258,6 +258,7 @@ public class SellProductJPanel extends javax.swing.JPanel {
         Product prd = new Product();
         try {
             listProduct = prd.getListProductInStock();
+            System.out.println(listProduct.size());
         } catch (SQLException ex) {
             Logger.getLogger(SellProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

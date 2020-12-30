@@ -260,7 +260,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
             }
         }
         if ("Edit".equals(btnSave.getText())) {
-            //S?a category nhung không s?a ?nh
+            //Sua category nhung khong sua anh
             if ("".equals(image)) {
                 try {
                     if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, imageLink) ) {
@@ -274,7 +274,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 } catch (SQLException ex) {
                     Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //S?a category nhung s?a ?nh
+                //Sua category nhung sua anh
             } else {
                 try {
                     File file = new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink);
@@ -302,12 +302,12 @@ public class CategoryJPanel extends javax.swing.JPanel {
         RefreshData();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    //Xóa Category
+    //Xoa Category
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
 
         if (!"".equals(txtCategoryId.getText())) {
-            // Ch?n Yes 
+            // Chon Yes 
             int reply = JOptionPane.showConfirmDialog(null, "Do you sure you want to delete this brand ?", "Message", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 File file = new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink);
@@ -317,14 +317,15 @@ public class CategoryJPanel extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(this, "Delete category successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                         GetCategoryList();
                         RefreshData();
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Delete category failed", "Message", JOptionPane.PLAIN_MESSAGE);
-                    }
+                    } 
+//                    else {
+//                        JOptionPane.showMessageDialog(this, "Delete category failed", "Message", JOptionPane.PLAIN_MESSAGE);
+//                    }
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(this, "Delete category failed", "Message", JOptionPane.PLAIN_MESSAGE);
                 }
             } else {
-                // ch?n NO nên không xóa
+                // chon NO 
             }
         } else {
             JOptionPane.showMessageDialog(this, "You must choose a brand to delete", "Message", JOptionPane.PLAIN_MESSAGE);

@@ -722,6 +722,7 @@ public class ProductJPanel extends javax.swing.JPanel {
             try {
                 product.setProductId(Integer.parseInt(txtProductId.getText()));
                 product.UpdateProduct();
+                showTableProduct("");
                 for (int i = 0; i < anh.size(); i++) {
                     prdImg.InsertProductImage(anh.get(i));
                 }

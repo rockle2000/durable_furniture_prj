@@ -111,4 +111,9 @@ public class Category {
         this.Image = Image;
     }
 
+    @Override
+    public String toString() {
+        return CategoryName;
+    }
+
 }
