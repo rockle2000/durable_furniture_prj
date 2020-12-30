@@ -99,7 +99,7 @@ public class HomeJPanel extends javax.swing.JPanel {
         });
         About.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\info.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info.png"))); // NOI18N
         About.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 260, 260));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -107,13 +107,13 @@ public class HomeJPanel extends javax.swing.JPanel {
         jLabel4.setText("About");
         About.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 90, 30));
 
-        add(About, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 340, 370, 280));
+        add(About, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, 450, 280));
 
         jPanel11.setBackground(new java.awt.Color(40, 100, 199));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\clock.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clock.png"))); // NOI18N
         jPanel11.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 130, 130));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -141,28 +141,28 @@ public class HomeJPanel extends javax.swing.JPanel {
         jLabel17.setText("Date");
         jPanel11.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
-        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, 370, 270));
+        add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 450, 270));
 
         jPanel12.setBackground(new java.awt.Color(40, 100, 199));
         jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\stats.png")); // NOI18N
-        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 286, 240));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/stats.png"))); // NOI18N
+        jPanel12.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 280, 240));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Analyze");
         jPanel12.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 30));
 
-        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 370, 280));
+        add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 450, 280));
 
         jPanel10.setBackground(new java.awt.Color(40, 100, 199));
         jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Redmibook 14\\Documents\\NetBeansProjects\\DurableFurnitureJavaProject\\src\\icons\\user.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
         jPanel10.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, 140));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
@@ -185,7 +185,7 @@ public class HomeJPanel extends javax.swing.JPanel {
         lblFullName.setText("Full Name");
         jPanel10.add(lblFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, -1));
 
-        add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 370, 270));
+        add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 450, 270));
     }// </editor-fold>//GEN-END:initComponents
 
     private void AboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutMouseClicked

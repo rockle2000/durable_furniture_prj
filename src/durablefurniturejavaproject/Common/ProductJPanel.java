@@ -157,20 +157,20 @@ public class ProductJPanel extends javax.swing.JPanel {
         tblProduct.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status", "Image"
+                "Product ID", "Product Name", "Category", "Brand", "Size", "Material", "Color", "Unit Price", "Quantity", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -516,8 +516,8 @@ public class ProductJPanel extends javax.swing.JPanel {
             try {
                 if (colorSub.InsertColor() == false) {
                     JOptionPane.showMessageDialog(this, "Color added!");
-                    cbBoxMaterial.removeAllItems();
-                    showComboboxProductMaterial();
+                    cbBoxColor.removeAllItems();
+                    showComboboxProductColor();
                 } else {
                     JOptionPane.showMessageDialog(this, "Insert failed!");
                 }
@@ -727,7 +727,7 @@ public class ProductJPanel extends javax.swing.JPanel {
                     prdImg.InsertProductImage(anh.get(i));
                 }
                 anh = new ArrayList();
-
+                showTableProduct("");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
@@ -736,7 +736,7 @@ public class ProductJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAdd_EditActionPerformed
 
     void validateForm_EnableBtnAdd_Edit() {
-        String strNumber = "1234567890";
+        String strNumber = "1234567890.";
         Boolean isValid = true;
         for (char c : txtProductQuantity.getText().toCharArray()) {
             if (strNumber.indexOf(c) < 0) {
@@ -832,9 +832,8 @@ public class ProductJPanel extends javax.swing.JPanel {
             String sizeName = tblProduct.getModel().getValueAt(row, 4).toString();
             String materialName = tblProduct.getModel().getValueAt(row, 5).toString();
             String colorName = tblProduct.getModel().getValueAt(row, 6).toString();
-            String[] splitString = tblProduct.getModel().getValueAt(row, 7).toString().split(".", 2);
-            String doublePrice = splitString[0];
-            txtProductPrice.setText(doublePrice);
+
+            txtProductPrice.setText(tblProduct.getModel().getValueAt(row, 7).toString());
             txtProductQuantity.setText(tblProduct.getModel().getValueAt(row, 8).toString());
             String status = tblProduct.getModel().getValueAt(row, 9).toString();
             for (int i = 0; i < cbBoxAddSize.getItemCount() - 1; i++) {
@@ -886,6 +885,7 @@ public class ProductJPanel extends javax.swing.JPanel {
             }
         }
         validateForm_EnableBtnAdd_Edit();
+        anh = new ArrayList<String>();
     }//GEN-LAST:event_tblProductMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

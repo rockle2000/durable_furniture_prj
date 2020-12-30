@@ -36,7 +36,7 @@ public class Product {
     String ColorName;
     Double UnitPrice;
     int UnitInStock;
-    int Quantity;
+    int Quantity = 1;
     List<Product> listProduct = new ArrayList<Product>();
 
     public List<Product> getListProduct(String searchText) throws SQLException {
