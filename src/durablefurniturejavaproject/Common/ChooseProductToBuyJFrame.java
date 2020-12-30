@@ -31,6 +31,8 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
 
 /**
  *
@@ -57,6 +59,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         showProduct(lsProduct);
     }
     SellProductJPanel sellProductJPanel;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -379,43 +382,22 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
     private void searchProduct() {
         if (cbBoxBrand.getSelectedItem() != null && cbBoxCategory.getSelectedItem() != null && cbBoxColor.getSelectedItem() != null && cbBoxSize.getSelectedItem() != null) {
             List<Product> lsProductFiltered = new ArrayList<Product>();
-            Thread th1 = new Thread() {
-                public synchronized void run() {
 
-                    for (Product prd : lsProduct) {
-                        if ((prd.getProductName().contains(txtSearch.getText())) && ((prd.getBrandName().equals(cbBoxBrand.getSelectedItem().toString())) || cbBoxBrand.getSelectedItem().toString().equals("Choose"))
-                                && ((prd.getCategoryName().equals(cbBoxCategory.getSelectedItem().toString())) || cbBoxCategory.getSelectedItem().toString().equals("Choose"))
-                                && ((prd.getColorName().equals(cbBoxColor.getSelectedItem().toString())) || cbBoxColor.getSelectedItem().toString().equals("Choose"))
-                                && ((prd.getSizeName().equals(cbBoxSize.getSelectedItem().toString())) || cbBoxSize.getSelectedItem().toString().equals("Choose"))) {
-                            lsProductFiltered.add(prd);
-                        }
-                    }
-                    jPanel2.removeAll();
-                    notifyAll();
+            for (Product prd : lsProduct) {
+                if ((prd.getProductName().contains(txtSearch.getText())) && ((prd.getBrandName().equals(cbBoxBrand.getSelectedItem().toString())) || cbBoxBrand.getSelectedItem().toString().equals("Choose"))
+                        && ((prd.getCategoryName().equals(cbBoxCategory.getSelectedItem().toString())) || cbBoxCategory.getSelectedItem().toString().equals("Choose"))
+                        && ((prd.getColorName().equals(cbBoxColor.getSelectedItem().toString())) || cbBoxColor.getSelectedItem().toString().equals("Choose"))
+                        && ((prd.getSizeName().equals(cbBoxSize.getSelectedItem().toString())) || cbBoxSize.getSelectedItem().toString().equals("Choose"))) {
+                    lsProductFiltered.add(prd);
                 }
-            };
-            Thread th2 = new Thread() {
-                public synchronized void run() {
-                    if (lsProductFiltered.size() < 0) {
-                        try {
-                            wait();
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    try {
-                        showProduct(lsProductFiltered);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    showCheckedCheckBox();
-
-                }
-            };
-
-            th1.start();
-            th2.start();
-
+            }
+            jPanel2.removeAll();
+            try {
+                showProduct(lsProductFiltered);
+            } catch (SQLException ex) {
+                Logger.getLogger(ChooseProductToBuyJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            showCheckedCheckBox();
         }
     }
 
@@ -423,9 +405,10 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         int X = 20;
         int Y = 20;
         int increaseVariableX = 160;
-        int increaseVariableY = 90;
-
+        int increaseVariableY = 120;
+        int flag = 0;
         for (Product prd : lsProduct) {
+            flag += 1;
             ProductImage prdImg = new ProductImage();
             prdImg.setProductId(prd.getProductId());
             try {
@@ -436,9 +419,27 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             JLabel lblImage = new JLabel();
             lblImage.setBounds(X, Y, 110, 80);
             X += increaseVariableX;
+            //
             JLabel lblProductName = new JLabel();
-            lblProductName.setBounds(X, Y + 30, 160, 20);
-            lblProductName.setText(prd.getProductName());
+            lblProductName.setBounds(X, Y, 160, 90);
+
+            String string = prd.getProductName();
+            String breakLineString = "<html>";
+            int lengthBeforeBreakline = 15;
+            for (int i = 0; i < string.length(); i++) {
+                breakLineString += string.charAt(i);
+                if (i > lengthBeforeBreakline) {
+                    if (string.charAt(i) != ' ') {
+                        continue;
+                    }
+                    breakLineString += "<br>";
+                    lengthBeforeBreakline += 15;
+                }
+
+            }
+            breakLineString += "</html>";
+            lblProductName.setText(breakLineString);
+
             X += increaseVariableX;
             //
             JLabel lblBrand = new JLabel();
@@ -451,10 +452,11 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             lblCategory.setText(prd.getCategoryName());
             X += increaseVariableX;
             //
-            JLabel lblColor = new JLabel();
-            lblColor.setBounds(X - 20, Y + 30, 160, 20);
-            lblColor.setText(prd.getColorName());
-            lblColor.setBackground(new Color(Integer.parseInt(prd.getColorName())));
+            JTextField txtColor = new JTextField();
+            txtColor.setBounds(X - 20, Y + 20, 40, 40);
+            txtColor.setBackground(new Color(Integer.parseInt(prd.getColorName())));
+            txtColor.setText(prd.getColorName());
+            txtColor.setEnabled(false);
             X += increaseVariableX;
             //
             JLabel lblSize = new JLabel();
@@ -466,6 +468,11 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             lblPrice.setBounds(X - 58, Y + 30, 160, 20);
             lblPrice.setText(prd.getUnitPrice().toString());
             X += increaseVariableX;
+
+            //
+            JSeparator seperator = new JSeparator();
+            seperator.setBounds(15, Y + 100, 1050, 10);
+
             //
             JCheckBox cbId = new JCheckBox();
             cbId.setBounds(X - 108, Y + 30, 160, 20);
@@ -477,7 +484,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
 
                     if (e.getStateChange() == ItemEvent.SELECTED && !listProductIdInThisForm.contains(Integer.parseInt(cbId.getText()))) {
                         listProductIdInThisForm.add(Integer.parseInt(cbId.getText()));
-                        
+
                     }
                     if (e.getStateChange() == ItemEvent.DESELECTED) {
                         for (int i = 0; i < listProductIdInThisForm.size(); i++) {
@@ -488,8 +495,6 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                     }
                     sellProductJPanel.showProductInCart();
                     sellProductJPanel.takeListProductIdToSellProductForm(listProductIdInThisForm);
-                    System.out.println(listProductIdInThisForm.size());
-
                 }
             });
             if (prdImg.getImg() == null) {
@@ -509,15 +514,22 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             jPanel2.add(lblProductName);
             jPanel2.add(lblBrand);
             jPanel2.add(lblCategory);
-            jPanel2.add(lblColor);
+            jPanel2.add(txtColor);
             jPanel2.add(lblSize);
             jPanel2.add(lblPrice);
             jPanel2.add(cbId);
+            jPanel2.add(seperator);
+
             X = 20;
             Y += increaseVariableY;
-
+            if (flag == 5) {
+                break;
+            }
         }
+
+        jPanel2.revalidate();
         jPanel2.repaint();
+
     }
     /**
      * @param args the command line arguments

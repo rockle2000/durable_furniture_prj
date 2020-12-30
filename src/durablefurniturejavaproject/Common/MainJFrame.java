@@ -38,7 +38,10 @@ public class MainJFrame extends javax.swing.JFrame {
         StaffId = staffId;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
-
+        if (Staff.getLevel() == 0) {
+            jPanel9.remove(sidebarStaff);
+        }
+        jLabel5.setText(Staff.getFullName());
     }
     public int StaffId;
     public Staff Staff = new Staff();
@@ -72,9 +75,11 @@ public class MainJFrame extends javax.swing.JFrame {
         sidebarUser = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
-        sidebarSellProduct = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
+        sidebarLogout = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        sidebarSellProduct = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         sidebarStaff = new javax.swing.JLabel();
         sidebarAccount = new javax.swing.JLabel();
@@ -113,11 +118,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-avatar-with-check-mark.png"))); // NOI18N
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 0, 40, 40));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 40, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("User");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 90, 30));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, 210, 30));
 
         jPanel1.setBackground(new java.awt.Color(12, 43, 90));
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -239,6 +244,21 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(12, 43, 90));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel8.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 225, 150, 10));
+        jPanel8.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 150, 10));
+
+        sidebarLogout.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        sidebarLogout.setForeground(new java.awt.Color(255, 255, 255));
+        sidebarLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/iconfinder_gnome-session-logout_28390.png"))); // NOI18N
+        sidebarLogout.setText("Logout");
+        sidebarLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sidebarLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                sidebarLogoutMousePressed(evt);
+            }
+        });
+        jPanel8.add(sidebarLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, 40));
+        jPanel8.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 150, 10));
 
         sidebarSellProduct.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         sidebarSellProduct.setForeground(new java.awt.Color(255, 255, 255));
@@ -249,11 +269,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 sidebarSellProductMousePressed(evt);
             }
         });
-        jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 140, 40));
-        jPanel8.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 150, 20));
-        jPanel8.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 150, 10));
+        jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
+        sidebarSellProduct.getAccessibleContext().setAccessibleName("Sell Product");
 
-        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 170, 180));
+        jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 230));
 
         jPanel9.setBackground(new java.awt.Color(0, 0, 0));
         jPanel9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(40, 81, 163), 2, true));
@@ -298,7 +317,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(sidebarStaff))
         );
 
-        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 90, -1, 70));
+        jPanel7.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 90, -1, 10));
 
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 430));
 
@@ -387,15 +406,16 @@ public class MainJFrame extends javax.swing.JFrame {
                             jPanel9.setBounds(3, 90, 165, i);
                             i -= 5;
                         }
-                        for (int i = 160; i >= 100;) {
+                        for (int i = 160; i >= 110;) {
                             Thread.sleep(3);
-                            jPanel8.setBounds(0, i, 165, 200);
+                            jPanel8.setBounds(0, i, 165, 250);
                             i -= 5;
                         }
 
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+
                 }
 
             };
@@ -405,25 +425,25 @@ public class MainJFrame extends javax.swing.JFrame {
             Thread th = new Thread() {
                 public void run() {
                     try {
-                        int jPanel7Position = 90;
+                        int jPanel7Position = 110;
                         for (int i = 10; i <= 70;) {
                             Thread.sleep(3);
                             jPanel9.setBounds(3, 90, 165, i);
-                            jPanel8.setBounds(0, jPanel7Position + i, 165, 200);
+                            jPanel8.setBounds(0, jPanel7Position + i, 165, 250);
                             i += 5;
                         }
 
                     } catch (Exception e) {
                         System.out.println(e);
                     }
+
                 }
 
             };
             th.start();
 
         }
-
-
+       
     }//GEN-LAST:event_sidebarUserMouseClicked
 
     private void SidebarManagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SidebarManagerMouseClicked
@@ -436,7 +456,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         Thread.sleep(1);
                         jPanel6.setBounds(3, 200, 165, i);
 
-                        jPanel7.setBounds(0, jPanel7Position + i, 170, 400);
+                        jPanel7.setBounds(0, jPanel7Position + i, 170, 430);
                         i += 5;
                     }
 
@@ -455,7 +475,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     }
                     for (int i = 400; i >= 205;) {
                         Thread.sleep(1);
-                        jPanel7.setBounds(0, i, 170, 400);
+                        jPanel7.setBounds(0, i, 170, 430);
                         i -= 5;
                     }
 
@@ -692,10 +712,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtSearchKeyReleased
 
     private void sidebarSellProductMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarSellProductMousePressed
-        
+
         if (labelForMakerForm.getText() != "SellProduct") {
             jPanel2.removeAll();
-            SellProductJPanel sellPrdPanel = new SellProductJPanel();
+            SellProductJPanel sellPrdPanel = new SellProductJPanel(Staff.getStaffId());
             //catePanel.setBounds(5, 5, 1040, 591);
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("SellProduct");
@@ -724,6 +744,12 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sidebarSellProductMousePressed
 
+    private void sidebarLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarLogoutMousePressed
+        LoginFrame loginFrame = new LoginFrame();
+        loginFrame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_sidebarLogoutMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -747,6 +773,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel sidebarAccount;
@@ -755,6 +782,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel sidebarBrand;
     private javax.swing.JLabel sidebarCategory;
     private javax.swing.JLabel sidebarHomeIcon;
+    private javax.swing.JLabel sidebarLogout;
     private javax.swing.JLabel sidebarProduct1;
     private javax.swing.JLabel sidebarSellProduct;
     private javax.swing.JLabel sidebarStaff;
