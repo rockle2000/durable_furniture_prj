@@ -49,6 +49,7 @@ public class LoginFrame extends javax.swing.JFrame {
             txtUsername.setText(rmbGlobal.getUsername());
             txtPassword.setText(rmbGlobal.getPassword());
             checkboxRememberMe.setSelected(true);
+            btnLogin.setEnabled(true);
         }
     }
 
@@ -134,7 +135,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -166,6 +167,9 @@ public class LoginFrame extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsernameKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyReleased(evt);
+            }
         });
         jPanel6.add(txtUsername, java.awt.BorderLayout.PAGE_END);
 
@@ -183,6 +187,9 @@ public class LoginFrame extends javax.swing.JFrame {
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
             }
         });
         jPanel7.add(txtPassword, java.awt.BorderLayout.PAGE_END);
@@ -206,6 +213,7 @@ public class LoginFrame extends javax.swing.JFrame {
         btnLogin.setBackground(new java.awt.Color(204, 204, 204));
         btnLogin.setText("Login ");
         btnLogin.setBorder(null);
+        btnLogin.setEnabled(false);
         btnLogin.setPreferredSize(new java.awt.Dimension(250, 30));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,8 +280,28 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void checkValidField() {
+        String invalidChar = "~!@#$%^&*()+`-={}|[]\\;':\"<>,./?";
+        if (txtUsername.getText().equals("") || txtPassword.getText().equals("")) {
+            btnLogin.setEnabled(false);
+            return;
+        }
+        for (char c : txtUsername.getText().toCharArray()) {
+            if (invalidChar.indexOf(c) > 0) {
+                btnLogin.setEnabled(false);
+                return;
+            }
+        }
+        for (char c : txtPassword.getText().toCharArray()) {
+            if (invalidChar.indexOf(c) > 0) {
+                btnLogin.setEnabled(false);
+                return;
+            }
+        }
+        btnLogin.setEnabled(true);
+    }
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
         try {
             Login();
             rememberMeIsSelected();
@@ -333,6 +361,14 @@ public class LoginFrame extends javax.swing.JFrame {
     private void lblSignUpMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSignUpMousePressed
         registerPanelShowHide();
     }//GEN-LAST:event_lblSignUpMousePressed
+
+    private void txtUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyReleased
+        checkValidField();
+    }//GEN-LAST:event_txtUsernameKeyReleased
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
+        checkValidField();
+    }//GEN-LAST:event_txtPasswordKeyReleased
     private void rememberMeIsSelected() {
         RememberMe rmb = new RememberMe();
         if (checkboxRememberMe.isSelected() && rmbGlobal.getUsername() == null) {
