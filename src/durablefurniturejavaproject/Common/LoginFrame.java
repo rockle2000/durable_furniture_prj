@@ -50,6 +50,7 @@ public class LoginFrame extends javax.swing.JFrame {
             txtPassword.setText(rmbGlobal.getPassword());
             checkboxRememberMe.setSelected(true);
             btnLogin.setEnabled(true);
+          
         }
     }
 
