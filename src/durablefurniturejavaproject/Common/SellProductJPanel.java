@@ -13,17 +13,15 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.Instant;
+
 import java.util.ArrayList;
-import java.sql.Date;
-import java.time.LocalDate;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +30,7 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
@@ -359,6 +357,12 @@ public class SellProductJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChooseProductActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        for (Product prd : productsInCart) {
+            if (prd.getQuantity() > prd.getUnitInStock()) {
+                JOptionPane.showMessageDialog(this, "Product in stock is not enough!!");
+                return;
+            }
+        }
         Bill bill = new Bill();
         bill.setClientName(txtClientName.getText());
         long millis = System.currentTimeMillis();
@@ -372,10 +376,11 @@ public class SellProductJPanel extends javax.swing.JPanel {
         try {
             bill.InsertBill();
             JOptionPane.showMessageDialog(this, "Create bill success!");
+            refeshForm();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        refeshForm();
+
     }//GEN-LAST:event_btnSubmitActionPerformed
     private void refeshForm() {
         txtClientName.setText("");
@@ -552,7 +557,7 @@ public class SellProductJPanel extends javax.swing.JPanel {
                     for (int i = 0; i < productsInCart.size(); i++) {
                         if (productsInCart.get(i).getProductId() == Integer.parseInt(lblProductId.getText())) {
                             productsInCart.get(i).setQuantity(plus);
-                           lblTotalPrice.setText(new BigDecimal(Double.parseDouble(lblTotalPrice.getText()) + productsInCart.get(i).getUnitPrice()).toPlainString());
+                            lblTotalPrice.setText(new BigDecimal(Double.parseDouble(lblTotalPrice.getText()) + productsInCart.get(i).getUnitPrice()).toPlainString());
                         }
                     }
                 }

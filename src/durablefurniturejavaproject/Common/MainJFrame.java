@@ -270,7 +270,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
-        sidebarSellProduct.getAccessibleContext().setAccessibleName("Sell Product");
 
         jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 230));
 

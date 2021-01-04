@@ -13,8 +13,7 @@ import durablefurniturejavaproject.Bussiness.ProductImage;
 import durablefurniturejavaproject.Bussiness.ProductSize;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
@@ -27,9 +26,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
+
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -58,7 +57,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         showComboboxProductColor();
         showProduct(lsProduct);
         System.out.println(lsProductInSelProductForm.size());
-        
+
     }
     SellProductJPanel sellProductJPanel;
 
@@ -95,16 +94,17 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1140, 645));
+        setPreferredSize(new java.awt.Dimension(1200, 645));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(40, 83, 160));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1140, 645));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1200, 645));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonSubmit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -114,7 +114,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                 jButtonSubmitActionPerformed(evt);
             }
         });
-        jPanel1.add(jButtonSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 550, 160, 40));
+        jPanel1.add(jButtonSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 550, 160, 40));
 
         cbBoxCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cbBoxCategory.addItemListener(new java.awt.event.ItemListener() {
@@ -179,16 +179,16 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jPanel1.add(lbl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
 
         jScrollPane1.setHorizontalScrollBar(null);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1110, 450));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1175, 450));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1110, 600));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1140, 600));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1106, Short.MAX_VALUE)
+            .addGap(0, 1152, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,6 +212,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jPanel1.add(txtShowColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 30, 59, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1175, 70));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("Price");
@@ -237,6 +238,9 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Image");
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel9.setText("Quantity");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -244,21 +248,23 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jLabel2)
-                .addGap(115, 115, 115)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel4)
-                .addGap(110, 110, 110)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(105, 105, 105)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel6)
-                .addGap(105, 105, 105)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110)
+                .addGap(100, 100, 100)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGap(30, 30, 30))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,17 +276,19 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 24, 24))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 99, 1109, 70));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 99, -1, -1));
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 1140, 645);
+        jPanel1.setBounds(0, 0, 1380, 645);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -423,7 +431,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             X += increaseVariableX;
             //
             JLabel lblProductName = new JLabel();
-            lblProductName.setBounds(X, Y, 160, 90);
+            lblProductName.setBounds(X - 10, Y, 160, 90);
 
             String string = prd.getProductName();
             String breakLineString = "<html>";
@@ -445,39 +453,45 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             X += increaseVariableX;
             //
             JLabel lblBrand = new JLabel();
-            lblBrand.setBounds(X + 5, Y + 30, 160, 20);
+            lblBrand.setBounds(X - 20, Y + 30, 160, 20);
             lblBrand.setText(prd.getBrandName());
             X += increaseVariableX;
             //
             JLabel lblCategory = new JLabel();
-            lblCategory.setBounds(X - 10, Y + 30, 160, 20);
+            lblCategory.setBounds(X - 45, Y + 30, 160, 20);
             lblCategory.setText(prd.getCategoryName());
             X += increaseVariableX;
             //
             JTextField txtColor = new JTextField();
-            txtColor.setBounds(X - 20, Y + 20, 40, 40);
+            txtColor.setBounds(X - 58, Y + 20, 40, 40);
             txtColor.setBackground(new Color(Integer.parseInt(prd.getColorName())));
             txtColor.setText(prd.getColorName());
             txtColor.setEnabled(false);
             X += increaseVariableX;
             //
             JLabel lblSize = new JLabel();
-            lblSize.setBounds(X - 38, Y + 30, 160, 20);
+            lblSize.setBounds(X - 82, Y + 30, 160, 20);
             lblSize.setText(prd.getSizeName());
             X += increaseVariableX;
             //
             JLabel lblPrice = new JLabel();
-            lblPrice.setBounds(X - 58, Y + 30, 160, 20);
+            lblPrice.setBounds(X - 112, Y + 30, 160, 20);
             lblPrice.setText(prd.getUnitPrice().toString());
             X += increaseVariableX;
 
             //
+            JLabel lblUnitInStock = new JLabel();
+            lblUnitInStock.setBounds(X - 129, Y + 30, 160, 20);
+            lblUnitInStock.setText(String.valueOf(prd.getUnitInStock()));
+            X += increaseVariableX;
+
+            //
             JSeparator seperator = new JSeparator();
-            seperator.setBounds(15, Y + 100, 1050, 10);
+            seperator.setBounds(15, Y + 100, 1130, 10);
 
             //
             JCheckBox cbId = new JCheckBox();
-            cbId.setBounds(X - 108, Y + 30, 160, 20);
+            cbId.setBounds(X - 195, Y + 30, 160, 20);
             String productIdStr = String.valueOf(prd.getProductId());
             cbId.setText(productIdStr);
             listCheckBox.add(cbId);
@@ -519,6 +533,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
             jPanel2.add(txtColor);
             jPanel2.add(lblSize);
             jPanel2.add(lblPrice);
+            jPanel2.add(lblUnitInStock);
             jPanel2.add(cbId);
             jPanel2.add(seperator);
 
@@ -552,6 +567,7 @@ public class ChooseProductToBuyJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

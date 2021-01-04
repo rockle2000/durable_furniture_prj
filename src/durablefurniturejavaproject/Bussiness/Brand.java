@@ -24,12 +24,11 @@ public class Brand {
     public String BrandName;
     public String Image;
     public String Description;
-    
     SqlDataAcess db = new SqlDataAcess();
     
     public Brand() {
     }
-    
+
     public Brand(int BrandId, String BrandName, String Image, String Description) {
         this.BrandId = BrandId;
         this.BrandName = BrandName;
@@ -43,7 +42,7 @@ public class Brand {
         try {
             ResultSet rs = db.ExecuteQuery(sql);
             while (rs.next()) {
-                Brand brand = new Brand(rs.getInt("BrandId"), rs.getString("BrandName"), rs.getString("Image"), rs.getString("Description"));
+                Brand brand = new Brand(rs.getInt("BrandId"), rs.getString("BrandName"), rs.getString("Image"),rs.getString("Description"));
                 brandList.add(brand);
             }
         } catch (SQLException ex) {
@@ -92,6 +91,14 @@ public class Brand {
         return res == 1;
     }
     
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+
     public int getBrandId() {
         return BrandId;
     }
@@ -121,13 +128,5 @@ public class Brand {
         return BrandName; //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-    
     
 }
