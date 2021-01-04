@@ -32,7 +32,7 @@ public class Staff {
     }
 
     public void GetStaffInfo(int StaffId) throws SQLException {
-        SqlDataAcess db = new SqlDataAcess();
+        db = new SqlDataAcess();
         ResultSet rs = db.ExecuteQuery(String.format("Select * from staff where StaffId = " + StaffId));
         while (rs.next()) {
             this.StaffId = rs.getInt("StaffId");
@@ -44,6 +44,7 @@ public class Staff {
             this.Level = rs.getInt("Level");
             this.Username = rs.getString("Username");
             this.Password = rs.getString("Password");
+            this.Avatar = rs.getString("Avatar");
         }
         db.CloseConnection();
     }
@@ -58,6 +59,7 @@ public class Staff {
         rs.next();
         return rs.getInt("count");
     }
+
     public int PhoneNumberIsExist() throws SQLException {
         db = new SqlDataAcess();
         String sql = "Select COUNT(*) as count from staff where PhoneNumber = ?";
@@ -68,7 +70,8 @@ public class Staff {
         rs.next();
         return rs.getInt("count");
     }
-     public int EmailIsExist() throws SQLException {
+
+    public int EmailIsExist() throws SQLException {
         db = new SqlDataAcess();
         String sql = "Select COUNT(*) as count from staff where Email = ?";
         db.OpenConnection();
@@ -83,9 +86,11 @@ public class Staff {
         db = new SqlDataAcess();
         if (UserNameIsExist() > 0) {
             return "User name is existed!";
-        } if (PhoneNumberIsExist() > 0) {
+        }
+        if (PhoneNumberIsExist() > 0) {
             return "Phone number is existed!";
-        } if (EmailIsExist() > 0) {
+        }
+        if (EmailIsExist() > 0) {
             return "Email is existed!";
         } else {
             String sql = "Insert into staff (FullName,BirthYear,Address,PhoneNumber,Email,Avatar,Level,Username,Password) values (?,?,?,?,?,?,?,?,?)";
@@ -105,7 +110,7 @@ public class Staff {
     }
 
     public int Login(String Username, String Password) throws SQLException {
-        SqlDataAcess db = new SqlDataAcess();
+        db = new SqlDataAcess();
         String sql = "Select StaffId from staff where Username = ? and Password =?";
         PreparedStatement stmt = null;
         db.OpenConnection();
@@ -118,6 +123,49 @@ public class Staff {
             return rs.getInt("StaffId");
         }
         return -1;
+    }
+
+//    public boolean UpdateAccountInfor(int StaffId, String Password,String Avatar) throws SQLException {
+//        db = new SqlDataAcess();
+//        String sql = "Update staff SET `Password` = ?,Avatar = ? WHERE StaffId = ?";
+//        PreparedStatement stmt = null;
+//        db.OpenConnection();
+//        stmt = db.connection.prepareCall(sql);
+//        stmt.setString(1, Password);
+//        stmt.setString(2, Avatar);
+//        stmt.setInt(3, StaffId);
+//        int res = stmt.executeUpdate();
+//        db.CloseConnection();
+//        return res == 1;
+//    }
+    public String UpdateStaffInfor() throws SQLException {
+        db = new SqlDataAcess();
+//        if (PhoneNumberIsExist() > 0) {
+//            return "Phone number is existed!";
+//        }
+//        if (EmailIsExist() > 0) {
+//            return "Email is existed!";
+//        }
+        String sql = "Update staff SET FullName = ?, BirthYear = ?, Address = ?, PhoneNumber = ?, Email = ?, Avatar = ?,`Password` = ? WHERE StaffId = ?";
+        PreparedStatement stmt = null;
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, FullName);
+        stmt.setInt(2, BirthYear);
+        stmt.setString(3, Address);
+        stmt.setString(4, PhoneNumber);
+        stmt.setString(5, Email);
+        stmt.setString(6, Avatar);
+        stmt.setString(7, Password);
+        stmt.setInt(8, StaffId);
+        System.out.println(stmt.toString());
+        int res = stmt.executeUpdate();
+        db.CloseConnection();
+        if (res == 1) {
+            return "Success";
+        } else {
+            return "Failed";
+        }
     }
 
     public int getStaffId() {

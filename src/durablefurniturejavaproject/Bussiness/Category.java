@@ -23,13 +23,15 @@ public class Category {
     public int CategoryId;
     public String CategoryName;
     public String Image;
+    public String Description;
 
     SqlDataAcess db = new SqlDataAcess();
 
-    public Category(int CategoryId, String CategoryName, String Image) {
+    public Category(int CategoryId, String CategoryName, String Image,String Description) {
         this.CategoryId = CategoryId;
         this.CategoryName = CategoryName;
         this.Image = Image;
+        this.Description = Description;
     }
 
     public Category() {
@@ -41,7 +43,7 @@ public class Category {
         try {
             ResultSet rs = db.ExecuteQuery(sql);
             while (rs.next()) {
-                Category cate = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"), rs.getString("Image"));
+                Category cate = new Category(rs.getInt("CategoryId"), rs.getString("CategoryName"), rs.getString("Image"),rs.getString("Description"));
                 cateList.add(cate);
             }
         } catch (SQLException ex) {
@@ -51,26 +53,28 @@ public class Category {
         return cateList;
     }
 
-    public boolean InsertCategory(String CategoryName, String Image) throws SQLException {
-        String sql = "INSERT category (CategoryName,Image) VALUES(?,?)";
+    public boolean InsertCategory(String CategoryName, String Image,String Description) throws SQLException {
+        String sql = "INSERT category (CategoryName,Image,Description) VALUES(?,?,?)";
         PreparedStatement stmt = null;
         db.OpenConnection();
         stmt = db.connection.prepareCall(sql);
         stmt.setString(1, CategoryName);
         stmt.setString(2, Image);
+        stmt.setString(3, Description);
         int res = stmt.executeUpdate();
         db.CloseConnection();
         return res == 1;
     }
 
-    public boolean UpdateCategory(int CategoryId, String CategoryName, String Image) throws SQLException {
-        String sql = "Update category SET CategoryName = ?, Image = ? WHERE CategoryId = ?";
+    public boolean UpdateCategory(int CategoryId, String CategoryName, String Image,String Description) throws SQLException {
+        String sql = "Update category SET CategoryName = ?, Image = ?,Description = ? WHERE CategoryId = ?";
         PreparedStatement stmt = null;
         db.OpenConnection();
         stmt = db.connection.prepareCall(sql);
         stmt.setString(1, CategoryName);
         stmt.setString(2, Image);
-        stmt.setInt(3, CategoryId);
+        stmt.setString(3, Description);
+        stmt.setInt(4, CategoryId);
         int res = stmt.executeUpdate();
         db.CloseConnection();
         return res == 1;
@@ -114,6 +118,13 @@ public class Category {
     @Override
     public String toString() {
         return CategoryName;
+    }
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
 }

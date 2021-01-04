@@ -43,7 +43,7 @@ public class BrandJPanel extends javax.swing.JPanel {
         List<Brand> brandList = brand.GetAllBrand();
         tblModel.setRowCount(0);
         brandList.forEach(b -> {
-            tblModel.addRow(new Object[]{b.getBrandId(), b.getBrandName(), b.getImage()});
+            tblModel.addRow(new Object[]{b.getBrandId(), b.getBrandName(), b.getImage(),b.getDescription()});
         });
     }
 
@@ -65,7 +65,7 @@ public class BrandJPanel extends javax.swing.JPanel {
         txtBrandName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         btnAddImage = new javax.swing.JButton();
         lblPicture = new javax.swing.JLabel();
@@ -82,20 +82,20 @@ public class BrandJPanel extends javax.swing.JPanel {
         tblBrand.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblBrand.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Brand Id", "Brand Name", "Image"
+                "Brand Id", "Brand Name", "Image", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,11 +114,6 @@ public class BrandJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblBrand);
-        if (tblBrand.getColumnModel().getColumnCount() > 0) {
-            tblBrand.getColumnModel().getColumn(0).setResizable(false);
-            tblBrand.getColumnModel().getColumn(1).setResizable(false);
-            tblBrand.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
@@ -155,10 +150,10 @@ public class BrandJPanel extends javax.swing.JPanel {
         jLabel3.setText("Brand Image");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescription.setColumns(20);
+        txtDescription.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        txtDescription.setRows(5);
+        jScrollPane2.setViewportView(txtDescription);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 780, -1));
 
@@ -205,6 +200,7 @@ public class BrandJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = txtBrandName.getText();
         String image = "".equals(anh) ? "" : anh;
+        String desc = "".equals(txtDescription.getText()) ? "" : txtDescription.getText();
         String currentDir = System.getProperty("user.dir") + "/Images";
         if ("Add".equals(btnSave.getText())) {
             if ("".equals(txtBrandName.getText())) {
@@ -216,7 +212,7 @@ public class BrandJPanel extends javax.swing.JPanel {
                 return;
             }
             try {
-                if (brand.InsertBrand(name, image)) {
+                if (brand.InsertBrand(name, image, desc)) {
                     try {
                         ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
                     } catch (IOException ex) {
@@ -236,7 +232,7 @@ public class BrandJPanel extends javax.swing.JPanel {
             //Sửa brand nhưng không sửa ảnh
             if ("".equals(image)) {
                 try {
-                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, imageLink)) {
+                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, imageLink, desc)) {
                         JOptionPane.showMessageDialog(this, "Edit brand successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                         GetBrandList();
                         RefreshData();
@@ -244,14 +240,14 @@ public class BrandJPanel extends javax.swing.JPanel {
                     } else {
                         JOptionPane.showMessageDialog(this, "Edit brand failed", "Message", JOptionPane.PLAIN_MESSAGE);
                     }
-                    //Sửa brand nhưng sửa ảnh
                 } catch (SQLException ex) {
                     Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            //Sửa brand nhưng sửa ảnh
             } else {
                 File file = new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink);
                 try {
-                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, image) && file.delete()) {
+                    if (brand.UpdateBrand(Integer.parseInt(txtBrandId.getText()), name, image, desc) && file.delete()) {
                         try {
                             ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
                         } catch (IOException ex) {
@@ -276,6 +272,8 @@ public class BrandJPanel extends javax.swing.JPanel {
         txtBrandName.setText("");
         btnSave.setText("Add");
         lblPicture.setIcon(null);
+        imageLink = "";
+        anh = "";
     }
     BufferedImage image_add;
     private void btnAddImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddImageActionPerformed
@@ -319,9 +317,13 @@ public class BrandJPanel extends javax.swing.JPanel {
             txtBrandId.setText(tblBrand.getModel().getValueAt(row, 0).toString());
             txtBrandName.setText(tblBrand.getModel().getValueAt(row, 1).toString());
             imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
+            String desc;
+            if(tblBrand.getModel().getValueAt(row, 3)==null || tblBrand.getModel().getValueAt(row, 3)=="")
+                desc = "";
+            else desc = tblBrand.getModel().getValueAt(row, 3).toString();
+            txtDescription.setText(desc);
             if (!"".equals(imageLink)) {
                 imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
-//                System.out.println(imageLink);
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink));
@@ -333,7 +335,6 @@ public class BrandJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tblBrandMouseClicked
-
     // Xóa brand
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
@@ -379,10 +380,10 @@ public class BrandJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTable tblBrand;
     private javax.swing.JTextField txtBrandId;
     private javax.swing.JTextField txtBrandName;
+    private javax.swing.JTextArea txtDescription;
     // End of variables declaration//GEN-END:variables
 }

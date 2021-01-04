@@ -503,9 +503,6 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Sell Product"/>
-                      </AccessibilityProperties>
                       <Events>
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sidebarSellProductMousePressed"/>
                       </Events>
