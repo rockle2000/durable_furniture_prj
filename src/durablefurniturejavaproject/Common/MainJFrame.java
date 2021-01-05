@@ -719,7 +719,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         if (labelForMakerForm.getText() != "SellProduct") {
             jPanel2.removeAll();
-            SellProductJPanel sellPrdPanel = new SellProductJPanel(Staff.getStaffId());
+            SellProductJPanel sellPrdPanel = new SellProductJPanel(Staff);
             //catePanel.setBounds(5, 5, 1040, 591);
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("SellProduct");

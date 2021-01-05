@@ -6,8 +6,10 @@
 package durablefurniturejavaproject.Common;
 
 import durablefurniturejavaproject.Bussiness.Bill;
+//import durablefurniturejavaproject.Bussiness.PrintBill;
 import durablefurniturejavaproject.Bussiness.Product;
 import durablefurniturejavaproject.Bussiness.ProductImage;
+import durablefurniturejavaproject.Bussiness.Staff;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -45,16 +47,18 @@ public class SellProductJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CategoryJPanel
      */
-    public SellProductJPanel(int staffId) {
+    public SellProductJPanel(Staff staff) {
         initComponents();
         jScrollPane2.getVerticalScrollBar().setUnitIncrement(15);
 
-        txtStaffId.setText(String.valueOf(staffId));
+        txtStaffId.setText(String.valueOf(staff.getStaffId()));
+        this.staff = staff;
     }
+    Staff staff;
 
     private void validationForm() {
         String number = "0123456789";
-        if (txtClientName.getText().equals("") || txtPhoneNumber.getText().equals("") || lblTotalPrice.getText().equals("Total Price : 0")) {
+        if (txtClientName.getText().equals("") || txtPhoneNumber.getText().equals("") || lblTotalPrice.getText().equals("0")) {
             btnSubmit.setEnabled(false);
             return;
         }
@@ -373,13 +377,19 @@ public class SellProductJPanel extends javax.swing.JPanel {
         bill.setStaffId(Integer.parseInt(txtStaffId.getText()));
         bill.setListProduct(productsInCart);
         bill.setTotalPrice(Integer.parseInt(lblTotalPrice.getText()));
+//        PrintBill printBill = new PrintBill();
         try {
             bill.InsertBill();
+//            printBill.printBill(staff, bill, bill.getListProduct());
             JOptionPane.showMessageDialog(this, "Create bill success!");
             refeshForm();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex);
-        }
+        } 
+//        catch (IOException ex) {
+//            Logger.getLogger(SellProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
 
     }//GEN-LAST:event_btnSubmitActionPerformed
     private void refeshForm() {
