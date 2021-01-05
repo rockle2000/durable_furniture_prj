@@ -59,6 +59,17 @@ public class Staff {
         rs.next();
         return rs.getInt("count");
     }
+    public int CheckUserNameForUpdate() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "Select COUNT(*) as count from staff where Username = ? and StaffId <> ?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, Username);
+        stmt.setInt(2, StaffId);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt("count");
+    }
 
     public int PhoneNumberIsExist() throws SQLException {
         db = new SqlDataAcess();
@@ -70,6 +81,18 @@ public class Staff {
         rs.next();
         return rs.getInt("count");
     }
+    
+    public int CheckPhoneForUpdate() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "Select COUNT(*) as count from staff where PhoneNumber = ? and StaffId <> ?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, PhoneNumber);
+        stmt.setInt(2, StaffId);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt("count");
+    }
 
     public int EmailIsExist() throws SQLException {
         db = new SqlDataAcess();
@@ -77,6 +100,18 @@ public class Staff {
         db.OpenConnection();
         PreparedStatement stmt = db.connection.prepareCall(sql);
         stmt.setString(1, Email);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt("count");
+    }
+    
+    public int CheckEmailForUpdate() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "Select COUNT(*) as count from staff where Email = ? and StaffId <> ?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, Email);
+        stmt.setInt(2, StaffId);
         ResultSet rs = stmt.executeQuery();
         rs.next();
         return rs.getInt("count");
@@ -125,28 +160,18 @@ public class Staff {
         return -1;
     }
 
-//    public boolean UpdateAccountInfor(int StaffId, String Password,String Avatar) throws SQLException {
-//        db = new SqlDataAcess();
-//        String sql = "Update staff SET `Password` = ?,Avatar = ? WHERE StaffId = ?";
-//        PreparedStatement stmt = null;
-//        db.OpenConnection();
-//        stmt = db.connection.prepareCall(sql);
-//        stmt.setString(1, Password);
-//        stmt.setString(2, Avatar);
-//        stmt.setInt(3, StaffId);
-//        int res = stmt.executeUpdate();
-//        db.CloseConnection();
-//        return res == 1;
-//    }
     public String UpdateStaffInfor() throws SQLException {
         db = new SqlDataAcess();
-//        if (PhoneNumberIsExist() > 0) {
-//            return "Phone number is existed!";
-//        }
-//        if (EmailIsExist() > 0) {
-//            return "Email is existed!";
-//        }
-        String sql = "Update staff SET FullName = ?, BirthYear = ?, Address = ?, PhoneNumber = ?, Email = ?, Avatar = ?,`Password` = ? WHERE StaffId = ?";
+        if (CheckUserNameForUpdate()> 0) {
+            return "User name is existed!";
+        }
+        if (CheckPhoneForUpdate()> 0) {
+            return "Phone number is existed!";
+        }
+        if (CheckEmailForUpdate()> 0) {
+            return "Email is existed!";
+        }
+        String sql = "Update staff SET FullName = ?, BirthYear = ?, Address = ?, PhoneNumber = ?, Email = ?, Avatar = ?,Username = ?,`Password` = ? WHERE StaffId = ?";
         PreparedStatement stmt = null;
         db.OpenConnection();
         stmt = db.connection.prepareCall(sql);
@@ -156,9 +181,9 @@ public class Staff {
         stmt.setString(4, PhoneNumber);
         stmt.setString(5, Email);
         stmt.setString(6, Avatar);
-        stmt.setString(7, Password);
-        stmt.setInt(8, StaffId);
-        System.out.println(stmt.toString());
+        stmt.setString(7, Username);
+        stmt.setString(8, Password);
+        stmt.setInt(9, StaffId);
         int res = stmt.executeUpdate();
         db.CloseConnection();
         if (res == 1) {
