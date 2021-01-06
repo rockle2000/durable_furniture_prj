@@ -271,6 +271,7 @@ public class BrandJPanel extends javax.swing.JPanel {
     private void RefreshData() {
         txtBrandId.setText("");
         txtBrandName.setText("");
+        txtDescription.setText("");
         btnSave.setText("Add");
         lblPicture.setIcon(null);
         imageLink = "";
@@ -283,24 +284,20 @@ public class BrandJPanel extends javax.swing.JPanel {
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setCurrentDirectory(new File("D:"));
         String currentDir = System.getProperty("user.dir") + "/Images";
-//        System.out.println(UUID.randomUUID().toString().replace("-", ""));
-//        System.out.println(currentDir);
+
         File theDir = new File(currentDir + "/Brands");
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
         int returnVal = chooser.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-//            System.out.println("You chose to open this directory: " + chooser.getSelectedFile().getAbsolutePath());
             BufferedImage img;
-//            BufferedImage image_add;
             try {
                 img = ImageIO.read(new File(chooser.getSelectedFile().getAbsolutePath()));
                 Image dimg = img.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
                 lblPicture.setIcon(new ImageIcon(dimg));
                 image_add = ImageIO.read(chooser.getSelectedFile());
                 anh = UUID.randomUUID().toString().replace("-", "") + chooser.getSelectedFile().getName();
-//                ImageIO.write(image_add, "jpg", new File(currentDir + "/Brands/" + anh));
             } catch (IOException e) {
 
             }

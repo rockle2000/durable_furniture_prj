@@ -223,7 +223,6 @@ public class CategoryJPanel extends javax.swing.JPanel {
 
             }
         }
-//        System.out.println(anh);
 
     }//GEN-LAST:event_btnAddImageActionPerformed
     String anh = "";
@@ -232,7 +231,6 @@ public class CategoryJPanel extends javax.swing.JPanel {
         String name = txtCategoryName.getText();
         String image = "".equals(anh) ? "" : anh;
         String desc = "".equals(txtDescription.getText()) ? "" : txtDescription.getText();
-//        System.out.println(image);
         String currentDir = System.getProperty("user.dir") + "/Images";
         if ("Add".equals(btnSave.getText())) {
             if ("".equals(txtCategoryName.getText())) {
@@ -349,7 +347,6 @@ public class CategoryJPanel extends javax.swing.JPanel {
             else desc = tblCategory.getModel().getValueAt(row, 3).toString();
             txtDescription.setText(desc);
             if (!"".equals(imageLink)) {
-//                imageLink = tblCategory.getModel().getValueAt(row, 2).toString();
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink));
@@ -365,6 +362,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
     private void RefreshData() {
         txtCategoryId.setText("");
         txtCategoryName.setText("");
+        txtDescription.setText("");
         btnSave.setText("Add");
         lblPicture.setIcon(null);
         imageLink = "";

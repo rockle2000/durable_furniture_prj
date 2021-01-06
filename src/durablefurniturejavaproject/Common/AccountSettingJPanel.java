@@ -50,19 +50,16 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         txtEmail.setText(String.valueOf(Staff.getEmail()));
         txtAddress.setText(String.valueOf(Staff.getAddress()));
         txtUserName.setText(String.valueOf(Staff.getUsername()));
-//        txtPassword.setText(String.valueOf(Staff.getPassword()));
         txtLevel.setText(String.valueOf(Staff.getLevel()));
 //        cbLevel.getModel().setSelectedItem(String.valueOf(Staff.getLevel()));
 
-//        boolean isManager = Staff.getLevel() != 0;
-//        txtStaffId.setEnabled(isManager);
-//        txtFullName.setEnabled(isManager);
-//        txtDob.setEnabled(isManager);
-//        txtPhone.setEnabled(isManager);
-//        txtEmail.setEnabled(isManager);
-//        txtAddress.setEnabled(isManager);
-//        txtUsername.setEnabled(isManager);
-//        txtLevel.setEnabled(isManager);
+        boolean isManager = Staff.getLevel() != 0;
+        txtFullName.setEnabled(isManager);
+        txtDob.setEnabled(isManager);
+        txtPhone.setEnabled(isManager);
+        txtEmail.setEnabled(isManager);
+        txtAddress.setEnabled(isManager);
+        txtUserName.setEnabled(isManager);
         ImageIcon imageIcon = new ImageIcon(new ImageIcon(System.getProperty("user.dir") + "/Images/Staffs/" + Staff.getAvatar()).getImage().getScaledInstance(280, 170, Image.SCALE_DEFAULT));
         lblAvatar.setIcon(imageIcon);
     }
@@ -189,7 +186,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Password");
+        jLabel4.setText("New password");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
@@ -214,9 +211,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 280, 30));
 
-        txtUserName.setEditable(false);
         txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtUserName.setEnabled(false);
         jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 260, 280, 30));
 
         txtLevel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -252,16 +247,6 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         Staff.setEmail(txtEmail.getText());
         Staff.setUsername(txtUserName.getText());
 
-//        String FullName = txtFullName.getText();
-//        int StaffId = Integer.parseInt(txtStaffId.getText());
-//        String BirthYear = txtDob.getText();
-//        String Address = txtAddress.getText();
-//        String PhoneNumber = txtPhone.getText();
-//        String Email = txtEmail.getText();
-//        String Avatar = txtFullName.getText();
-//        int Level = Integer.parseInt(txtLevel.getText());
-//        String Username = txtUserName.getText();
-//        String Password = CryptWithMD5.cryptWithMD5(txtPassword.getText());
         if (!txtRetype.getText().equals(txtPassword.getText())) {
             JOptionPane.showMessageDialog(this, "Retype password is incorrect", "Error", JOptionPane.PLAIN_MESSAGE);
             return;
@@ -273,21 +258,9 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         }
         //Sua thong tin khong sua anh
         if ("".equals(image)) {
-//            st.setAvatar(Staff.getAvatar());
             try {
-//                System.out.println("Fullname: " + Staff.getFullName());
-//                System.out.println("Dob: " + Staff.getBirthYear());
-//                System.out.println("Address: " + Staff.getAddress());
-//                System.out.println("Phone: " + Staff.getPhoneNumber());
-//                System.out.println("Email: " + Staff.getEmail());
-//                System.out.println("Level: " + Staff.getLevel());
-//                System.out.println("Avatar: " + Staff.getAvatar());
-//                System.out.println("Username: " + Staff.getUsername());
-//                System.out.println("Pass: " + Staff.getPassword());
-
-                
                 String res = Staff.UpdateStaffInfor();
-                System.out.println("Kết quả: " + res);
+//                System.out.println("Kết quả: " + res);
                 if ("Success".equals(res)) {
                     JOptionPane.showMessageDialog(this, "Update account successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                     RefreshData();
