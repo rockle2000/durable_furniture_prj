@@ -28,7 +28,7 @@ public class Staff {
     String Username;
     String Password;
     String Avatar;
-
+    SqlDataAcess db = new SqlDataAcess();
     public Staff() {
     }
     public void GetStaffInfo(int StaffId) throws SQLException {
@@ -223,7 +223,11 @@ public class Staff {
         stmt.setString(1, Username);
         stmt.setString(2, Password);
         ResultSet rs = stmt.executeQuery();
-
+        if (rs.next()) {
+            return rs.getInt("Level");
+        }
+        return -1;
+    }
     public String UpdateStaffInfor() throws SQLException {
         db = new SqlDataAcess();
         if (CheckUserNameForUpdate()> 0) {
