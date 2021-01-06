@@ -6,6 +6,7 @@
 package durablefurniturejavaproject.Common;
 
 import durablefurniturejavaproject.Bussiness.Brand;
+import durablefurniturejavaproject.Bussiness.ProductBill;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -32,7 +33,7 @@ public class BrandJPanel extends javax.swing.JPanel {
      */
     DefaultTableModel tblModel;
     Brand brand = new Brand();
-
+    ProductBill productbill = new ProductBill();
     public BrandJPanel() {
         initComponents();
         tblModel = (DefaultTableModel) tblBrand.getModel();

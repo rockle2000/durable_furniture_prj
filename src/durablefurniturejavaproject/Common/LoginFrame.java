@@ -159,7 +159,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel6.setLayout(new java.awt.BorderLayout());
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel2.setText("Username");
         jPanel6.add(jLabel2, java.awt.BorderLayout.CENTER);
 
@@ -180,7 +179,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(250, 50));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel3.setText("Password");
         jPanel7.add(jLabel3, java.awt.BorderLayout.CENTER);
 
@@ -202,7 +200,6 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel8.setLayout(new java.awt.BorderLayout());
 
         checkboxRememberMe.setBackground(new java.awt.Color(255, 255, 255));
-        checkboxRememberMe.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         checkboxRememberMe.setText("Remember me");
         jPanel8.add(checkboxRememberMe, java.awt.BorderLayout.WEST);
 
@@ -396,8 +393,9 @@ public class LoginFrame extends javax.swing.JFrame {
     public void Login() throws SQLException {
         Staff Stafflogin = new Staff();
         int StaffId = Stafflogin.Login(txtUsername.getText(), CryptWithMD5.cryptWithMD5(txtPassword.getText()));
+        int Level = Stafflogin.Login1(txtUsername.getText(), CryptWithMD5.cryptWithMD5(txtPassword.getText()));
         if (StaffId > 0) {
-            MainJFrame mainFrame = new MainJFrame(StaffId);
+            MainJFrame mainFrame = new MainJFrame(StaffId,Level);
             mainFrame.setVisible(true);
             this.dispose();
 

@@ -9,6 +9,8 @@ import durablefurniturejavaproject.DataAccess.SqlDataAcess;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -26,13 +28,11 @@ public class Staff {
     String Username;
     String Password;
     String Avatar;
-    SqlDataAcess db;
-
+    SqlDataAcess db = new SqlDataAcess();
     public Staff() {
     }
-
     public void GetStaffInfo(int StaffId) throws SQLException {
-        db = new SqlDataAcess();
+        SqlDataAcess db = new SqlDataAcess();
         ResultSet rs = db.ExecuteQuery(String.format("Select * from staff where StaffId = " + StaffId));
         while (rs.next()) {
             this.StaffId = rs.getInt("StaffId");
@@ -41,6 +41,7 @@ public class Staff {
             this.Address = rs.getString("Address");
             this.PhoneNumber = rs.getString("PhoneNumber");
             this.Email = rs.getString("Email");
+            this.Avatar = rs.getString("Avatar");
             this.Level = rs.getInt("Level");
             this.Username = rs.getString("Username");
             this.Password = rs.getString("Password");
@@ -48,7 +49,61 @@ public class Staff {
         }
         db.CloseConnection();
     }
+    List<Staff> stafflist = new ArrayList();
 
+    public List<Staff> GetAllStaff() throws SQLException{
+            String sql = "Select * from staff";
+             List<Staff> lstStaff = new ArrayList<Staff>();
+            ResultSet rs = db.ExecuteQuery(sql);
+            while (rs.next()) {
+            Staff s = new Staff();
+            s.StaffId = rs.getInt("StaffId");
+            s.FullName = rs.getString("FullName");
+            s.BirthYear = rs.getInt("BirthYear");
+            s.Address = rs.getString("Address");
+            s.PhoneNumber = rs.getString("PhoneNumber");
+            s.Email = rs.getString("Email");
+            s.Avatar = rs.getString("Avatar");
+            s.Level = rs.getInt("Level");
+            s.Username = rs.getString("Username");
+            s.Password = rs.getString("Password");
+            lstStaff.add(s);
+            }
+            stafflist = lstStaff;
+            
+            return  lstStaff;
+    }
+    
+      
+    public String UpdateStaff() throws SQLException {
+        db = new SqlDataAcess();
+        String sql = "update staff set FullName = ?,BirthYear=?,Address=?,PhoneNumber=?,Email=? ,Avatar = ? ,Level=?,Username=?,Password=? where StaffId = ?";
+        db.OpenConnection();
+        PreparedStatement stmt = db.connection.prepareCall(sql);
+            stmt.setString(1, FullName);
+            stmt.setInt(2, BirthYear);
+            stmt.setString(3 , Address);
+            stmt.setString(4 , PhoneNumber);
+            stmt.setString(5 , Email);
+            stmt.setString(6, Avatar);
+            stmt.setInt(7 , Level);
+            stmt.setString(8 , Username);
+            stmt.setString(9 , Password);
+            stmt.setInt(10, StaffId);
+            stmt.execute();
+            return "Success";
+       
+    }
+    
+    public Boolean DeleteStaff() throws SQLException{
+     String sql = "Delete from staff where StaffId = ?";
+        PreparedStatement stmt = null;
+         db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setInt(1, StaffId);  
+            stmt.execute();
+            return stmt.execute();          
+    }
     public int UserNameIsExist() throws SQLException {
         db = new SqlDataAcess();
         String sql = "Select COUNT(*) as count from staff where Username = ?";
@@ -145,7 +200,7 @@ public class Staff {
     }
 
     public int Login(String Username, String Password) throws SQLException {
-        db = new SqlDataAcess();
+        SqlDataAcess db = new SqlDataAcess();
         String sql = "Select StaffId from staff where Username = ? and Password =?";
         PreparedStatement stmt = null;
         db.OpenConnection();
@@ -159,7 +214,20 @@ public class Staff {
         }
         return -1;
     }
-
+    public int Login1(String Username, String Password) throws SQLException {
+         db = new SqlDataAcess();
+        String sql = "Select Level from staff where Username = ? and Password =?";
+        PreparedStatement stmt = null;
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setString(1, Username);
+        stmt.setString(2, Password);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("Level");
+        }
+        return -1;
+    }
     public String UpdateStaffInfor() throws SQLException {
         db = new SqlDataAcess();
         if (CheckUserNameForUpdate()> 0) {
