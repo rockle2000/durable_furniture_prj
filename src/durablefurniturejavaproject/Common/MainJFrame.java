@@ -643,33 +643,38 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_sidebarHomeIconMouseClicked
 
     private void sidebarAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarAccountMouseClicked
+        //add new try catch block
         if (labelForMakerForm.getText() != "Account") {
-            jPanel2.removeAll();
-            labelForMakerForm.setForeground(Color.WHITE);
-            labelForMakerForm.setText("Account");
-            labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
-            labelForMakerForm.setBounds(10, 0, 200, 40);
-            AccountSettingJPanel accoutSettingPanel = new AccountSettingJPanel();
-            //brandPanel.setBounds(5, 5, 1040, 591);
-            jPanel2.add(labelForMakerForm);
-            jPanel2.add(accoutSettingPanel);
-            Thread th = new Thread() {
-                public void run() {
-                    try {
-                        for (int i = 0; i <= 1025;) {
-                            Thread.sleep(1);
-                            accoutSettingPanel.setBounds(-1020 + i, 5, 1020, 640);
-                            i += 25;
-
+            try {
+                jPanel2.removeAll();
+                labelForMakerForm.setForeground(Color.WHITE);
+                labelForMakerForm.setText("Account");
+                labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
+                labelForMakerForm.setBounds(10, 0, 200, 40);
+                AccountSettingJPanel accoutSettingPanel = new AccountSettingJPanel(StaffId);
+                //brandPanel.setBounds(5, 5, 1040, 591);
+                jPanel2.add(labelForMakerForm);
+                jPanel2.add(accoutSettingPanel);
+                Thread th = new Thread() {
+                    public void run() {
+                        try {
+                            for (int i = 0; i <= 1025;) {
+                                Thread.sleep(1);
+                                accoutSettingPanel.setBounds(-1020 + i, 5, 1020, 640);
+                                i += 25;
+                                
+                            }
+                            
+                        } catch (Exception e) {
+                            System.out.println(e);
                         }
-
-                    } catch (Exception e) {
-                        System.out.println(e);
                     }
-                }
-            };
-            th.start();
-            jPanel2.validate();
+                };
+                th.start();
+                jPanel2.validate();
+            } catch (SQLException ex) {
+                Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }//GEN-LAST:event_sidebarAccountMouseClicked
@@ -721,7 +726,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         if (labelForMakerForm.getText() != "SellProduct") {
             jPanel2.removeAll();
-            SellProductJPanel sellPrdPanel = new SellProductJPanel(Staff.getStaffId());
+            SellProductJPanel sellPrdPanel = new SellProductJPanel(Staff);
             //catePanel.setBounds(5, 5, 1040, 591);
             labelForMakerForm.setForeground(Color.WHITE);
             labelForMakerForm.setText("SellProduct");

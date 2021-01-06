@@ -43,7 +43,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
         List<Category> cateList = cate.GetAllCategory();
         tblModel.setRowCount(0);
         cateList.forEach(c -> {
-            tblModel.addRow(new Object[]{c.getCategoryId(), c.getCategoryName(), c.getImage()});
+            tblModel.addRow(new Object[]{c.getCategoryId(), c.getCategoryName(), c.getImage(), c.getDescription()});
         });
     }
 
@@ -65,7 +65,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
         txtCategoryName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescription = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         btnAddImage = new javax.swing.JButton();
         lblPicture = new javax.swing.JLabel();
@@ -82,20 +82,20 @@ public class CategoryJPanel extends javax.swing.JPanel {
         tblCategory.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblCategory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CategoryId", "Category Name", "Image"
+                "CategoryId", "Category Name", "Image", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -107,7 +107,6 @@ public class CategoryJPanel extends javax.swing.JPanel {
             }
         });
         tblCategory.setMinimumSize(new java.awt.Dimension(1040, 340));
-        tblCategory.setPreferredSize(new java.awt.Dimension(1040, 150));
         tblCategory.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblCategoryMouseClicked(evt);
@@ -118,6 +117,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
             tblCategory.getColumnModel().getColumn(0).setResizable(false);
             tblCategory.getColumnModel().getColumn(1).setResizable(false);
             tblCategory.getColumnModel().getColumn(2).setResizable(false);
+            tblCategory.getColumnModel().getColumn(3).setResizable(false);
         }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -154,10 +154,10 @@ public class CategoryJPanel extends javax.swing.JPanel {
         jLabel3.setText("Category Image");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        txtDescription.setColumns(20);
+        txtDescription.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        txtDescription.setRows(5);
+        jScrollPane2.setViewportView(txtDescription);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 780, -1));
 
@@ -223,7 +223,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
 
             }
         }
-        System.out.println(anh);
+//        System.out.println(anh);
 
     }//GEN-LAST:event_btnAddImageActionPerformed
     String anh = "";
@@ -231,7 +231,8 @@ public class CategoryJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String name = txtCategoryName.getText();
         String image = "".equals(anh) ? "" : anh;
-        System.out.println(image);
+        String desc = "".equals(txtDescription.getText()) ? "" : txtDescription.getText();
+//        System.out.println(image);
         String currentDir = System.getProperty("user.dir") + "/Images";
         if ("Add".equals(btnSave.getText())) {
             if ("".equals(txtCategoryName.getText())) {
@@ -243,7 +244,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 return;
             }
             try {
-                if (cate.InsertCategory(name, image)) {
+                if (cate.InsertCategory(name, image, desc)) {
                     try {
                         ImageIO.write(image_add, "jpg", new File(currentDir + "/Categories/" + anh));
                     } catch (IOException ex) {
@@ -263,7 +264,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
             //Sua category nhung khong sua anh
             if ("".equals(image)) {
                 try {
-                    if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, imageLink) ) {
+                    if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, imageLink, desc)) {
                         JOptionPane.showMessageDialog(this, "Edit category successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                         GetCategoryList();
                         RefreshData();
@@ -278,7 +279,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
             } else {
                 try {
                     File file = new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink);
-                    if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, image) && file.delete()) {
+                    if (cate.UpdateCategory(Integer.parseInt(txtCategoryId.getText()), name, image, desc) && file.delete()) {
                         try {
                             ImageIO.write(image_add, "jpg", new File(currentDir + "/Categories/" + anh));
                         } catch (IOException ex) {
@@ -317,7 +318,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(this, "Delete category successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                         GetCategoryList();
                         RefreshData();
-                    } 
+                    }
 //                    else {
 //                        JOptionPane.showMessageDialog(this, "Delete category failed", "Message", JOptionPane.PLAIN_MESSAGE);
 //                    }
@@ -338,14 +339,17 @@ public class CategoryJPanel extends javax.swing.JPanel {
         btnSave.setText("Edit");
         int row = tblCategory.rowAtPoint(evt.getPoint());
         int col = tblCategory.columnAtPoint(evt.getPoint());
-
         if (row >= 0 && col >= 0) {
             txtCategoryId.setText(tblCategory.getModel().getValueAt(row, 0).toString());
             txtCategoryName.setText(tblCategory.getModel().getValueAt(row, 1).toString());
             imageLink = tblCategory.getModel().getValueAt(row, 2).toString();
+            String desc;
+            if(tblCategory.getModel().getValueAt(row, 3)==null || tblCategory.getModel().getValueAt(row, 3)=="")
+                desc = "";
+            else desc = tblCategory.getModel().getValueAt(row, 3).toString();
+            txtDescription.setText(desc);
             if (!"".equals(imageLink)) {
-                imageLink = tblCategory.getModel().getValueAt(row, 2).toString();
-//                System.out.println(imageLink);
+//                imageLink = tblCategory.getModel().getValueAt(row, 2).toString();
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink));
@@ -363,6 +367,8 @@ public class CategoryJPanel extends javax.swing.JPanel {
         txtCategoryName.setText("");
         btnSave.setText("Add");
         lblPicture.setIcon(null);
+        imageLink = "";
+        anh = "";
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -376,10 +382,10 @@ public class CategoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTable tblCategory;
     private javax.swing.JTextField txtCategoryId;
     private javax.swing.JTextField txtCategoryName;
+    private javax.swing.JTextArea txtDescription;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,10 +56,11 @@ public class Bill {
             stmt2.setInt(3, listProduct.get(i).getQuantity());
             stmt2.execute();
             stmt2.closeOnCompletion();
-            String sqlUpdateProductQuantity = "Update product set UnitInStock = (select (product.UnitInStock - productbill.Quantity) FROM product,bill,productbill where product.ProductId = productbill.ProductId and productbill.BillId = bill.BillId and bill.BillId = ? ) where product.ProductId = ?";
+            String sqlUpdateProductQuantity = "Update product set UnitInStock = (select (product.UnitInStock - productbill.Quantity) FROM product,bill,productbill where product.ProductId = productbill.ProductId and productbill.BillId = bill.BillId and productbill.BillId = ? and  productbill.ProductId = ? ) where ProductId = ? ";
             PreparedStatement stmt3 = db.connection.prepareCall(sqlUpdateProductQuantity);
             stmt3.setInt(1, billid);
             stmt3.setInt(2, listProduct.get(i).getProductId());
+            stmt3.setInt(3, listProduct.get(i).getProductId());
             stmt3.execute();
             stmt3.closeOnCompletion();
         }
