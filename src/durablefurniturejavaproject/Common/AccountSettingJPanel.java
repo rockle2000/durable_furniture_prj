@@ -99,6 +99,8 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         txtRetype = new javax.swing.JPasswordField();
+        txtCurrentPass = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -122,7 +124,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
                 btnUpdateActionPerformed(evt);
             }
         });
-        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 280, 30));
+        jPanel1.add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 470, 280, 30));
 
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, 280, 30));
@@ -164,7 +166,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Address");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, -1, -1));
 
         btnChangeAvatar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnChangeAvatar.setText("Change Avatar");
@@ -186,14 +188,14 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("New password");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, 20));
+        jLabel4.setText("Current password");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, -1, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Username");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 240, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
 
         txtStaffId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtStaffId.setEnabled(false);
@@ -206,17 +208,22 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Level");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, -1, -1));
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 280, 30));
+        txtAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddressActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 470, 280, 30));
 
         txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 260, 280, 30));
+        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 280, 30));
 
         txtLevel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtLevel.setEnabled(false);
-        jPanel1.add(txtLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 280, 30));
+        jPanel1.add(txtLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 280, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -225,6 +232,13 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, -1, 20));
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 330, 280, 30));
         jPanel1.add(txtRetype, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 400, 280, 30));
+        jPanel1.add(txtCurrentPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 260, 280, 30));
+
+        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("New password");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, 20));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -233,6 +247,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         anh = "";
         txtPassword.setText("");
         txtRetype.setText("");
+        txtCurrentPass.setText("");
     }
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -247,11 +262,16 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         Staff.setEmail(txtEmail.getText());
         Staff.setUsername(txtUserName.getText());
 
+        String currentPass = Staff.getPassword();
+        if (!currentPass.equals(CryptWithMD5.cryptWithMD5(txtCurrentPass.getText())) && !txtCurrentPass.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Current password is incorrect", "Error", JOptionPane.PLAIN_MESSAGE);
+            return;
+        }
         if (!txtRetype.getText().equals(txtPassword.getText())) {
             JOptionPane.showMessageDialog(this, "Retype password is incorrect", "Error", JOptionPane.PLAIN_MESSAGE);
             return;
         }
-        if ((txtPassword.getText().isEmpty() || txtPassword.getText() == null) && (txtRetype.getText().isEmpty() || txtRetype.getText() == null))         {
+        if ((txtPassword.getText().isEmpty() || txtPassword.getText() == null) && (txtRetype.getText().isEmpty() || txtRetype.getText() == null)) {
 //            Staff.setPassword(Staff.getPassword());
         } else {
             Staff.setPassword(CryptWithMD5.cryptWithMD5(txtPassword.getText()));
@@ -282,7 +302,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Update account successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                     RefreshData();
                     return;
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, res, "Message", JOptionPane.PLAIN_MESSAGE);
                     return;
                 }
@@ -320,6 +340,10 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnChangeAvatarActionPerformed
+
+    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressActionPerformed
     static Boolean txtFieldAddColorIsShowing = false;
     static Boolean txtFieldAddMaterialIsShowing = false;
     static Boolean txtFieldAddSizeIsShowing = false;
@@ -327,6 +351,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChangeAvatar;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
@@ -341,6 +366,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAvatar;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JPasswordField txtCurrentPass;
     private javax.swing.JTextField txtDob;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFieldAddColor1;
