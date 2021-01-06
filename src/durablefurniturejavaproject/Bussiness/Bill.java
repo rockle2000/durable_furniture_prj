@@ -28,7 +28,7 @@ public class Bill {
     int StaffId;
     double TotalPrice;
     List<Product> listProduct = new ArrayList<Product>();
-    SqlDataAcess db;
+    SqlDataAcess db =new SqlDataAcess();
 
     public void InsertBill() throws SQLException {
         db = new SqlDataAcess();
@@ -66,6 +66,41 @@ public class Bill {
         db.CloseConnection();
 
     }
+    
+    List<Bill> billlist = new ArrayList();
+
+    public List<Bill> GetAllBill() throws SQLException{
+            String sql = "Select * from bill";
+             List<Bill> lstBill = new ArrayList<Bill>();
+             ResultSet rs = db.ExecuteQuery(sql);
+            while (rs.next()) {
+            Bill b = new Bill();
+            b.BillId = rs.getInt("BillId");
+            b.ClientName = rs.getString("ClientName");
+            b.Address = rs.getString("Address");
+            b.Date = rs.getDate("Date");
+            b.PhoneNumber = rs.getString("PhoneNumber");
+            b.Email = rs.getString("Email");
+            b.StaffId = rs.getInt("StaffId");
+            b.TotalPrice = rs.getDouble("TotalPrice");
+            lstBill.add(b);
+            }
+            billlist = lstBill;
+            
+            return  lstBill;
+    }
+     public boolean DeleteBill(int BillId) throws SQLException {
+
+        String sql = "Delete from bill where BillId  = ?";
+        PreparedStatement stmt = null;
+        db.OpenConnection();
+        stmt = db.connection.prepareCall(sql);
+        stmt.setInt(1, BillId);
+        int res = stmt.executeUpdate();
+        db.CloseConnection();
+        return res == 1;
+    }
+    
 
     public int getBillId() {
         return BillId;

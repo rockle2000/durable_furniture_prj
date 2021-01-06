@@ -262,7 +262,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="3" y="200" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="3" y="200" width="-1" height="10"/>
                 </Constraint>
               </Constraints>
 
@@ -312,6 +312,9 @@
                       <Color id="Hand Cursor"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sidebarBillMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="sidebarBrand">
                   <Properties>
@@ -503,9 +506,6 @@
                           <Color id="Hand Cursor"/>
                         </Property>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Sell Product"/>
-                      </AccessibilityProperties>
                       <Events>
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sidebarSellProductMousePressed"/>
                       </Events>

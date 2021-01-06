@@ -32,10 +32,11 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
-    public MainJFrame(int staffId) throws SQLException {
+    public MainJFrame(int staffId,int Level) throws SQLException {
         initComponents();
         this.setLocationRelativeTo(null);
         StaffId = staffId;
+        level = Level;
         Staff.GetStaffInfo(StaffId);
         ShowHomePage(Staff);
         if (Staff.getLevel() == 0) {
@@ -44,6 +45,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel5.setText(Staff.getFullName());
     }
     public int StaffId;
+    public int level;
     public Staff Staff = new Staff();
 
     /**
@@ -160,6 +162,11 @@ public class MainJFrame extends javax.swing.JFrame {
         sidebarBill.setForeground(new java.awt.Color(255, 255, 255));
         sidebarBill.setText("Bill");
         sidebarBill.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        sidebarBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sidebarBillMouseClicked(evt);
+            }
+        });
 
         sidebarBrand.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sidebarBrand.setForeground(new java.awt.Color(255, 255, 255));
@@ -224,7 +231,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(sidebarAnalyze))
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 200, -1, -1));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 200, -1, 10));
 
         jPanel7.setBackground(new java.awt.Color(12, 43, 90));
         jPanel7.setPreferredSize(new java.awt.Dimension(170, 300));
@@ -270,7 +277,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jPanel8.add(sidebarSellProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 150, -1));
-        sidebarSellProduct.getAccessibleContext().setAccessibleName("Sell Product");
 
         jPanel7.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 170, 230));
 
@@ -749,6 +755,40 @@ public class MainJFrame extends javax.swing.JFrame {
         loginFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_sidebarLogoutMousePressed
+
+    private void sidebarBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sidebarBillMouseClicked
+        // TODO add your handling code here:
+       
+        if (labelForMakerForm.getText() != "Bills") {
+            jPanel2.removeAll();
+            labelForMakerForm.setForeground(Color.WHITE);
+            labelForMakerForm.setText("Bills");
+            labelForMakerForm.setFont(new Font("Soege UI", Font.BOLD, 22));
+            labelForMakerForm.setBounds(10, 0, 200, 40);
+            BillJPanel billJPanel = new BillJPanel(level);
+            //brandPanel.setBounds(5, 5, 1040, 591);
+            jPanel2.add(labelForMakerForm);
+            jPanel2.add(billJPanel);
+            Thread th = new Thread() {
+                public void run() {
+                    try {
+                        for (int i = 0; i <= 1025;) {
+                            Thread.sleep(1);
+                            billJPanel.setBounds(-1020 + i, 5, 1020, 640);
+                            i += 25;
+
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+            };
+            th.start();
+            jPanel2.validate();
+
+        }
+    }//GEN-LAST:event_sidebarBillMouseClicked
 
     /**
      * @param args the command line arguments
