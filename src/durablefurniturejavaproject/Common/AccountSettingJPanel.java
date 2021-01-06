@@ -261,7 +261,7 @@ public class AccountSettingJPanel extends javax.swing.JPanel {
         Staff.setPhoneNumber(txtPhone.getText());
         Staff.setEmail(txtEmail.getText());
         Staff.setUsername(txtUserName.getText());
-
+        
         String currentPass = Staff.getPassword();
         if (!currentPass.equals(CryptWithMD5.cryptWithMD5(txtCurrentPass.getText())) && !txtCurrentPass.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Current password is incorrect", "Error", JOptionPane.PLAIN_MESSAGE);
