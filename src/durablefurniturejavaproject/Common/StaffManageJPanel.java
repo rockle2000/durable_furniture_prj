@@ -67,6 +67,9 @@ public class StaffManageJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuRefeshForm = new javax.swing.JPopupMenu();
+        Refesh = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -98,6 +101,19 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
 
+        jPopupMenuRefeshForm.setPreferredSize(new java.awt.Dimension(150, 100));
+
+        Refesh.setText("Refesh");
+        Refesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefeshActionPerformed(evt);
+            }
+        });
+        jPopupMenuRefeshForm.add(Refesh);
+
+        Delete.setText("Delete");
+        jPopupMenuRefeshForm.add(Delete);
+
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(1040, 645));
@@ -106,6 +122,11 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(40, 81, 163));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(1040, 640));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -186,9 +207,13 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         });
         tblStaff.setMinimumSize(new java.awt.Dimension(1040, 340));
         tblStaff.setPreferredSize(new java.awt.Dimension(1040, 150));
+        tblStaff.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tblStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblStaffMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblStaffMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblStaff);
@@ -729,12 +754,34 @@ public class StaffManageJPanel extends javax.swing.JPanel {
             btnSave.setEnabled(false);
         }
     }//GEN-LAST:event_txtStaffIDMouseReleased
+
+    private void RefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefeshActionPerformed
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RefeshActionPerformed
+
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jPanel1MouseReleased
+
+    private void tblStaffMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStaffMouseReleased
+         if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblStaffMouseReleased
     static Boolean txtFieldAddColorIsShowing = false;
     static Boolean txtFieldAddMaterialIsShowing = false;
     static Boolean txtFieldAddSizeIsShowing = false;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CbBLevel;
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Refesh;
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
@@ -751,6 +798,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenuRefeshForm;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTable tblStaff;
