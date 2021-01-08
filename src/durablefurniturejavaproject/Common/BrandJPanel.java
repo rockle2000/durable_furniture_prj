@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -39,9 +40,9 @@ public class BrandJPanel extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tblBrand.getModel();
         GetBrandList();
     }
-
+    List<Brand> brandList = new ArrayList<Brand>();
     private void GetBrandList() {
-        List<Brand> brandList = brand.GetAllBrand();
+       brandList = brand.GetAllBrand();
         tblModel.setRowCount(0);
         brandList.forEach(b -> {
             tblModel.addRow(new Object[]{b.getBrandId(), b.getBrandName(), b.getImage(),b.getDescription()});
@@ -314,14 +315,19 @@ public class BrandJPanel extends javax.swing.JPanel {
         if (row >= 0 && col >= 0) {
             txtBrandId.setText(tblBrand.getModel().getValueAt(row, 0).toString());
             txtBrandName.setText(tblBrand.getModel().getValueAt(row, 1).toString());
-            imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
+            imageLink = "";
+            for(Brand br : brandList){
+                if(br.getBrandId() == Integer.parseInt(tblBrand.getModel().getValueAt(row, 0).toString())){
+                    imageLink = br.getImage();
+                }
+            }
+           
             String desc;
             if(tblBrand.getModel().getValueAt(row, 3)==null || tblBrand.getModel().getValueAt(row, 3)=="")
                 desc = "";
             else desc = tblBrand.getModel().getValueAt(row, 3).toString();
             txtDescription.setText(desc);
-            if (!"".equals(imageLink)) {
-                imageLink = tblBrand.getModel().getValueAt(row, 2).toString();
+            if (imageLink!=null) {       
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Brands/" + imageLink));
@@ -330,7 +336,10 @@ public class BrandJPanel extends javax.swing.JPanel {
                 } catch (IOException e) {
 
                 }
+            }else{
+                 lblPicture.setIcon(null);
             }
+         
         }
     }//GEN-LAST:event_tblBrandMouseClicked
     // Xóa brand

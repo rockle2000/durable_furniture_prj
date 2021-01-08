@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package durablefurniturejavaproject.DataAccess;
-import com.mysql.cj.xdevapi.Result;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.Connection;

@@ -89,6 +89,8 @@ public class BillJPanel extends javax.swing.JPanel {
         txtStaffID = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(40, 81, 163));
+        setPreferredSize(new java.awt.Dimension(1050, 640));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(40, 81, 163));
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -97,31 +99,31 @@ public class BillJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Phon Number");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+        jLabel2.setText("Phone Number");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 480, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Client Name");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, -1, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bill ID");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Date");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email");
-        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, -1, -1));
 
         txtFieldAddColor1.setText("jTextField2");
         jPanel3.add(txtFieldAddColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 210, 0));
@@ -129,19 +131,19 @@ public class BillJPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Address");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Total Price");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("StaffID");
-        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 300, -1, -1));
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1010, 150));
 
@@ -174,17 +176,17 @@ public class BillJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblBill);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 810, 170));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtEmail.setEnabled(false);
-        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 270, -1));
+        jPanel3.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 270, -1));
 
         txtBillID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtBillID.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtBillID.setEnabled(false);
-        jPanel3.add(txtBillID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 270, -1));
+        jPanel3.add(txtBillID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 270, -1));
 
         btnRefresh.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnRefresh.setText("Refresh");
@@ -193,63 +195,49 @@ public class BillJPanel extends javax.swing.JPanel {
                 btnRefreshActionPerformed(evt);
             }
         });
-        jPanel3.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 580, 140, 40));
+        jPanel3.add(btnRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 270, 23));
 
         btnDelete1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDelete1.setText("Delete");
+        btnDelete1.setPreferredSize(new java.awt.Dimension(7, 23));
         btnDelete1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDelete1ActionPerformed(evt);
             }
         });
-        jPanel3.add(btnDelete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 140, 40));
+        jPanel3.add(btnDelete1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 500, 270, 23));
 
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTotal.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtTotal.setEnabled(false);
-        jPanel3.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 350, 270, -1));
+        jPanel3.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 380, 270, -1));
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtAddress.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtAddress.setEnabled(false);
-        jPanel3.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 270, -1));
+        jPanel3.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 270, -1));
 
         txtDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtDate.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtDate.setEnabled(false);
-        jPanel3.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 270, -1));
+        jPanel3.add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 270, -1));
 
         txtClientName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtClientName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtClientName.setEnabled(false);
-        jPanel3.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 270, -1));
+        jPanel3.add(txtClientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 270, -1));
 
         txtPhone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPhone.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtPhone.setEnabled(false);
-        jPanel3.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 270, -1));
+        jPanel3.add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 270, -1));
 
         txtStaffID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtStaffID.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtStaffID.setEnabled(false);
-        jPanel3.add(txtStaffID, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 270, -1));
+        jPanel3.add(txtStaffID, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, 270, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 975, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBillMouseClicked
@@ -282,6 +270,7 @@ public class BillJPanel extends javax.swing.JPanel {
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
+        RefreshData();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed

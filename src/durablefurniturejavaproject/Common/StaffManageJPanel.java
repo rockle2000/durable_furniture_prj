@@ -67,6 +67,9 @@ public class StaffManageJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenuRefeshForm = new javax.swing.JPopupMenu();
+        Refesh = new javax.swing.JMenuItem();
+        Delete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -98,6 +101,19 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
 
+        jPopupMenuRefeshForm.setPreferredSize(new java.awt.Dimension(150, 100));
+
+        Refesh.setText("Refesh");
+        Refesh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefeshActionPerformed(evt);
+            }
+        });
+        jPopupMenuRefeshForm.add(Refesh);
+
+        Delete.setText("Delete");
+        jPopupMenuRefeshForm.add(Delete);
+
         setBackground(new java.awt.Color(40, 81, 163));
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setPreferredSize(new java.awt.Dimension(1040, 645));
@@ -105,36 +121,41 @@ public class StaffManageJPanel extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(40, 81, 163));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1050, 640));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1040, 640));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Email");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Full Name");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, -1, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Staff ID");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Phone Number");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 400, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Address");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, -1, -1));
 
         txtFieldAddColor1.setText("jTextField2");
         jPanel1.add(txtFieldAddColor1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 210, 0));
@@ -142,25 +163,25 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Birth Year");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Password");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 400, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 400, -1, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Username");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, -1, -1));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 340, -1, -1));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Level");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, -1, -1));
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1010, 150));
 
@@ -186,9 +207,13 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         });
         tblStaff.setMinimumSize(new java.awt.Dimension(1040, 340));
         tblStaff.setPreferredSize(new java.awt.Dimension(1040, 150));
+        tblStaff.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tblStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblStaffMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblStaffMouseReleased(evt);
             }
         });
         jScrollPane1.setViewportView(tblStaff);
@@ -203,7 +228,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtStaffIDMouseReleased(evt);
             }
         });
-        jPanel1.add(txtStaffID, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 270, -1));
+        jPanel1.add(txtStaffID, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 270, -1));
 
         txtFullName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtFullName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -211,7 +236,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtFullNameKeyReleased(evt);
             }
         });
-        jPanel1.add(txtFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 270, -1));
+        jPanel1.add(txtFullName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, 270, -1));
 
         txtUserName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtUserName.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -219,7 +244,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtUserNameKeyReleased(evt);
             }
         });
-        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 360, 270, -1));
+        jPanel1.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 270, -1));
 
         txtBirthYear.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtBirthYear.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -227,7 +252,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtBirthYearKeyReleased(evt);
             }
         });
-        jPanel1.add(txtBirthYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 270, -1));
+        jPanel1.add(txtBirthYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 270, -1));
 
         txtPhonenumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPhonenumber.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -235,7 +260,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtPhonenumberKeyReleased(evt);
             }
         });
-        jPanel1.add(txtPhonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 270, -1));
+        jPanel1.add(txtPhonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 270, -1));
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -243,7 +268,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtEmailKeyReleased(evt);
             }
         });
-        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 480, 270, -1));
+        jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 480, 270, -1));
 
         btnDelete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnDelete.setText("Delete");
@@ -252,7 +277,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 550, 140, 40));
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, 140, 40));
 
         txtAddress1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtAddress1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -260,7 +285,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtAddress1KeyReleased(evt);
             }
         });
-        jPanel1.add(txtAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 270, -1));
+        jPanel1.add(txtAddress1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 240, 270, -1));
 
         btnEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnEdit.setText("Edit");
@@ -269,11 +294,11 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 550, 140, 40));
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, 140, 40));
 
         CbBLevel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         CbBLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", " " }));
-        jPanel1.add(CbBLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 270, -1));
+        jPanel1.add(CbBLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 270, -1));
 
         lblPicture.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.add(lblPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 260, 160));
@@ -298,7 +323,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 550, 140, 40));
+        jPanel1.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 550, 140, 40));
 
         txtReTypePassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtReTypePassword.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -306,29 +331,30 @@ public class StaffManageJPanel extends javax.swing.JPanel {
                 txtReTypePasswordKeyReleased(evt);
             }
         });
-        jPanel1.add(txtReTypePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 480, 240, -1));
+        jPanel1.add(txtReTypePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 480, 270, 23));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Re-type Password");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 460, 110, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 110, -1));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPassword.setPreferredSize(new java.awt.Dimension(7, 23));
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyReleased(evt);
             }
         });
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 240, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 270, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 620));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     String imageLink;
     private void tblStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStaffMouseClicked
         // TODO add your handling code here:
         //bntEdit.setText("Edi      t");
-        btnDelete.setEnabled(false);
+        btnDelete.setEnabled(true);
         btnEdit.setEnabled(false);
         btnSave.setEnabled(false);
         txtPassword.setText("");
@@ -414,10 +440,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
             btnEdit.setEnabled(false);
             return;
         }
-        if (!txtPassword.getText().equals(txtReTypePassword.getText())) {
-            btnDelete.setEnabled(false);
-            return;
-        }
+
         if (!txtStaffID.getText().equals("")) {
             int reply = JOptionPane.showConfirmDialog(null, "Do you sure you want to delete this Staff ?", "Message", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
@@ -601,14 +624,14 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         if (txtFullName.getText().equals("") || txtBirthYear.getText().equals("")
                 || txtAddress1.getText().equals("") || txtPhonenumber.getText().equals("")
                 || txtUserName.getText().equals("") || txtPassword.getText().equals("")) {
-            btnDelete.setEnabled(false);
+
             btnEdit.setEnabled(false);
             btnSave.setEnabled(false);
             return;
         }
         for (char c : txtBirthYear.getText().toCharArray()) {
             if (number.indexOf(c) < 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -616,7 +639,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         }
         for (char c : txtFullName.getText().toCharArray()) {
             if (number.indexOf(c) > 0 || invalidChar.indexOf(c) > 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -624,7 +647,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         }
         for (char c : txtPhonenumber.getText().toCharArray()) {
             if (number.indexOf(c) < 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -632,7 +655,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         }
         for (char c : txtUserName.getText().toCharArray()) {
             if (invalidChar.indexOf(c) > 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -640,7 +663,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         }
         for (char c : txtPassword.getText().toCharArray()) {
             if (invalidCharPassword.indexOf(c) > 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -648,7 +671,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         }
         for (char c : txtAddress1.getText().toCharArray()) {
             if (invalidCharAddress.indexOf(c) > 0) {
-                btnDelete.setEnabled(false);
+
                 btnEdit.setEnabled(false);
                 btnSave.setEnabled(false);
                 return;
@@ -658,19 +681,19 @@ public class StaffManageJPanel extends javax.swing.JPanel {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(txtEmail.getText());
         if (!matcher.matches()) {
-            btnDelete.setEnabled(false);
+
             btnEdit.setEnabled(false);
             btnSave.setEnabled(false);
             return;
         }
 
         if (!txtPassword.getText().equals(txtReTypePassword.getText())) {
-            btnDelete.setEnabled(false);
+
             btnEdit.setEnabled(false);
             btnSave.setEnabled(false);
             return;
         }
-        btnDelete.setEnabled(true);
+
         btnEdit.setEnabled(true);
         btnSave.setEnabled(true);
 
@@ -728,12 +751,34 @@ public class StaffManageJPanel extends javax.swing.JPanel {
             btnSave.setEnabled(false);
         }
     }//GEN-LAST:event_txtStaffIDMouseReleased
+
+    private void RefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefeshActionPerformed
+        try {
+            refeshForm();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_RefeshActionPerformed
+
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jPanel1MouseReleased
+
+    private void tblStaffMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblStaffMouseReleased
+        if (evt.isPopupTrigger()) {
+            jPopupMenuRefeshForm.show(this, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblStaffMouseReleased
     static Boolean txtFieldAddColorIsShowing = false;
     static Boolean txtFieldAddMaterialIsShowing = false;
     static Boolean txtFieldAddSizeIsShowing = false;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CbBLevel;
+    private javax.swing.JMenuItem Delete;
+    private javax.swing.JMenuItem Refesh;
     private javax.swing.JButton btnChooseImage;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
@@ -750,6 +795,7 @@ public class StaffManageJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu jPopupMenuRefeshForm;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTable tblStaff;

@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -38,9 +39,10 @@ public class CategoryJPanel extends javax.swing.JPanel {
         tblModel = (DefaultTableModel) tblCategory.getModel();
         GetCategoryList();
     }
+    List<Category> cateList = new ArrayList<Category>();
 
     private void GetCategoryList() {
-        List<Category> cateList = cate.GetAllCategory();
+        cateList = cate.GetAllCategory();
         tblModel.setRowCount(0);
         cateList.forEach(c -> {
             tblModel.addRow(new Object[]{c.getCategoryId(), c.getCategoryName(), c.getImage(), c.getDescription()});
@@ -123,6 +125,7 @@ public class CategoryJPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
 
         txtCategoryId.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCategoryId.setEnabled(false);
         add(txtCategoryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 350, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -237,17 +240,16 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Category's name can not be null", "Error", JOptionPane.INFORMATION_MESSAGE);
                 return;
             }
-            if ("".equals(anh) || anh == null) {
-                JOptionPane.showMessageDialog(this, "Category's image can not be null", "Error", JOptionPane.INFORMATION_MESSAGE);
-                return;
+            if (anh != null) {
+
+                try {
+                    ImageIO.write(image_add, "jpg", new File(currentDir + "/Categories/" + anh));
+                } catch (IOException ex) {
+                    Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             try {
                 if (cate.InsertCategory(name, image, desc)) {
-                    try {
-                        ImageIO.write(image_add, "jpg", new File(currentDir + "/Categories/" + anh));
-                    } catch (IOException ex) {
-                        Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                     JOptionPane.showMessageDialog(this, "Add new category successfully", "Message", JOptionPane.PLAIN_MESSAGE);
                     GetCategoryList();
                     RefreshData();
@@ -255,9 +257,10 @@ public class CategoryJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Add category failed", "Message", JOptionPane.PLAIN_MESSAGE);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(BrandJPanel.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CategoryJPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         if ("Edit".equals(btnSave.getText())) {
             //Sua category nhung khong sua anh
             if ("".equals(image)) {
@@ -340,13 +343,20 @@ public class CategoryJPanel extends javax.swing.JPanel {
         if (row >= 0 && col >= 0) {
             txtCategoryId.setText(tblCategory.getModel().getValueAt(row, 0).toString());
             txtCategoryName.setText(tblCategory.getModel().getValueAt(row, 1).toString());
-            imageLink = tblCategory.getModel().getValueAt(row, 2).toString();
+            imageLink = "";
+            for (Category cate : cateList) {
+                if (cate.getCategoryId() == Integer.parseInt(tblCategory.getModel().getValueAt(row, 0).toString())) {
+                    imageLink = cate.getImage();
+                }
+            }
             String desc;
-            if(tblCategory.getModel().getValueAt(row, 3)==null || tblCategory.getModel().getValueAt(row, 3)=="")
+            if (tblCategory.getModel().getValueAt(row, 3) == null || tblCategory.getModel().getValueAt(row, 3) == "") {
                 desc = "";
-            else desc = tblCategory.getModel().getValueAt(row, 3).toString();
+            } else {
+                desc = tblCategory.getModel().getValueAt(row, 3).toString();
+            }
             txtDescription.setText(desc);
-            if (!"".equals(imageLink)) {
+            if (!imageLink.equals("")) {
                 BufferedImage img;
                 try {
                     img = ImageIO.read(new File(System.getProperty("user.dir") + "/Images/Categories/" + imageLink));
@@ -355,7 +365,10 @@ public class CategoryJPanel extends javax.swing.JPanel {
                 } catch (IOException e) {
 
                 }
+            } else {
+                lblPicture.setIcon(null);
             }
+ 
         }
     }//GEN-LAST:event_tblCategoryMouseClicked
 
